@@ -24,7 +24,8 @@ public class Player : MonoBehaviour
     public int test;
     public float mouseSense = 100f;
     public Transform cameraMount;
-
+    public float maxPlaceDistance = 10f;
+    Vector3 hitPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour
 
         Movement();
         Camera();
+        ShadowPointer();
     }
 
     void Movement()
@@ -93,8 +95,7 @@ public class Player : MonoBehaviour
             else
             {
                 selectedIndex--;
-            }
-        }
+    
         else
         {
             if (selectedIndex == totalItemNumber - 1)
@@ -107,11 +108,35 @@ public class Player : MonoBehaviour
             }
         }
     }
-
+	
+	void ShadowPointer()
+    {
+        if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(cameraMount.position, cameraMount.forward, out hit))
+            {
+                hitPosition = hit.point;
+            }
+        }
+		else
+		{
+			hitPosition = new Vector3(0, 0, 0);
+        }
+        
+	}
+	
     //execute this when in object placing mode
     void objectPlaceModeUpdate()
     {
         //TODO
+    }
+
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(hitPosition, 0.1f);
     }
 
 }
