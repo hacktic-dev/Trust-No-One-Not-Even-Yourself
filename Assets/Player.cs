@@ -7,10 +7,21 @@ public class Player : MonoBehaviour
 
     public Inventory inventory;
 
+    //execute objectPlace code when new
+    bool objectPlaceMode;
+    //index for selected item
+    public int selectedIndex;
+
+    public bool newSelection;
+
+    //the number of items in the game, update this as we add more
+    const int totalItemNumber = 3;
+
     Vector3 move;
     public float speed = 12f;
     public CharacterController controller;
     float xRotation;
+    public int test;
     public float mouseSense = 100f;
     public Transform cameraMount;
 
@@ -23,6 +34,20 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //goes true for a frame when initiating a new selection
+        newSelection = false;
+
+        //select inventory
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            selectUpdate(-1);
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") <0f)
+        {
+            selectUpdate(1);
+        }
+
+
         Movement();
         Camera();
     }
@@ -54,4 +79,39 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
+    //execute this when the player selects a new object
+    void selectUpdate(int selectDirection)
+    {
+        newSelection = true;
+        if (selectDirection == 1)
+        {
+            if (selectedIndex == 0)
+            {
+                selectedIndex = totalItemNumber - 1;
+            }
+            else
+            {
+                selectedIndex--;
+            }
+        }
+        else
+        {
+            if (selectedIndex == totalItemNumber - 1)
+            {
+                selectedIndex = 0;
+               }
+            else
+            {
+                selectedIndex++;
+            }
+        }
+    }
+
+    //execute this when in object placing mode
+    void objectPlaceModeUpdate()
+    {
+        //TODO
+    }
+
 }
