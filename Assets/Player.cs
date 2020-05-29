@@ -95,13 +95,14 @@ public class Player : MonoBehaviour
             else
             {
                 selectedIndex--;
-    
+            }
+        }
         else
         {
             if (selectedIndex == totalItemNumber - 1)
             {
                 selectedIndex = 0;
-               }
+            }
             else
             {
                 selectedIndex++;
