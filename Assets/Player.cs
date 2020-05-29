@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
     float xRotation;
     public float mouseSense = 100f;
     public Transform cameraMount;
-
+    public float maxPlaceDistance = 10f;
+    Vector3 hitPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
     {
         Movement();
         Camera();
+        ShadowPointer();
     }
 
     void Movement()
@@ -53,5 +55,28 @@ public class Player : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    void ShadowPointer()
+    {
+        if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(cameraMount.position, cameraMount.forward, out hit))
+            {
+                hitPosition = hit.point;
+            }
+        }
+        else
+        {
+            hitPosition = new Vector3(0, 0, 0);
+        }
+        
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(hitPosition, 0.1f);
     }
 }
