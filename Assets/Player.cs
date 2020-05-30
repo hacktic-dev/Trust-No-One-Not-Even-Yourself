@@ -144,7 +144,7 @@ using UnityEngine;
 
     void ShadowPointer()
     {
-        placeable= true;
+        
         switch (selectedIndex)
         {
             case 0:
@@ -179,11 +179,15 @@ using UnityEngine;
         shadowPointer.SetPositionAndRotation(new Vector3(shadowPointer.position.x, 0, shadowPointer.position.z),selfTransform.rotation);
         //shadowPointer.rotation = selfTransform.rotation;
 
-        Collider[] checkCollision = Physics.OverlapSphere(shadowPointer.position, 8f);
-        if (checkCollision.Length>0 && checkCollision[0].tag=="Solid Object")
+        bool checkCollision = Physics.CheckSphere(shadowPointer.position, 8f);
+        if (checkCollision)
         {
-            Debug.Log(checkCollision[0]);
+            Debug.Log(checkCollision);
             placeable = false;
+        }
+        else
+        {
+            placeable = true;
         }
 
         switch (selectedIndex)
