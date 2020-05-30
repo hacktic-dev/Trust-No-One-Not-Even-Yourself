@@ -210,6 +210,16 @@ using UnityEngine;
             }
             
         }
+        else if (itemName=="still turret")
+        {
+            if (inventory.resourceAmount["smarts"] >= 2 && inventory.resourceAmount["force"] >= 1)
+            {
+                inventory.inventoryAmount[1]++;
+                inventory.resourceAmount["smarts"] -= 2;
+                inventory.resourceAmount["force"] -= 1;
+            }
+        }
+
         else
         {
             throw new System.Exception("Invalid Item Type!");

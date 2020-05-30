@@ -18,7 +18,7 @@ public class CraftComponent : MonoBehaviour
     void Update()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit) && hit.collider.name=="CraftBarrier" && !player.objectPlaceMode)
+        if (Physics.Raycast(ray, out hit) && hit.collider==gameObject.GetComponent<Collider>() && !player.objectPlaceMode)
         {
             gameObject.GetComponent<Renderer>().material.SetColor("_Color", new Color(8f, 8f,8f));
             if (Input.GetMouseButtonDown(0))
