@@ -281,7 +281,7 @@ using UnityEngine;
                 foreach (Transform child in currentshadowPointer.transform)
                 {
                     
-                    child.gameObject.GetComponent<Renderer>().material.color = new Color(0.1f,0.1f,0.1f,0.1f);
+                    child.gameObject.GetComponent<Renderer>().material.color = new Color(0.10f,0.01f,0.01f,0.01f);
                 }
                 return false;
             }
