@@ -307,7 +307,7 @@ using UnityEngine;
             fallSpeed.y = 0f;
         }
 
-        if (Input.GetButton("Jump"))
+        if (Input.GetButton("Jump") && controller.isGrounded)
         {
             fallSpeed.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
