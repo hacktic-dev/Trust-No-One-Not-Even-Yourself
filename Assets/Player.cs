@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     //the number of items in the game, update this as we add more
     const int totalItemNumber = 3;
 
+    public GameObject barrier;
+
+    public Transform selfTransform;
     Vector3 move;
     public float speed = 12f;
     public CharacterController controller;
@@ -27,6 +30,8 @@ public class Player : MonoBehaviour
     public float maxPlaceDistance = 20f;
     Vector3 hitPosition;
     public Transform shadowPointer;
+    public GameObject shadowPointerBarrier;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,11 +53,22 @@ public class Player : MonoBehaviour
         {
             selectUpdate(-1);
         }
-
+        if(Input.GetKeyDown("space") && objectPlaceMode)
+        {
+            shadowPointer.position= new Vector3(0, -100, 0);
+            objectPlaceMode = false;
+        }
+        else if (Input.GetKeyDown("space"))
+        {
+            objectPlaceMode = true;
+        }
 
         Movement();
         Camera();
-        ShadowPointer();
+        if (objectPlaceMode)
+        {
+            ShadowPointer();
+        }
     }
 
     void Movement()
@@ -113,7 +129,16 @@ public class Player : MonoBehaviour
 	
 	void ShadowPointer()
     {
-        LayerMask mask = ~LayerMask.GetMask("Player");
+        if(selectedIndex==0)
+        {
+            shadowPointerBarrier.SetActive(true);
+        }
+        else
+        {
+            shadowPointerBarrier.SetActive(false);
+        }
+
+        LayerMask mask = ~LayerMask.GetMask("Hidden Objects");
         if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance, mask))
         {
             RaycastHit hit;
@@ -124,9 +149,18 @@ public class Player : MonoBehaviour
         }
 		else
 		{
-			hitPosition = new Vector3(0, 0, 0);
+			hitPosition = new Vector3(1000, 0, 0);
         }
         shadowPointer.position = hitPosition;
+        shadowPointer.SetPositionAndRotation(new Vector3(shadowPointer.position.x, 0, shadowPointer.position.z),selfTransform.rotation);
+        //shadowPointer.rotation = selfTransform.rotation;
+        shadowPointer.Rotate(0.0f, 90.0f, 0.0f);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(barrier, shadowPointer.position, shadowPointer.rotation);
+        }
+
 	}
 	
     //execute this when in object placing mode
