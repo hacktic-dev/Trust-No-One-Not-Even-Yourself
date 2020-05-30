@@ -30,19 +30,23 @@ public class SpawnPad : MonoBehaviour
     void Update()
     {
         timerToSpawn -= Time.deltaTime;
-        if (timerToSpawn<=0 && currentSpawnedResources<spawnedMaximum)
+        
+
+        if (Vector3.Distance(player.transform.position, transform.position)<3f && currentSpawnedResources>0)
+        {
+            player.inventory.resourceAmount[resourceType] += currentSpawnedResources;
+            currentSpawnedResources = 0;
+            DestroyAllChildren();
+
+            timerToSpawn = spawnTimeInterval;
+        }
+
+        if (timerToSpawn <= 0 && currentSpawnedResources < spawnedMaximum)
         {
             currentSpawnedResources++;
             timerToSpawn = spawnTimeInterval;
             SpawnObject(resourceType);
 
-        }
-
-        if (Vector3.Distance(player.transform.position, transform.position)<3f)
-        {
-            player.inventory.resourceAmount[resourceType] += currentSpawnedResources;
-            currentSpawnedResources = 0;
-            DestroyAllChildren();
         }
     }
 

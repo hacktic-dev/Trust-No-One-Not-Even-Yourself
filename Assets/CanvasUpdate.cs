@@ -14,6 +14,8 @@ public class CanvasUpdate : MonoBehaviour
     public Text motionText;
     public Text forceText;
 
+    public Text waveNumber;
+
     private const float alpha = 0.8f;
 
     public int selectedIndex;
@@ -26,6 +28,8 @@ public class CanvasUpdate : MonoBehaviour
     public GameObject smartsBox;
     public GameObject forceBox;
     public GameObject motionBox;
+
+    public GameHandler gameHandler;
 
     public Player player;
     public List<GameObject> inventoryBoxSprites;
@@ -80,6 +84,9 @@ public class CanvasUpdate : MonoBehaviour
         motionText.text = player.inventory.resourceAmount["motion"].ToString();
         forceText.text = player.inventory.resourceAmount["force"].ToString();
         matterText.text = player.inventory.resourceAmount["matter"].ToString();
+
+        waveNumber.text = "Wave "+gameHandler.roundNumber.ToString();
+
     }
 
 }
