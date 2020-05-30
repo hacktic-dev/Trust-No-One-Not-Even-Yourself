@@ -41,6 +41,8 @@ using UnityEngine;
     public GameObject shadowPointerTurret;
     GameObject currentshadowPointer;
 
+    public GameObject level;
+
     GameObject objectToPlace;
     int currentObjectAmount;
 
@@ -66,7 +68,7 @@ using UnityEngine;
         {
             selectUpdate(-1);
         }
-        if(Input.GetKeyDown("space") && objectPlaceMode)
+        if(Input.GetKeyDown("e") && objectPlaceMode)
         {
             shadowPointer.position= new Vector3(0, -100, 0);
             objectPlaceMode = false;
