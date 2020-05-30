@@ -39,7 +39,10 @@ using UnityEngine;
     public Transform shadowPointer;
     public GameObject shadowPointerBarrier;
     public GameObject shadowPointerTurret;
+    GameObject currentshadowPointer;
 
+
+    public bool placeable;
     GameObject objectToPlace;
     int currentObjectAmount;
 
@@ -141,17 +144,19 @@ using UnityEngine;
 
     void ShadowPointer()
     {
+        placeable= true;
         switch (selectedIndex)
         {
             case 0:
                 shadowPointerBarrier.SetActive(true);
                 shadowPointerTurret.SetActive(false);
                 objectToPlace = barrier;
-
+                currentshadowPointer = shadowPointerBarrier;
                 break;
             case 1:
                 shadowPointerBarrier.SetActive(false);
                 shadowPointerTurret.SetActive(true);
+                currentshadowPointer = shadowPointerTurret;
                 objectToPlace = turret;
 
                 break;
@@ -174,6 +179,13 @@ using UnityEngine;
         shadowPointer.SetPositionAndRotation(new Vector3(shadowPointer.position.x, 0, shadowPointer.position.z),selfTransform.rotation);
         //shadowPointer.rotation = selfTransform.rotation;
 
+        Collider[] checkCollision = Physics.OverlapSphere(shadowPointer.position, 8f);
+        if (checkCollision.Length>0 && checkCollision[0].tag=="Solid Object")
+        {
+            Debug.Log(checkCollision[0]);
+            placeable = false;
+        }
+
         switch (selectedIndex)
         {
             case 0:
@@ -187,7 +199,7 @@ using UnityEngine;
         if (Input.GetMouseButtonDown(0))
         {
             bool success = false;
-            if (inventory.inventoryAmount[selectedIndex] > 0)
+            if (inventory.inventoryAmount[selectedIndex] > 0 && placeable)
             {
                 success = true;
                 GameObject instantiatedObject = Instantiate(objectToPlace, shadowPointer.position, shadowPointer.rotation);

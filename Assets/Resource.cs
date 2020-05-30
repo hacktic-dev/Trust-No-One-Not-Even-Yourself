@@ -47,7 +47,6 @@ public class Resource : MonoBehaviour
     {
         bobYOffset += Time.deltaTime*3f;
         bobYOffset = bobYOffset % (Mathf.PI * 2);
-        Debug.Log(bobYOffset);
         transform.position = new Vector3(transform.position.x,absoluteY+Mathf.Sin(bobYOffset)/7f,transform.position.z);
         transform.Rotate(0, Time.deltaTime*10f , 0);
     }
