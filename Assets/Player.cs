@@ -44,10 +44,12 @@ using UnityEngine;
     GameObject objectToPlace;
     int currentObjectAmount;
 
+    Vector3 fallSpeed;
     // Start is called before the first frame update
     void Start()
     {
         LockMouse();
+        fallSpeed = new Vector3(0, 0, 0);
     }
 
 
@@ -82,6 +84,8 @@ using UnityEngine;
         {
             ShadowPointer();
         }
+
+        Jump();
     }
 
     void Movement()
@@ -283,5 +287,25 @@ using UnityEngine;
         {
             return true;
         }
+    }
+
+    void Jump()
+    {
+        float gravity = -19;
+        float jumpHeight = 2;
+
+        fallSpeed.y += gravity * Time.deltaTime;
+
+        if (controller.isGrounded && fallSpeed.y < -0)
+        {
+            fallSpeed.y = 0f;
+        }
+
+        if (Input.GetButton("Jump"))
+        {
+            fallSpeed.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        controller.Move(fallSpeed * Time.deltaTime);
     }
 }
