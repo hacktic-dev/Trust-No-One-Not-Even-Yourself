@@ -21,7 +21,7 @@ TagManager:
   - No Collision
   - Level
   - Wall
-  - 
+  - RaycastCollider
   - 
   - 
   - 
