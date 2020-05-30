@@ -6,9 +6,15 @@ public class Resource : MonoBehaviour
 {
     public string resourceType;
 
+    public float bobYOffset;
+    float absoluteY;
+
     // Start is called before the first frame update
     void Start()
     {
+        absoluteY = transform.position.y;
+        bobYOffset = 0;
+
         if (resourceType=="matter")
         {
             GetComponent<Renderer>().material.SetColor("_Color", new Color(1.0f,1.0f,1.0f));
@@ -34,6 +40,15 @@ public class Resource : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Bob();
+    }
+
+    void Bob()
+    {
+        bobYOffset += Time.deltaTime*3f;
+        bobYOffset = bobYOffset % (Mathf.PI * 2);
+        Debug.Log(bobYOffset);
+        transform.position = new Vector3(transform.position.x,absoluteY+Mathf.Sin(bobYOffset)/7f,transform.position.z);
+        transform.Rotate(0, Time.deltaTime*10f , 0);
     }
 }
