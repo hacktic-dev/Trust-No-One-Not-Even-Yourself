@@ -188,7 +188,8 @@ using UnityEngine;
         if (Input.GetMouseButtonDown(0))
         {
             bool success = false;
-            if (inventory.inventoryAmount[selectedIndex] > 0 && checkIfPlaceable())
+            bool check = checkIfPlaceable();
+            if (inventory.inventoryAmount[selectedIndex] > 0 && check)
             {
                 success = true;
                 GameObject instantiatedObject = Instantiate(objectToPlace, shadowPointer.position, shadowPointer.rotation);
@@ -267,7 +268,10 @@ using UnityEngine;
         {
             if (currentshadowPointer.transform.Find("BarrierBoundBox").GetComponent<Collider>().bounds.Intersects(checkSphere[0].bounds))
             {
-
+                foreach (Transform child in currentshadowPointer.transform)
+                {
+                    child.gameObject.GetComponent<Renderer>().material.color = new Color(0.1f,0.1f,0.1f);
+                }
                 return false;
             }
             else
