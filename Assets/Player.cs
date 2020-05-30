@@ -142,10 +142,6 @@ using UnityEngine;
 
     void ShadowPointer()
     {
-<<<<<<< HEAD
-=======
-        placeable= true;
->>>>>>> parent of 4e74693... Push
         switch (selectedIndex)
         {
             case 0:
@@ -180,11 +176,15 @@ using UnityEngine;
 
         //shadowPointer.rotation = selfTransform.rotation;
 
-        Collider[] checkCollision = Physics.OverlapSphere(shadowPointer.position, 8f);
-        if (checkCollision.Length>0 && checkCollision[0].tag=="Solid Object")
+        bool checkCollision = Physics.CheckSphere(shadowPointer.position, 8f);
+        if (checkCollision)
         {
-            Debug.Log(checkCollision[0]);
+            Debug.Log(checkCollision);
             placeable = false;
+        }
+        else
+        {
+            placeable = true;
         }
 
 
