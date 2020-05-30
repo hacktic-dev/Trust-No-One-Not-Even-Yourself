@@ -2,18 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Resource : MonoBehaviour
 {
-    Inventory()
-    {
-        for (int i=0; i<3;i++)
-        {
-            inventoryAmount[i] = 10;
-        }
-    }
-
-    public int[] inventoryAmount=new int[3];
-
+    public string resourceType;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +17,4 @@ public class Inventory : MonoBehaviour
     {
         
     }
-
-
 }

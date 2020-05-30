@@ -56,9 +56,9 @@ public class CanvasUpdate : MonoBehaviour
 
     void updateTextValues()
     {
-        barrierAmountText.text = player.inventory.barrierAmount.ToString();
-        stillTurretAmountText.text = player.inventory.stillTurretAmount.ToString();
-        movingTurretAmountText.text = player.inventory.movingTurretAmount.ToString();
+        barrierAmountText.text = player.inventory.inventoryAmount[0].ToString();
+        stillTurretAmountText.text = player.inventory.inventoryAmount[1].ToString();
+        movingTurretAmountText.text = player.inventory.inventoryAmount[2].ToString();
     }
 
 }

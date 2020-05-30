@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     const int totalItemNumber = 3;
 
     public GameObject barrier;
+    public GameObject turret;
 
     public Transform selfTransform;
     Vector3 move;
@@ -29,8 +30,13 @@ public class Player : MonoBehaviour
     public Transform cameraMount;
     public float maxPlaceDistance = 20f;
     Vector3 hitPosition;
+
     public Transform shadowPointer;
     public GameObject shadowPointerBarrier;
+    public GameObject shadowPointerTurret;
+
+    GameObject objectToPlace;
+    int currentObjectAmount;
 
     // Start is called before the first frame update
     void Start()
@@ -126,20 +132,27 @@ public class Player : MonoBehaviour
             }
         }
     }
-	
-	void ShadowPointer()
+
+    void ShadowPointer()
     {
-        if(selectedIndex==0)
+        switch (selectedIndex)
         {
-            shadowPointerBarrier.SetActive(true);
-        }
-        else
-        {
-            shadowPointerBarrier.SetActive(false);
+            case 0:
+                shadowPointerBarrier.SetActive(true);
+                shadowPointerTurret.SetActive(false);
+                objectToPlace = barrier;
+
+                break;
+            case 1:
+                shadowPointerBarrier.SetActive(false);
+                shadowPointerTurret.SetActive(true);
+                objectToPlace = turret;
+
+                break;
         }
 
         LayerMask mask = ~LayerMask.GetMask("Hidden Objects");
-        if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance, mask))
+        if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance, mask) && inventory.inventoryAmount[selectedIndex]>0)
         {
             RaycastHit hit;
             if (Physics.Raycast(cameraMount.position, cameraMount.forward, out hit, maxPlaceDistance + 1, mask))
@@ -154,11 +167,26 @@ public class Player : MonoBehaviour
         shadowPointer.position = hitPosition;
         shadowPointer.SetPositionAndRotation(new Vector3(shadowPointer.position.x, 0, shadowPointer.position.z),selfTransform.rotation);
         //shadowPointer.rotation = selfTransform.rotation;
-        shadowPointer.Rotate(0.0f, 90.0f, 0.0f);
 
-        if (Input.GetMouseButtonDown(0))
+        switch (selectedIndex)
         {
-            Instantiate(barrier, shadowPointer.position, shadowPointer.rotation);
+            case 0:
+                shadowPointer.Rotate(0.0f, 90.0f, 0.0f);
+                break;
+            case 1:
+                shadowPointer.Rotate(0.0f, 180.0f, 0.0f);
+                break;
+        }
+
+        if (Input.GetMouseButtonDown(0) && inventory.inventoryAmount[selectedIndex]>0)
+        {
+            GameObject instantiatedObject=Instantiate(objectToPlace, shadowPointer.position, shadowPointer.rotation);
+            if (objectToPlace==turret)
+            {
+                Turret playerVariable = instantiatedObject.GetComponent<Turret>();
+                playerVariable.player = this.transform;
+            }
+            inventory.inventoryAmount[selectedIndex]--;
         }
 
 	}
