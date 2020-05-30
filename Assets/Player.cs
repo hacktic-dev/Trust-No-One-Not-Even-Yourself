@@ -41,11 +41,11 @@ public class Player : MonoBehaviour
         //select inventory
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
-            selectUpdate(-1);
+            selectUpdate(1);
         }
         else if (Input.GetAxis("Mouse ScrollWheel") <0f)
         {
-            selectUpdate(1);
+            selectUpdate(-1);
         }
 
 
