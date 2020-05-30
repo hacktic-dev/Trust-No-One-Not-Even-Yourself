@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3838270391197718908}
   - component: {fileID: 7314005101251303819}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TurretObject
-  m_TagString: Untagged
+  m_TagString: SolidObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,10 +68,25 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1666340304050393665, guid: a9016b66f10ff26429a84a461464b02d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2405663557978638506, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513501686593541979, guid: a9016b66f10ff26429a84a461464b02d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399464247024579467, guid: a9016b66f10ff26429a84a461464b02d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3893911089623783648, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
@@ -82,6 +97,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5438981786095236027, guid: a9016b66f10ff26429a84a461464b02d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5563128875656904617, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
@@ -143,6 +163,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7923899630127425881, guid: a9016b66f10ff26429a84a461464b02d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8786691969528570577, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Mesh
@@ -152,6 +177,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Turret (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8928386924355158379, guid: a9016b66f10ff26429a84a461464b02d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4494182734260937870, guid: a9016b66f10ff26429a84a461464b02d, type: 3}
