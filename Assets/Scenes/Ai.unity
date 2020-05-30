@@ -402,7 +402,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 1cf078e368a885c4c946941b1219af8c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 77d84b41b6d92634dbdf979e9b80c3b5, type: 2}
 --- !u!4 &364556360
 Transform:
   m_ObjectHideFlags: 0
@@ -736,7 +736,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 98f54e50c53eac246a934d4c350e63bf, type: 2}
+  - {fileID: 2100000, guid: cb4ff86b17451084faafc9b8ab252aed, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1071,12 +1071,12 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_Bias: 0
+    m_NormalBias: 0.38
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -1104,7 +1104,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
