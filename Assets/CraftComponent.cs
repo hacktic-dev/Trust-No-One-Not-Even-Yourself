@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CraftComponent : MonoBehaviour
 {
+
+
     public string componentType;
     public Player player;
 

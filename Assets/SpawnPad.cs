@@ -5,6 +5,9 @@ using UnityEngine;
 public class SpawnPad : MonoBehaviour
 {
 
+    public AudioSource audioSource;
+    public AudioClip clip;
+
     float timerToSpawn;
 
     const float spawnTimeInterval = 1.5f;
@@ -34,6 +37,8 @@ public class SpawnPad : MonoBehaviour
 
         if (Vector3.Distance(player.transform.position, transform.position)<3f && currentSpawnedResources>0)
         {
+            audioSource.pitch = (Random.Range(0.9f, 1.1f));
+            audioSource.PlayOneShot(clip, 0.8f);
             player.inventory.resourceAmount[resourceType] += currentSpawnedResources;
             currentSpawnedResources = 0;
             DestroyAllChildren();
