@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2383022526236318418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 492756288929803159}
+  - component: {fileID: 6498804531098940055}
+  m_Layer: 8
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &492756288929803159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2383022526236318418}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10.440131, y: 1.9021823, z: -1.088244}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7110947734949821441}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6498804531098940055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2383022526236318418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71eaad1be970bbd44b22f963d248fe1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barrierAmount: 10
+  stillTurretAmount: 10
+  movingTurretAmount: 10
 --- !u!1 &7110947734949821443
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,7 +58,7 @@ GameObject:
   - component: {fileID: 7110947734949821440}
   - component: {fileID: 7110947734949821470}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,6 +76,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7110947735381540026}
+  - {fileID: 492756288929803159}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -64,10 +111,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
+  selectedIndex: 0
+  newSelection: 0
   speed: 12
   controller: {fileID: 7110947734949821440}
+  test: 0
   mouseSense: 100
   cameraMount: {fileID: 7110947735381540026}
+  maxPlaceDistance: 10
+  shadowPointer: {fileID: 0}
 --- !u!1 &7110947735381540031
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,8 +24,9 @@ public class Player : MonoBehaviour
     public int test;
     public float mouseSense = 100f;
     public Transform cameraMount;
-    public float maxPlaceDistance = 10f;
+    public float maxPlaceDistance = 20f;
     Vector3 hitPosition;
+    public Transform shadowPointer;
     // Start is called before the first frame update
     void Start()
     {
@@ -112,10 +113,11 @@ public class Player : MonoBehaviour
 	
 	void ShadowPointer()
     {
-        if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance))
+        LayerMask mask = ~LayerMask.GetMask("Player");
+        if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance, mask))
         {
             RaycastHit hit;
-            if (Physics.Raycast(cameraMount.position, cameraMount.forward, out hit))
+            if (Physics.Raycast(cameraMount.position, cameraMount.forward, out hit, maxPlaceDistance + 1, mask))
             {
                 hitPosition = hit.point;
             }
@@ -124,7 +126,7 @@ public class Player : MonoBehaviour
 		{
 			hitPosition = new Vector3(0, 0, 0);
         }
-        
+        shadowPointer.position = hitPosition;
 	}
 	
     //execute this when in object placing mode
@@ -132,12 +134,4 @@ public class Player : MonoBehaviour
     {
         //TODO
     }
-
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(hitPosition, 0.1f);
-    }
-
 }
