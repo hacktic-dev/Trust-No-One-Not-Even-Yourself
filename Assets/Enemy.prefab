@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3130142192734708523}
   - component: {fileID: 6616481857701615227}
   - component: {fileID: 2309330547928035505}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,11 +175,11 @@ MonoBehaviour:
   repathRate: 0.5
   canSearch: 1
   canMove: 1
-  maxSpeed: 1
+  maxSpeed: 3
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 6711
   centerOffsetCompatibility: NaN
   orientation: 0
   enableRotation: 1

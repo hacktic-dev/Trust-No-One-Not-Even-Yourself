@@ -191,10 +191,11 @@ using UnityEngine;
                 break;
         }
 
+        bool check = checkIfPlaceable();
         if (Input.GetMouseButtonDown(0))
         {
             bool success = false;
-            bool check = checkIfPlaceable();
+            
             if (inventory.inventoryAmount[selectedIndex] > 0 && check)
             {
                 Pathfinding.GridGraph graphToScan = AstarPath.active.data.gridGraph;
@@ -279,18 +280,28 @@ using UnityEngine;
             {
                 foreach (Transform child in currentshadowPointer.transform)
                 {
-                    //TODO FIX THIS TO HAPPEN EVERY FRAME
-                    //child.gameObject.GetComponent<Renderer>().material.color = new Color(0.1f,0.1f,0.1f);
+                    
+                    child.gameObject.GetComponent<Renderer>().material.color = new Color(0.1f,0.1f,0.1f,0.1f);
                 }
                 return false;
             }
             else
             {
+                foreach (Transform child in currentshadowPointer.transform)
+                {
+
+                    child.gameObject.GetComponent<Renderer>().material.color = new Color(0.1f, 0.1f, 0.1f, 0.5f);
+                }
                 return true;
             }
         }
         else
         {
+            foreach (Transform child in currentshadowPointer.transform)
+            {
+
+                child.gameObject.GetComponent<Renderer>().material.color = new Color(0.1f, 0.1f, 0.1f, 0.5f);
+            }
             return true;
         }
     }

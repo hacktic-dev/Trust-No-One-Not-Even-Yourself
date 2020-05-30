@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8476104131559792855}
   - component: {fileID: 5416136890207701460}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 6748898599136497185}
   - component: {fileID: 6748898599136497184}
   - component: {fileID: 6748898599136497187}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpawnPad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,6 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 5416136890207701460}
   clip: {fileID: 8300000, guid: 3f8f271d4e19c0347aedeb9f7288c0ce, type: 3}
+  spawnTimeInterval: 0.1
   resourceType: test
   currentSpawnedResources: 0
   player: {fileID: 0}

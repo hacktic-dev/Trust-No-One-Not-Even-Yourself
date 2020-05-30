@@ -10,12 +10,13 @@ public class SpawnEnemy : MonoBehaviour
 
     public GameHandler gameHandler;
     public GameObject enemy;
+    public GameObject flag;
 
     // Start is called before the first frame update
     void Start()
     {
         currentRound = 0;
-        timeBetweenSpawns = 10f;
+        timeBetweenSpawns = 3f;
         timeToNextSpawn = timeBetweenSpawns;
     }
 
@@ -34,7 +35,7 @@ public class SpawnEnemy : MonoBehaviour
         {
             currentRound = gameHandler.roundNumber;
             //TODO change value
-            timeBetweenSpawns -= 1f;
+            //timeBetweenSpawns -= 1f;
         }
 
     }
@@ -48,6 +49,7 @@ public class SpawnEnemy : MonoBehaviour
         Enemy EnemyObject = instantiatedObject.GetComponent<Enemy>();
 
         //TODO test values, update later
+        EnemyObject.flag = flag.transform;
         EnemyObject.speed = 1f+currentRound;
         EnemyObject.attackPower = 1f + currentRound;
     }
