@@ -71,7 +71,7 @@ using UnityEngine;
             shadowPointer.position= new Vector3(0, -100, 0);
             objectPlaceMode = false;
         }
-        else if (Input.GetKeyDown("space"))
+        else if (Input.GetKeyDown("e"))
         {
             objectPlaceMode = true;
         }
