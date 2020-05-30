@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+
+    public class Player : MonoBehaviour
 {
 
     public Inventory inventory;
@@ -43,6 +44,7 @@ public class Player : MonoBehaviour
     {
         LockMouse();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -181,12 +183,17 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && inventory.inventoryAmount[selectedIndex]>0)
         {
             GameObject instantiatedObject=Instantiate(objectToPlace, shadowPointer.position, shadowPointer.rotation);
+            /*
             if (objectToPlace==turret)
             {
                 Turret playerVariable = instantiatedObject.GetComponent<Turret>();
-                playerVariable.player = this.transform;
+                Transform test=this.transform;
+                playerVariable.player = test;
             }
+            */
+            Debug.Log(inventory.inventoryAmount[selectedIndex]);
             inventory.inventoryAmount[selectedIndex]--;
+            Debug.Log(inventory.inventoryAmount[selectedIndex]);
         }
 
 	}

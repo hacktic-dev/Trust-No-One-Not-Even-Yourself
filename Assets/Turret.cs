@@ -21,7 +21,11 @@ public class Turret : MonoBehaviour
 
     void Look()
     {
-        Quaternion target = Quaternion.LookRotation(closest.transform.position - head.position);
+        //DEBUG
+        FindClosestEnemy();
+
+        Vector3 test = head.position;
+        Quaternion target = Quaternion.LookRotation(closest.transform.position-test);
         head.rotation = Quaternion.Lerp(head.rotation, target, Time.deltaTime * 5);
     }
 

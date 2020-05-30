@@ -8,6 +8,9 @@ public class CanvasUpdate : MonoBehaviour
     public Text barrierAmountText;
     public Text stillTurretAmountText;
     public Text movingTurretAmountText;
+
+    public Text smartsText;
+
     private const float alpha = 0.8f;
 
     public int selectedIndex;
@@ -59,6 +62,8 @@ public class CanvasUpdate : MonoBehaviour
         barrierAmountText.text = player.inventory.inventoryAmount[0].ToString();
         stillTurretAmountText.text = player.inventory.inventoryAmount[1].ToString();
         movingTurretAmountText.text = player.inventory.inventoryAmount[2].ToString();
+
+        smartsText.text= player.inventory.resourceAmount["smarts"].ToString();
     }
 
 }
