@@ -41,7 +41,7 @@ using UnityEngine;
     public GameObject shadowPointerTurret;
     GameObject currentshadowPointer;
 
-
+    float objectSize;
     public bool placeable;
     GameObject objectToPlace;
     int currentObjectAmount;
@@ -152,13 +152,14 @@ using UnityEngine;
                 shadowPointerTurret.SetActive(false);
                 objectToPlace = barrier;
                 currentshadowPointer = shadowPointerBarrier;
+                objectSize = 4f;
                 break;
             case 1:
                 shadowPointerBarrier.SetActive(false);
                 shadowPointerTurret.SetActive(true);
                 currentshadowPointer = shadowPointerTurret;
                 objectToPlace = turret;
-
+                objectSize = 1f;
                 break;
         }
 
@@ -179,8 +180,7 @@ using UnityEngine;
         shadowPointer.SetPositionAndRotation(new Vector3(shadowPointer.position.x, 0, shadowPointer.position.z),selfTransform.rotation);
         //shadowPointer.rotation = selfTransform.rotation;
 
-        Collider[] checkCollision = Physics.OverlapSphere(shadowPointer.position, 8f, LayerMask.GetMask("Solid Object"));
-        ;
+        Collider[] checkCollision = Physics.OverlapSphere(shadowPointer.position, objectSize, LayerMask.GetMask("Solid Object"));
         if (checkCollision.Length>0 && checkCollision[0].tag=="SolidObject")
         {
             Debug.Log(checkCollision[0].tag);
