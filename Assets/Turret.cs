@@ -24,9 +24,12 @@ public class Turret : MonoBehaviour
         //DEBUG
         FindClosestEnemy();
 
-        Vector3 test = head.position;
-        Quaternion target = Quaternion.LookRotation(closest.transform.position-test);
-        head.rotation = Quaternion.Lerp(head.rotation, target, Time.deltaTime * 5);
+        if (closest != null)
+        {
+            Vector3 test = head.position;
+            Quaternion target = Quaternion.LookRotation(closest.transform.position - test);
+            head.rotation = Quaternion.Lerp(head.rotation, target, Time.deltaTime * 5);
+        }
     }
 
     void FindClosestEnemy()
@@ -35,14 +38,41 @@ public class Turret : MonoBehaviour
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         float closestDistance = 10000;
         Vector3 position = transform.position;
+        closest = null;
         foreach (GameObject enemy in enemies)
         {
-            float distance = Vector3.Distance(enemy.transform.position, transform.position);
-            if (distance < closestDistance)
+            RaycastHit[] raycast = Physics.RaycastAll(transform.position, -transform.position + enemy.transform.position, 100f);
+
+            int enemyIndex=0;
+
+            for (int i= 0; i < raycast.Length;i++)
             {
-                closestDistance = distance;
-                closest = enemy;
+                if (raycast[i].transform.tag == "Enemy") ;
+                enemyIndex = i;
+                break;
             }
+
+            for (int i = 0; i < raycast.Length; i++)
+            {
+                if (raycast[i].transform.tag == "SolidObject" && raycast[i].distance <= raycast[enemyIndex].distance)
+                {
+                    goto nested_break;
+                }
+ 
+            }
+
+            if (raycast.Length>0 && raycast[0].transform.tag == "Enemy")
+            {
+                float distance = Vector3.Distance(enemy.transform.position, transform.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closest = enemy;
+                }
+            }
+
+        nested_break: continue;
+            
         }
     }
 }
