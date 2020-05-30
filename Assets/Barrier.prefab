@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameObject: {fileID: 0}
-  alpha: 0.5
+  alpha: 0
 --- !u!1 &7698930115498940518
 GameObject:
   m_ObjectHideFlags: 0
