@@ -165,7 +165,7 @@ using UnityEngine;
                 break;
         }
 
-        LayerMask mask = ~LayerMask.GetMask("Hidden Objects");
+        LayerMask mask = ~LayerMask.GetMask("Hidden Objects","RaycastCollider");
         if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance, mask) && inventory.inventoryAmount[selectedIndex]>0)
         {
             RaycastHit hit;
@@ -197,6 +197,9 @@ using UnityEngine;
             bool check = checkIfPlaceable();
             if (inventory.inventoryAmount[selectedIndex] > 0 && check)
             {
+                Pathfinding.GridGraph graphToScan = AstarPath.active.data.gridGraph;
+                AstarPath.active.Scan(graphToScan);
+
                 success = true;
                 GameObject instantiatedObject = Instantiate(objectToPlace, shadowPointer.position, shadowPointer.rotation);
                 /*
@@ -276,7 +279,8 @@ using UnityEngine;
             {
                 foreach (Transform child in currentshadowPointer.transform)
                 {
-                    child.gameObject.GetComponent<Renderer>().material.color = new Color(0.1f,0.1f,0.1f);
+                    //TODO FIX THIS TO HAPPEN EVERY FRAME
+                    //child.gameObject.GetComponent<Renderer>().material.color = new Color(0.1f,0.1f,0.1f);
                 }
                 return false;
             }
