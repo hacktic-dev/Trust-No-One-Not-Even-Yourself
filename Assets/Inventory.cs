@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i=0; i<3;i++)
         {
-            inventoryAmount[i] = 10;
+            inventoryAmount[i] = 0;
         }
         resourceAmount.Add("matter", 0);
         resourceAmount.Add("smarts", 0);

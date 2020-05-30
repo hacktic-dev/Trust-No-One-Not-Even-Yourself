@@ -7,7 +7,7 @@ public class SpawnPad : MonoBehaviour
 
     float timerToSpawn;
 
-    const float spawnTimeInterval = 0.5f;
+    const float spawnTimeInterval = 1.5f;
     const int spawnedMaximum = 10;
 
     public string resourceType;

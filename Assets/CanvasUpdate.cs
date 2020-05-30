@@ -9,7 +9,10 @@ public class CanvasUpdate : MonoBehaviour
     public Text stillTurretAmountText;
     public Text movingTurretAmountText;
 
+    public Text matterText;
     public Text smartsText;
+    public Text motionText;
+    public Text forceText;
 
     private const float alpha = 0.8f;
 
@@ -19,12 +22,22 @@ public class CanvasUpdate : MonoBehaviour
     public GameObject movingTurretInventory;
     public GameObject barrierInventory;
 
+    public GameObject matterBox;
+    public GameObject smartsBox;
+    public GameObject forceBox;
+    public GameObject motionBox;
+
     public Player player;
     public List<GameObject> inventoryBoxSprites;
 
     // Start is called before the first frame update
     void Start()
     {
+        matterBox.GetComponent<Image>().color = new Color(0, 0, 0, alpha);
+        smartsBox.GetComponent<Image>().color = new Color(0, 0, 0, alpha);
+        forceBox.GetComponent<Image>().color = new Color(0, 0, 0, alpha);
+        motionBox.GetComponent<Image>().color = new Color(0, 0, 0, alpha);
+
         selectedIndex = 0;
 
         inventoryBoxSprites.Add(barrierInventory);
@@ -64,6 +77,9 @@ public class CanvasUpdate : MonoBehaviour
         movingTurretAmountText.text = player.inventory.inventoryAmount[2].ToString();
 
         smartsText.text= player.inventory.resourceAmount["smarts"].ToString();
+        motionText.text = player.inventory.resourceAmount["motion"].ToString();
+        forceText.text = player.inventory.resourceAmount["force"].ToString();
+        matterText.text = player.inventory.resourceAmount["matter"].ToString();
     }
 
 }

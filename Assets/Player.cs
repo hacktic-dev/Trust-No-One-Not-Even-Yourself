@@ -9,7 +9,7 @@ using UnityEngine;
     public Inventory inventory;
 
     //execute objectPlace code when new
-    bool objectPlaceMode;
+    public bool objectPlaceMode;
     //index for selected item
     public int selectedIndex;
 
@@ -198,9 +198,21 @@ using UnityEngine;
 
 	}
 	
-    //execute this when in object placing mode
-    void objectPlaceModeUpdate()
+    public void craftItem(string itemName)
     {
-        //TODO
+        if (itemName=="barrier")
+        {
+            if(inventory.resourceAmount["matter"]>=2 && inventory.resourceAmount["force"] >= 1)
+            {
+                inventory.inventoryAmount[0]++;
+                inventory.resourceAmount["matter"] -= 2;
+                inventory.resourceAmount["force"] -= 1;
+            }
+            
+        }
+        else
+        {
+            throw new System.Exception("Invalid Item Type!");
+        }
     }
 }
