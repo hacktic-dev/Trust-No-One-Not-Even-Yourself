@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8698153785090404349}
   - component: {fileID: 5630520769987384382}
   m_Layer: 10
-  m_Name: BarrierBoundBox
+  m_Name: BoundBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

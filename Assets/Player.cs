@@ -270,7 +270,7 @@ using UnityEngine;
                                  4f, LayerMask.GetMask("Solid Object"));
         if (checkSphere.Length > 0)
         {
-            if (currentshadowPointer.transform.Find("BarrierBoundBox").GetComponent<Collider>().bounds.Intersects(checkSphere[0].bounds))
+            if (currentshadowPointer.transform.Find("BoundBox").GetComponent<Collider>().bounds.Intersects(checkSphere[0].bounds))
             {
                 foreach (Transform child in currentshadowPointer.transform)
                 {
