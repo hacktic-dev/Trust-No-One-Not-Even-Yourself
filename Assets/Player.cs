@@ -152,7 +152,7 @@ using UnityEngine;
                 shadowPointerTurret.SetActive(false);
                 objectToPlace = barrier;
                 currentshadowPointer = shadowPointerBarrier;
-                objectSize = 4f;
+                objectSize = 2f;
                 break;
             case 1:
                 shadowPointerBarrier.SetActive(false);
@@ -178,18 +178,25 @@ using UnityEngine;
         }
         shadowPointer.position = hitPosition;
         shadowPointer.SetPositionAndRotation(new Vector3(shadowPointer.position.x, 0, shadowPointer.position.z),selfTransform.rotation);
-        //shadowPointer.rotation = selfTransform.rotation;
 
-        Collider[] checkCollision = Physics.OverlapSphere(shadowPointer.position, objectSize, LayerMask.GetMask("Solid Object"));
-        if (checkCollision.Length>0 && checkCollision[0].tag=="SolidObject")
+
+        Collider[] checkSphere = Physics.OverlapSphere(shadowPointer.position,
+                                 4f, LayerMask.GetMask("Solid Object"));
+        if (checkSphere.Length > 0)
         {
-            Debug.Log(checkCollision[0].tag);
-            placeable = false;
+            if ( currentshadowPointer.transform.Find("BarrierBoundBox").GetComponent<Collider>().bounds.Intersects(checkSphere[0].bounds))
+            {
+
+                placeable = false;
+            }
+            else
+            {
+                placeable = true; }
         }
         else
         {
-            placeable = true;
-        }
+            placeable = true; }
+
 
         switch (selectedIndex)
         {

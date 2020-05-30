@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Resource
-  - Solid Object
+  - SolidObject
   layers:
   - Default
   - TransparentFX

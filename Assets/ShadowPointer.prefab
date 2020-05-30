@@ -39,6 +39,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 497311881284355751}
     m_Modifications:
+    - target: {fileID: 5340834598434079568, guid: 89b4424f1be34c64b8ff551513602783,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7698930114807641543, guid: 89b4424f1be34c64b8ff551513602783,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7698930114807641544, guid: 89b4424f1be34c64b8ff551513602783,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -68,6 +78,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BarrierGhost
+      objectReference: {fileID: 0}
+    - target: {fileID: 7698930115498940518, guid: 89b4424f1be34c64b8ff551513602783,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7698930115498940519, guid: 89b4424f1be34c64b8ff551513602783,
         type: 3}
@@ -123,6 +138,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7698930115572238275, guid: 89b4424f1be34c64b8ff551513602783,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7698930115572238276, guid: 89b4424f1be34c64b8ff551513602783,
         type: 3}
