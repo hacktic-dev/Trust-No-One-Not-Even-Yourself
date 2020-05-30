@@ -41,8 +41,6 @@ using UnityEngine;
     public GameObject shadowPointerTurret;
     GameObject currentshadowPointer;
 
-    float objectSize;
-    public bool placeable;
     GameObject objectToPlace;
     int currentObjectAmount;
 
@@ -152,14 +150,12 @@ using UnityEngine;
                 shadowPointerTurret.SetActive(false);
                 objectToPlace = barrier;
                 currentshadowPointer = shadowPointerBarrier;
-                objectSize = 2f;
                 break;
             case 1:
                 shadowPointerBarrier.SetActive(false);
                 shadowPointerTurret.SetActive(true);
                 currentshadowPointer = shadowPointerTurret;
                 objectToPlace = turret;
-                objectSize = 1f;
                 break;
         }
 
@@ -179,25 +175,6 @@ using UnityEngine;
         shadowPointer.position = hitPosition;
         shadowPointer.SetPositionAndRotation(new Vector3(shadowPointer.position.x, 0, shadowPointer.position.z),selfTransform.rotation);
 
-
-        Collider[] checkSphere = Physics.OverlapSphere(shadowPointer.position,
-                                 4f, LayerMask.GetMask("Solid Object"));
-        if (checkSphere.Length > 0)
-        {
-            if ( currentshadowPointer.transform.Find("BarrierBoundBox").GetComponent<Collider>().bounds.Intersects(checkSphere[0].bounds))
-            {
-
-                placeable = false;
-            }
-            else
-            {
-                placeable = true; }
-        }
-        else
-        {
-            placeable = true; }
-
-
         switch (selectedIndex)
         {
             case 0:
@@ -211,7 +188,7 @@ using UnityEngine;
         if (Input.GetMouseButtonDown(0))
         {
             bool success = false;
-            if (inventory.inventoryAmount[selectedIndex] > 0 && placeable)
+            if (inventory.inventoryAmount[selectedIndex] > 0 && checkIfPlaceable())
             {
                 success = true;
                 GameObject instantiatedObject = Instantiate(objectToPlace, shadowPointer.position, shadowPointer.rotation);
@@ -279,6 +256,28 @@ using UnityEngine;
         else
         {
             audioSource.PlayOneShot(craftFail, 0.8f);
+        }
+    }
+
+    bool checkIfPlaceable()
+    {
+        Collider[] checkSphere = Physics.OverlapSphere(shadowPointer.position,
+                                 4f, LayerMask.GetMask("Solid Object"));
+        if (checkSphere.Length > 0)
+        {
+            if (currentshadowPointer.transform.Find("BarrierBoundBox").GetComponent<Collider>().bounds.Intersects(checkSphere[0].bounds))
+            {
+
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            return true;
         }
     }
 }
