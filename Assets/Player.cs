@@ -49,6 +49,7 @@ using UnityEngine;
     int currentObjectAmount;
 
     Vector3 fallSpeed;
+    float damage = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -324,11 +325,25 @@ using UnityEngine;
             fallSpeed.y = 0f;
         }
 
-        if (Input.GetButton("Jump") && controller.isGrounded)
+        if (Input.GetButton("Jump") && Physics.CheckSphere(transform.position, 0.4f))
         {
             fallSpeed.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
         controller.Move(fallSpeed * Time.deltaTime);
+    }
+
+    void shooting()
+    {
+        if(Input.GetMouseButtonDown(0) && gameHandler.roundType == "attack")
+        {
+            RaycastHit hit;
+            GameObject hitObject;
+            if(Physics.Raycast(cameraMount.position, cameraMount.forward, out hit))
+            {
+                hitObject = hit.transform.gameObject;
+                hitObject.GetComponent<Health>().health -= damage;
+            }
+        }
     }
 }
