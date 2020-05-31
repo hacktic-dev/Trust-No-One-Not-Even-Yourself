@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 4525429432374645652}
   m_Layer: 9
   m_Name: Barrier
-  m_TagString: SolidObject
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

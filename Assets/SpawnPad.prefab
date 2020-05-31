@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 6748898599136497187}
   m_Layer: 10
   m_Name: SpawnPad
-  m_TagString: Untagged
+  m_TagString: SpawnPad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,3 +243,4 @@ MonoBehaviour:
   player: {fileID: 0}
   Resource: {fileID: 7274659130960244181, guid: 9401a492f6da13649973d8e2874dd7c4,
     type: 3}
+  gameHandler: {fileID: 0}

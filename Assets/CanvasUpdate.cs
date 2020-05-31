@@ -14,6 +14,8 @@ public class CanvasUpdate : MonoBehaviour
     public Text motionText;
     public Text forceText;
 
+    public Text health;
+
     public Text waveTime;
     public Text waveNumber;
     public Text instructionText;
@@ -57,24 +59,49 @@ public class CanvasUpdate : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            GameObject[] allChildren = new GameObject[transform.childCount];
-            int i = 0;
-            foreach (Transform child in transform)
+            if (gameHandler.roundType == "defend")
             {
-                allChildren[i] = child.gameObject;
-                i += 1;
-            }
-
-            foreach (GameObject child in allChildren)
-            {
-
-                if (child.tag == "Active")
+                GameObject[] allChildren = new GameObject[transform.childCount];
+                int i = 0;
+                foreach (Transform child in transform)
                 {
-                    child.SetActive(true);
+                    allChildren[i] = child.gameObject;
+                    i += 1;
                 }
-                else
-                { child.SetActive(false); }
-                
+
+                foreach (GameObject child in allChildren)
+                {
+
+                    if (child.tag == "ActiveDefend" || child.tag=="Active" || child.tag == "Always") 
+                    {
+                        child.SetActive(true);
+                    }
+                    else
+                    { child.SetActive(false); }
+
+                }
+            }
+            else
+            {
+                GameObject[] allChildren = new GameObject[transform.childCount];
+                int i = 0;
+                foreach (Transform child in transform)
+                {
+                    allChildren[i] = child.gameObject;
+                    i += 1;
+                }
+
+                foreach (GameObject child in allChildren)
+                {
+
+                    if (child.tag == "ActiveAttack" || child.tag == "Active" || child.tag == "Always")
+                    {
+                        child.SetActive(true);
+                    }
+                    else
+                    { child.SetActive(false); }
+
+                }
             }
 
         }
@@ -156,6 +183,32 @@ public class CanvasUpdate : MonoBehaviour
 
         }
 
+        else if (gameHandler.gameState == "lose")
+
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            GameObject[] allChildren = new GameObject[transform.childCount];
+            int i = 0;
+            foreach (Transform child in transform)
+            {
+                allChildren[i] = child.gameObject;
+                i += 1;
+            }
+
+            foreach (GameObject child in allChildren)
+            {
+                if (child.tag == "Lose" || child.tag == "Always")
+                {
+                    child.SetActive(true);
+                }
+                else
+                { child.SetActive(false); }
+
+            }
+
+        }
+
         //startGame.onClick.AddListener(StartGameOnClick);
 
         updateTextValues();
@@ -178,8 +231,9 @@ public class CanvasUpdate : MonoBehaviour
 
     public void StartGameOnClick()
     {
-        Debug.Log("press");
+        
         gameHandler.gameState = "active";
+        gameHandler.newGame();
     }
 
     void updateSelection()
@@ -189,11 +243,14 @@ public class CanvasUpdate : MonoBehaviour
         inventoryBoxSprites[selectedIndex].GetComponent<Image>().color = new Color(0.8f, 0.8f, 0.8f, alpha);
     }
 
+
     void updateTextValues()
     {
         barrierAmountText.text = player.inventory.inventoryAmount[0].ToString();
         stillTurretAmountText.text = player.inventory.inventoryAmount[1].ToString();
         movingTurretAmountText.text = player.inventory.inventoryAmount[2].ToString();
+
+        health.text = "Health: "+player.health.health.ToString();
 
         smartsText.text = player.inventory.resourceAmount["smarts"].ToString();
         motionText.text = player.inventory.resourceAmount["motion"].ToString();
@@ -202,14 +259,16 @@ public class CanvasUpdate : MonoBehaviour
 
         waveNumber.text = "Wave " + gameHandler.roundNumber.ToString();
 
-        if (gameHandler.timeLeftThisRound < gameHandler.fightTimeLength)
+        if (gameHandler.timeLeftThisRound < gameHandler.fightTimeLength && gameHandler.roundType=="defend")
         {
             waveTime.text = "Wave ends in " + Mathf.Ceil(gameHandler.timeLeftThisRound).ToString();
         }
-        else
+        else if (gameHandler.roundType == "defend")
         {
             waveTime.text = "Wave begins in " + Mathf.Ceil(gameHandler.timeLeftThisRound - gameHandler.fightTimeLength).ToString();
         }
+        else
+        { waveTime.text = "Time Left: " + Mathf.Ceil(gameHandler.timeLeftThisRound).ToString(); }
 
         if(gameHandler.gameState=="lose")
         {

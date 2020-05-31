@@ -13,12 +13,13 @@ public class Turret : MonoBehaviour
     float gunOffset = 0.2f;
     Vector3 gun1Position;
     Vector3 gun2Position;
-
+    public Health health;
     public AudioSource audioSource;
     public AudioClip shoot;
-    float particleTimer;
-
+    float particleTimer, particleTimer2;
+    float lastFrameHealth;
     public GameHandler gameHandler;
+    bool firstFrame = true;
 
     // Start is called before the first frame update
     void Start()
@@ -44,16 +45,45 @@ public class Turret : MonoBehaviour
         // Update is called once per frame
         void Update()
         {
+
+        //Debug.Log(head.GetComponent<ParticleSystem>().isPlaying.ToString());
+        //Debug.Log(particleTimer.ToString());
+        if (health.health != lastFrameHealth && !firstFrame)
+        {
+            gameObject.GetComponent<ParticleSystem>().Play();
+            particleTimer2 = 0.4f;
+        }
+        lastFrameHealth = health.health;
+
+        if (firstFrame)
+        {
+            firstFrame = false;
+        }
+
+        if (particleTimer2 < 0)
+        {
+            gameObject.GetComponent<ParticleSystem>().Stop();
+            particleTimer2 = 0;
+        }
+
+        particleTimer2 -= Time.deltaTime;
+
         if (gameObject.tag != "Shadow")
         {
             if (gameHandler.gameState == "active")
-        {
-
-            if (particleTimer < 0)
             {
-                head.GetComponent<ParticleSystem>().Stop();
-                particleTimer = 0;
-            }
+
+                if (health.health <= 0)
+                {
+                    Destroy(gameObject, 0.4f);
+                }
+
+                if (particleTimer < 0)
+                {
+                    Debug.Log("end");
+                    head.GetComponent<ParticleSystem>().Stop();
+                    particleTimer = 0;
+                }
             particleTimer -= Time.deltaTime;
             
 
@@ -109,9 +139,9 @@ public class Turret : MonoBehaviour
 
                     if (closest != null)
                     {
-                        audioSource.PlayOneShot(shoot, 0.8f*gameHandler.MasterVolume);
+                        audioSource.PlayOneShot(shoot, 0.3f*gameHandler.MasterVolume);
                         head.GetComponent<ParticleSystem>().Play();
-                        particleTimer = 0.2f;
+                        particleTimer = 0.4f;
 
 
                         foreach (Transform child in head.transform)
@@ -128,7 +158,7 @@ public class Turret : MonoBehaviour
 
                             for (int i = 0; i < raycast.Length; i++)
                             {
-                                if (raycast[i].transform.tag == "Enemy")
+                                if (raycast[i].transform.tag == "Enemy" || (gameHandler.roundType == "attack" && raycast[i].transform.tag == "Player"))
                                 {
                                     raycast[i].transform.GetComponent<Health>().health -= damage;
                                     break;
@@ -160,7 +190,12 @@ public class Turret : MonoBehaviour
         {
             GameObject[] enemies;
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            float closestDistance = 10000;
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            List<GameObject> list = new List<GameObject>();
+            list.AddRange(enemies);
+            list.AddRange(players);
+            enemies = list.ToArray();
+             float closestDistance = 10000;
             Vector3 position = transform.position;
             closest = null;
             foreach (GameObject enemy in enemies)
@@ -171,7 +206,7 @@ public class Turret : MonoBehaviour
 
                 for (int i = 0; i < raycast.Length; i++)
                 {
-                    if (raycast[i].transform.tag == "Enemy") ;
+                    if (raycast[i].transform.tag == "Enemy" || (gameHandler.roundType=="attack" && raycast[i].transform.tag=="Player") )
                     enemyIndex = i;
                     break;
                 }
@@ -185,7 +220,7 @@ public class Turret : MonoBehaviour
 
                 }
 
-                if (raycast.Length > 0 && raycast[0].transform.tag == "Enemy")
+                if (raycast.Length > 0 && raycast[0].transform.tag == "Enemy" || (gameHandler.roundType == "attack" && raycast[0].transform.tag == "Player"))
                 {
                     float distance = Vector3.Distance(enemy.transform.position, transform.position);
                     if (distance < closestDistance)

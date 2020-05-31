@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3411557242960561360}
   m_Layer: 10
   m_Name: SpawnPadEnemy
-  m_TagString: Untagged
+  m_TagString: EnemySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameHandler: {fileID: 0}
   enemy: {fileID: 756957053551172592, guid: ce25024bab9c0734a8f59dc6bb3facb1, type: 3}
+  flag: {fileID: 0}
 --- !u!1 &6865251494461814568
 GameObject:
   m_ObjectHideFlags: 0

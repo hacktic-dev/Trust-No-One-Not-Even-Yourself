@@ -9,6 +9,7 @@ using UnityEngine.AI;
     public AudioSource audioSource;
     public AudioClip craftSuccess;
     public AudioClip craftFail;
+    public AudioClip shoot;
 
     public Inventory inventory;
 
@@ -20,7 +21,7 @@ using UnityEngine.AI;
     public bool newSelection;
 
     //the number of items in the game, update this as we add more
-    const int totalItemNumber = 3;
+    const int totalItemNumber = 2;
 
     public GameObject barrier;
     public GameObject turret;
@@ -41,6 +42,8 @@ using UnityEngine.AI;
     public GameObject shadowPointerTurret;
     GameObject currentshadowPointer;
 
+    float particleTimer;
+    public Health health;
     public GameObject level;
 
     public NavMeshSurface Navmesh;
@@ -49,6 +52,8 @@ using UnityEngine.AI;
 
     GameObject objectToPlace;
     int currentObjectAmount;
+
+    public GameObject flag;
 
     Vector3 fallSpeed;
     float damage = 10f;
@@ -70,35 +75,64 @@ using UnityEngine.AI;
     {
         if (gameHandler.gameState == "active")
         {
+
+            if(health.health<=0)
+            { gameHandler.gameState = "lose"; }
+
+            if (gameHandler.newRound)
+            {
+                shadowPointerBarrier.SetActive(false);
+                shadowPointerTurret.SetActive(false);
+                Debug.Log("new loc");
+                newPlayerLocation();
+            }
+
+
+
+            if (particleTimer <= 0)
+            {
+                particleTimer = 0;
+                cameraMount.GetComponent<ParticleSystem>().Stop();
+
+            }
+
+            particleTimer -= Time.deltaTime;
+
+
+
             //goes true for a frame when initiating a new selection
             newSelection = false;
 
             //select inventory
-            if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+            if (gameHandler.roundType == "defend")
             {
-                selectUpdate(1);
-            }
-            else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-            {
-                selectUpdate(-1);
-            }
-            if (Input.GetKeyDown("e") && objectPlaceMode)
-            {
-                shadowPointer.position = new Vector3(0, -100, 0);
-                objectPlaceMode = false;
-            }
-            else if (Input.GetKeyDown("e"))
-            {
-                objectPlaceMode = true;
+                if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+                {
+                    selectUpdate(1);
+                }
+                else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+                {
+                    selectUpdate(-1);
+                }
+                if (Input.GetKeyDown("e") && objectPlaceMode)
+                {
+                    shadowPointer.position = new Vector3(0, -100, 0);
+                    objectPlaceMode = false;
+                }
+                else if (Input.GetKeyDown("e"))
+                {
+                    objectPlaceMode = true;
+                }
+
+                if (objectPlaceMode)
+                {
+                    ShadowPointer();
+                }
             }
 
+            shooting();
             Movement();
             Camera();
-            if (objectPlaceMode)
-            {
-                ShadowPointer();
-            }
-
             Jump();
 
         }
@@ -179,6 +213,8 @@ using UnityEngine.AI;
                 break;
         }
 
+      
+
         LayerMask mask = ~LayerMask.GetMask("Hidden Objects","RaycastCollider","Grayscale");
         if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance, mask) && inventory.inventoryAmount[selectedIndex]>0)
         {
@@ -221,6 +257,7 @@ using UnityEngine.AI;
 
                 if (objectToPlace == turret)
                 {
+                    instantiatedObject.GetComponent<Health>().maxHealth = 80f;
                     instantiatedObject.GetComponent<Turret>().gameHandler = gameHandler;
                 }
 
@@ -286,7 +323,7 @@ using UnityEngine.AI;
     bool checkIfPlaceable()
     {
         Collider[] checkSphere = Physics.OverlapSphere(shadowPointer.position,
-                                 4f, LayerMask.GetMask("Solid Object"));
+                                 4f, LayerMask.GetMask("Solid Object","Turret"));
         if (checkSphere.Length > 0)
         {
             if (currentshadowPointer.transform.Find("BoundBox").GetComponent<Collider>().bounds.Intersects(checkSphere[0].bounds))
@@ -343,13 +380,96 @@ using UnityEngine.AI;
     {
         if(Input.GetMouseButtonDown(0) && gameHandler.roundType == "attack")
         {
-            RaycastHit hit;
-            GameObject hitObject;
-            if(Physics.Raycast(cameraMount.position, cameraMount.forward, out hit))
+            audioSource.PlayOneShot(shoot, 0.3f * gameHandler.MasterVolume);
+            cameraMount.GetComponent<ParticleSystem>().Play();
+            particleTimer = 0.2f;
+            float closestDistance = 10000;
+            bool flagHit = false;
+            int flagIndex=0;
+            Debug.DrawRay(cameraMount.position, cameraMount.forward * 100f, Color.white, 1f);
+            RaycastHit[] raycast = Physics.RaycastAll(cameraMount.position, cameraMount.forward, 100f);
+            if (raycast.Length > 0)
             {
-                hitObject = hit.transform.gameObject;
-                hitObject.GetComponent<Health>().health -= damage;
+
+
+
+                for (int i = 0; i < raycast.Length; i++)
+                {
+                    float distance = Vector3.Distance(raycast[i].transform.position, transform.position);
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        
+                    }
+
+                    if (raycast[i].transform.tag == "Turret")
+                    {
+
+                        raycast[i].transform.GetComponent<Health>().health -= damage;
+                        break;
+                    }
+                    else if (raycast[i].transform.tag == "Flag")
+                    {
+                        flagHit = true;
+                        flagIndex = i;
+                    }
+                }
+
+                if(flagHit && closestDistance== Vector3.Distance(raycast[flagIndex].transform.position, transform.position))
+                {
+                    gameHandler.newRoundF();
+                    CharacterController cc = this.GetComponent<CharacterController>();
+                    cc.enabled = false;
+                    transform.position = flag.transform.position;
+                    cc.enabled = true;
+                }
+
             }
         }
+    }
+
+    void newPlayerLocation()
+    {
+        if (gameHandler.roundType=="attack")
+        {
+            object[] obj = GameObject.FindObjectsOfType(typeof(GameObject));
+            List<GameObject> spawnLocs = new List<GameObject>();
+            foreach (object o in obj)
+            {
+                Debug.Log("test");
+                GameObject g = (GameObject)o;
+                if (g.tag=="EnemySpawn")
+                {
+                    spawnLocs.Add(g);
+                }
+
+            }
+
+            int locationIndex = Random.Range(0, spawnLocs.Count);
+            CharacterController cc = this.GetComponent<CharacterController>();
+            cc.enabled = false;
+            Debug.Log(locationIndex.ToString());
+            transform.position = spawnLocs[locationIndex].transform.position;
+            Debug.Log(transform.position);
+            Debug.Log(spawnLocs[locationIndex].transform.position);
+            cc.enabled = true;
+        }
+        else
+        {
+            CharacterController cc = this.GetComponent<CharacterController>();
+            cc.enabled = false;
+            transform.position = flag.transform.position;
+            cc.enabled = true;
+        }
+    }
+
+    public void reset()
+    {
+        health.health = 50f;
+        CharacterController cc = this.GetComponent<CharacterController>();
+        cc.enabled = false;
+        transform.position = flag.transform.position;
+        cc.enabled = true;
+        inventory.reset();
     }
 }

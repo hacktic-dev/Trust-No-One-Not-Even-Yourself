@@ -6,7 +6,15 @@ public class Inventory : MonoBehaviour
 {
     Inventory()
     {
-        for (int i=0; i<3;i++)
+        reset();
+    }
+
+    public int[] inventoryAmount=new int[2];
+    public SortedDictionary<string, int> resourceAmount=new SortedDictionary<string, int>();
+
+    public void reset()
+    {
+        for (int i = 0; i < 2; i++)
         {
             inventoryAmount[i] = 0;
         }
@@ -15,10 +23,6 @@ public class Inventory : MonoBehaviour
         resourceAmount.Add("motion", 0);
         resourceAmount.Add("force", 0);
     }
-
-    public int[] inventoryAmount=new int[3];
-    public SortedDictionary<string, int> resourceAmount=new SortedDictionary<string, int>();
-
 
     // Start is called before the first frame update
     void Start()

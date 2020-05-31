@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
 
-    Enemy() { gameObject.GetComponent<ParticleSystem>().Stop(); }
+    Enemy() {}
 
     //ublic float speed;
     // public float attackPower;
@@ -21,8 +21,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        gameObject.GetComponent<AIPath>().destination = flag.transform.position;
+
     }
     // Update is called once per frame
     void Update()

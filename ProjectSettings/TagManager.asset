@@ -14,6 +14,15 @@ TagManager:
   - Menu
   - Paused
   - Options
+  - ActiveDefend
+  - Turret
+  - EnemySpawn
+  - Flag
+  - SpawnPad
+  - Lose
+  - Barrier
+  - Always
+  - ActiveAttack
   layers:
   - Default
   - TransparentFX
