@@ -41,6 +41,11 @@ public class CanvasUpdate : MonoBehaviour
     {
 
         selectedIndex = 0;
+
+        inventoryBoxSprites.Add(barrierInventory);
+        inventoryBoxSprites.Add(stillTurretInventory);
+        inventoryBoxSprites.Add(movingTurretInventory);
+        
         updateSelection();
     }
 
@@ -51,27 +56,78 @@ public class CanvasUpdate : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            activeUI.SetActive(true);
-            menuUI.SetActive(false);
-            pauseUI.SetActive(false);
+
+            GameObject[] allChildren = new GameObject[transform.childCount];
+            int i = 0;
+            foreach (Transform child in transform)
+            {
+                allChildren[i] = child.gameObject;
+                i += 1;
+            }
+
+            foreach (GameObject child in allChildren)
+            {
+
+                if (child.tag == "Active")
+                {
+                    child.SetActive(true);
+                }
+                else
+                { child.SetActive(false); }
+                
+            }
 
         }
         else if (gameHandler.gameState=="menu")
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            activeUI.SetActive(false);
-            menuUI.SetActive(true);
-            pauseUI.SetActive(false);
+
+            GameObject[] allChildren = new GameObject[transform.childCount];
+            int i = 0;
+            foreach (Transform child in transform)
+            {
+                allChildren[i] = child.gameObject;
+                i += 1;
+            }
+
+            foreach (GameObject child in allChildren)
+            {
+                Debug.Log(child.tag);
+                if (child.tag == "Menu")
+                {
+                    child.SetActive(true);
+                }
+                else
+                { child.SetActive(false); }
+
+            }
+
         }
         else if (gameHandler.gameState=="paused")
 
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            activeUI.SetActive(false);
-            menuUI.SetActive(false);
-            pauseUI.SetActive(true);
+            GameObject[] allChildren = new GameObject[transform.childCount];
+            int i = 0;
+            foreach (Transform child in transform)
+            {
+                allChildren[i] = child.gameObject;
+                i += 1;
+            }
+
+            foreach (GameObject child in allChildren)
+            {
+                if (child.tag == "Paused")
+                {
+                    child.SetActive(true);
+                }
+                else
+                { child.SetActive(false); }
+
+            }
+
         }
 
         //startGame.onClick.AddListener(StartGameOnClick);

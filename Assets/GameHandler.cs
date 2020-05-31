@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    public float roundLength=10f; //test value, default 180
-    public float fightTimeLength=2f;
+    public float roundLength=60f; //test value, default 180
+    public float fightTimeLength=55f;
     public string roundType;
     public float timeLeftThisRound;
     public int roundNumber;

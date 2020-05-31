@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
         if (health.health != lastFrameHealth && !firstFrame)
         {
             gameObject.GetComponent<ParticleSystem>().Play();
-            particleTimer = 0.2f;
+            particleTimer = 0.4f;
         }
         lastFrameHealth = health.health;
 

@@ -1620,8 +1620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac31855a5c3a8498596e9ba5f33bd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundLength: 10
-  fightTimeLength: 2
+  roundLength: 60
+  fightTimeLength: 55
   roundType: 
   timeLeftThisRound: 0
   roundNumber: 0
