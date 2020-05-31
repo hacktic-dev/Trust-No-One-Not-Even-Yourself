@@ -15,7 +15,7 @@ public class GameHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameState = "active";
+        gameState = "menu";
         roundNumber = 1;
         timeLeftThisRound = roundLength;
         roundType = "defend";

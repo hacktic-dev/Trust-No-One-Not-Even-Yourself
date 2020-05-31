@@ -92,6 +92,7 @@ public class CanvasUpdate : MonoBehaviour
 
     public void StartGameOnClick()
     {
+        Debug.Log("press");
         gameHandler.gameState = "active";
     }
 

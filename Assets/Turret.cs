@@ -26,7 +26,7 @@ public class Turret : MonoBehaviour
 
         foreach (Transform child in head.transform)
         {
-            Debug.Log(gunOffset);
+            //Debug.Log(gunOffset);
             if (child.tag == "Gun")
             {
                 gun1Position = child.position;
