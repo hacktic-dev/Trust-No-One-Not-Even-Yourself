@@ -10,7 +10,7 @@ public class GameHandler : MonoBehaviour
     public float timeLeftThisRound;
     public int roundNumber;
     public string gameState;
-
+    public float MasterVolume;
 
     // Start is called before the first frame update
     void Start()
@@ -52,5 +52,10 @@ public class GameHandler : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetVolume(System.Single value)
+    {
+        MasterVolume = value;
     }
 }

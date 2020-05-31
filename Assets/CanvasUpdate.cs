@@ -130,6 +130,32 @@ public class CanvasUpdate : MonoBehaviour
 
         }
 
+        else if (gameHandler.gameState == "options")
+
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            GameObject[] allChildren = new GameObject[transform.childCount];
+            int i = 0;
+            foreach (Transform child in transform)
+            {
+                allChildren[i] = child.gameObject;
+                i += 1;
+            }
+
+            foreach (GameObject child in allChildren)
+            {
+                if (child.tag == "Options")
+                {
+                    child.SetActive(true);
+                }
+                else
+                { child.SetActive(false); }
+
+            }
+
+        }
+
         //startGame.onClick.AddListener(StartGameOnClick);
 
         updateTextValues();
@@ -143,6 +169,11 @@ public class CanvasUpdate : MonoBehaviour
     public void ReturnToMenu()
     {
         gameHandler.gameState = "menu";
+    }
+
+    public void OpenOptions()
+    {
+        gameHandler.gameState = "options";
     }
 
     public void StartGameOnClick()

@@ -57,6 +57,11 @@ using UnityEngine;
         fallSpeed = new Vector3(0, 0, 0);
     }
 
+    public void SetMouseSens(System.Single value)
+    {
+        mouseSense = 50f + value * 800f;
+        Debug.Log(mouseSense);
+    }
 
     // Update is called once per frame
     void Update()
@@ -226,11 +231,11 @@ using UnityEngine;
 
             if (success)
             {
-                audioSource.PlayOneShot(craftSuccess, 0.8f);
+                audioSource.PlayOneShot(craftSuccess, 0.8f*gameHandler.MasterVolume);
             }
             else
             {
-                audioSource.PlayOneShot(craftFail, 0.8f);
+                audioSource.PlayOneShot(craftFail, 0.8f* gameHandler.MasterVolume);
             }
         }
 

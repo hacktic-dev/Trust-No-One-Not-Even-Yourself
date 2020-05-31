@@ -109,7 +109,7 @@ public class Turret : MonoBehaviour
 
                     if (closest != null)
                     {
-                        audioSource.PlayOneShot(shoot, 0.8f);
+                        audioSource.PlayOneShot(shoot, 0.8f*gameHandler.MasterVolume);
                         head.GetComponent<ParticleSystem>().Play();
                         particleTimer = 0.2f;
 

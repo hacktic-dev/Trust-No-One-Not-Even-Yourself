@@ -10,7 +10,7 @@ public class SpawnPad : MonoBehaviour
 
     float timerToSpawn;
 
-    public float spawnTimeInterval = 0.1f; //DEBUG default 1.5
+    public float spawnTimeInterval = 1.5f; //DEBUG default 1.5
     const int spawnedMaximum = 10;
 
     public string resourceType;
@@ -42,7 +42,7 @@ public class SpawnPad : MonoBehaviour
             if (Vector3.Distance(player.transform.position, transform.position) < 3f && currentSpawnedResources > 0)
             {
                 audioSource.pitch = (Random.Range(0.9f, 1.1f));
-                audioSource.PlayOneShot(clip, 0.2f);
+                audioSource.PlayOneShot(clip, 0.5f* gameHandler.MasterVolume);
                 player.inventory.resourceAmount[resourceType] += currentSpawnedResources;
                 currentSpawnedResources = 0;
                 DestroyAllChildren();

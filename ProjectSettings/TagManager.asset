@@ -13,6 +13,7 @@ TagManager:
   - Active
   - Menu
   - Paused
+  - Options
   layers:
   - Default
   - TransparentFX
