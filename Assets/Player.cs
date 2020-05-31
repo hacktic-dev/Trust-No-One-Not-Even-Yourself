@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 
     public class Player : MonoBehaviour
 {
@@ -42,6 +42,8 @@ using UnityEngine;
     GameObject currentshadowPointer;
 
     public GameObject level;
+
+    public NavMeshSurface Navmesh;
 
     public GameHandler gameHandler;
 
@@ -215,15 +217,13 @@ using UnityEngine;
 
                 success = true;
                 GameObject instantiatedObject = Instantiate(objectToPlace, shadowPointer.position, shadowPointer.rotation);
-                instantiatedObject.GetComponent<Turret>().gameHandler = gameHandler;
-                /*
-                if (objectToPlace==turret)
+                Navmesh.BuildNavMesh();
+
+                if (objectToPlace == turret)
                 {
-                    Turret playerVariable = instantiatedObject.GetComponent<Turret>();
-                    Transform test=this.transform;
-                    playerVariable.player = test;
+                    instantiatedObject.GetComponent<Turret>().gameHandler = gameHandler;
                 }
-                */
+
                 Debug.Log(inventory.inventoryAmount[selectedIndex]);
                 inventory.inventoryAmount[selectedIndex]--;
                 Debug.Log(inventory.inventoryAmount[selectedIndex]);

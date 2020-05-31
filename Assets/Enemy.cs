@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
 
@@ -15,6 +16,7 @@ public class Enemy : MonoBehaviour
     float particleTimer;
     bool firstFrame = true;
     public GameHandler gameHandler;
+    public NavMeshAgent enemy;
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +27,11 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        enemy.SetDestination(flag.position);
         if (gameHandler.gameState == "active")
         {
-            gameObject.GetComponent<AIPath>().enabled = true;
+           // gameObject.GetComponent<AIPath>().enabled = true;
             if (particleTimer <= 0)
             {
                 particleTimer = 0;
@@ -56,7 +60,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            gameObject.GetComponent<AIPath>().enabled = false;
+          //  gameObject.GetComponent<AIPath>().enabled = false;
         }
     }
 }
