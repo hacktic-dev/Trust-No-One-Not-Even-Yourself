@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
 
             if (health.health <= 0 || gameHandler.roundType == "attack")
             {
-                Destroy(gameObject);
+                Destroy(gameObject,0.4f);
             }
 
             if (firstFrame)
