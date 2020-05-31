@@ -44,7 +44,6 @@ using UnityEngine.AI;
 
     float particleTimer;
     public Health health;
-    public GameObject level;
 
     public NavMeshSurface Navmesh;
 
@@ -237,7 +236,8 @@ using UnityEngine.AI;
                 break;
         }
 
-      
+
+        Vector3 hitNormal=new Vector3(0f,0f,0f);
 
         LayerMask mask = ~LayerMask.GetMask("Hidden Objects","RaycastCollider","Grayscale");
         if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance, mask) && inventory.inventoryAmount[selectedIndex]>0)
@@ -246,6 +246,7 @@ using UnityEngine.AI;
             if (Physics.Raycast(cameraMount.position, cameraMount.forward, out hit, maxPlaceDistance + 1, mask))
             {
                 hitPosition = hit.point;
+                hitNormal = hit.normal;
             }
         }
 		else
@@ -253,7 +254,7 @@ using UnityEngine.AI;
 			hitPosition = new Vector3(1000, 0, 0);
         }
         shadowPointer.position = hitPosition;
-        shadowPointer.SetPositionAndRotation(new Vector3(shadowPointer.position.x, 0, shadowPointer.position.z),selfTransform.rotation);
+        shadowPointer.SetPositionAndRotation(new Vector3(shadowPointer.position.x, shadowPointer.position.y, shadowPointer.position.z),selfTransform.rotation);
 
         switch (selectedIndex)
         {
@@ -270,10 +271,9 @@ using UnityEngine.AI;
         {
             bool success = false;
             
-            if (inventory.inventoryAmount[selectedIndex] > 0 && check)
+            if (inventory.inventoryAmount[selectedIndex] > 0 && check && hitNormal==new Vector3(0f,1f,0f))
             {
-                Pathfinding.GridGraph graphToScan = AstarPath.active.data.gridGraph;
-                AstarPath.active.Scan(graphToScan);
+                
 
                 success = true;
                 GameObject instantiatedObject = Instantiate(objectToPlace, shadowPointer.position, shadowPointer.rotation);

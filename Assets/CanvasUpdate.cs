@@ -33,9 +33,6 @@ public class CanvasUpdate : MonoBehaviour
     public Player player;
     public List<GameObject> inventoryBoxSprites;
 
-    public GameObject activeUI;
-    public GameObject menuUI;
-    public GameObject pauseUI;
     public Button startGame;
 
     // Start is called before the first frame update
@@ -253,13 +250,13 @@ public class CanvasUpdate : MonoBehaviour
     {
         barrierAmountText.text = player.inventory.inventoryAmount[0].ToString();
         stillTurretAmountText.text = player.inventory.inventoryAmount[1].ToString();
-        movingTurretAmountText.text = player.inventory.inventoryAmount[2].ToString();
+        //movingTurretAmountText.text = player.inventory.inventoryAmount[2].ToString();
 
         //Debug.Log("health is " + player.health.health.ToString());
         health.text = "Health: "+player.health.health.ToString();
 
         smartsText.text = player.inventory.resourceAmount["smarts"].ToString();
-        motionText.text = player.inventory.resourceAmount["motion"].ToString();
+       // motionText.text = player.inventory.resourceAmount["motion"].ToString();
         forceText.text = player.inventory.resourceAmount["force"].ToString();
         matterText.text = player.inventory.resourceAmount["matter"].ToString();
 

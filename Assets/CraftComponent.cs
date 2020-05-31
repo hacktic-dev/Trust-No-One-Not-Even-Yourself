@@ -22,7 +22,7 @@ public class CraftComponent : MonoBehaviour
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit) && hit.collider==gameObject.GetComponent<Collider>() && !player.objectPlaceMode)
         {
-            gameObject.GetComponent<Renderer>().material.SetColor("_Color", new Color(8f, 8f,8f));
+            gameObject.GetComponent<Renderer>().material.SetColor("_Color", new Color(4f, 4f,4f));
             if (Input.GetMouseButtonDown(0))
             {
                 player.craftItem(componentType);
@@ -30,7 +30,7 @@ public class CraftComponent : MonoBehaviour
 
         }
         else {
-            gameObject.GetComponent<Renderer>().material.SetColor("_Color", new Color(3f, 3f, 3f));
+            gameObject.GetComponent<Renderer>().material.SetColor("_Color", new Color(2f, 2f, 2f));
         }
 
     }
