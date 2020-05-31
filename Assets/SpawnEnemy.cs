@@ -23,22 +23,25 @@ public class SpawnEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeToNextSpawn -= Time.deltaTime;
-
-        if(timeToNextSpawn<=0f)
+        if (gameHandler.gameState == "active")
         {
-            timeToNextSpawn = timeBetweenSpawns;
-            if (gameHandler.timeLeftThisRound < gameHandler.fightTimeLength && gameHandler.roundType == "defend")
+            timeToNextSpawn -= Time.deltaTime;
+
+            if (timeToNextSpawn <= 0f)
             {
-                Spawn();
+                timeToNextSpawn = timeBetweenSpawns;
+                if (gameHandler.timeLeftThisRound < gameHandler.fightTimeLength && gameHandler.roundType == "defend")
+                {
+                    Spawn();
+                }
             }
-        }
 
-        if (currentRound!=gameHandler.roundNumber)
-        {
-            currentRound = gameHandler.roundNumber;
-            //TODO change value
-            //timeBetweenSpawns -= 1f;
+            if (currentRound != gameHandler.roundNumber)
+            {
+                currentRound = gameHandler.roundNumber;
+                //TODO change value
+                //timeBetweenSpawns -= 1f;
+            }
         }
 
     }

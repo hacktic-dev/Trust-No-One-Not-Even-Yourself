@@ -51,6 +51,7 @@ MonoBehaviour:
   player: {fileID: 0}
   audioSource: {fileID: 8791729130789984898}
   shoot: {fileID: 8300000, guid: 9b2712cde8cbc80458e3cb6cea6eebec, type: 3}
+  gameHandler: {fileID: 0}
 --- !u!114 &749300351818280439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +176,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1

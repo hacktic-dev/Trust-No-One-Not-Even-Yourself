@@ -18,6 +18,8 @@ public class Turret : MonoBehaviour
     public AudioClip shoot;
     float particleTimer;
 
+    public GameHandler gameHandler;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,14 +44,18 @@ public class Turret : MonoBehaviour
         // Update is called once per frame
         void Update()
         {
-        if (particleTimer < 0)
-        {
-            head.GetComponent<ParticleSystem>().Stop();
-            particleTimer = 0;
-        }
-        particleTimer -= Time.deltaTime;
         if (gameObject.tag != "Shadow")
+        {
+            if (gameHandler.gameState == "active")
+        {
+
+            if (particleTimer < 0)
             {
+                head.GetComponent<ParticleSystem>().Stop();
+                particleTimer = 0;
+            }
+            particleTimer -= Time.deltaTime;
+            
 
                 //please do not judge this code  
 
@@ -108,7 +114,7 @@ public class Turret : MonoBehaviour
                         particleTimer = 0.2f;
 
 
-                    foreach (Transform child in head.transform)
+                        foreach (Transform child in head.transform)
                         {
                             gunOffset = 0.2f;
                         }
@@ -134,6 +140,7 @@ public class Turret : MonoBehaviour
                     }
                 }
             }
+        }
         }
 
         void Look()

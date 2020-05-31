@@ -210,6 +210,7 @@ using UnityEngine;
 
                 success = true;
                 GameObject instantiatedObject = Instantiate(objectToPlace, shadowPointer.position, shadowPointer.rotation);
+                instantiatedObject.GetComponent<Turret>().gameHandler = gameHandler;
                 /*
                 if (objectToPlace==turret)
                 {

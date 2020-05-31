@@ -25,29 +25,38 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (particleTimer<=0)
-        { particleTimer = 0;
-            gameObject.GetComponent<ParticleSystem>().Stop();
-
-        }
-
-        particleTimer -= Time.deltaTime;
-
-        if (health.health != lastFrameHealth && !firstFrame)
+        if (gameHandler.gameState == "active")
         {
-            gameObject.GetComponent<ParticleSystem>().Play();
-            particleTimer = 0.4f;
-        }
-        lastFrameHealth = health.health;
+            gameObject.GetComponent<AIPath>().enabled = true;
+            if (particleTimer <= 0)
+            {
+                particleTimer = 0;
+                gameObject.GetComponent<ParticleSystem>().Stop();
 
-        if (health.health <= 0 || gameHandler.roundType=="attack")
-        {
-            Destroy(gameObject);
-        }
+            }
 
-        if (firstFrame)
+            particleTimer -= Time.deltaTime;
+
+            if (health.health != lastFrameHealth && !firstFrame)
+            {
+                gameObject.GetComponent<ParticleSystem>().Play();
+                particleTimer = 0.4f;
+            }
+            lastFrameHealth = health.health;
+
+            if (health.health <= 0 || gameHandler.roundType == "attack")
+            {
+                Destroy(gameObject);
+            }
+
+            if (firstFrame)
+            {
+                firstFrame = false;
+            }
+        }
+        else
         {
-            firstFrame = false;
+            gameObject.GetComponent<AIPath>().enabled = false;
         }
     }
 }
