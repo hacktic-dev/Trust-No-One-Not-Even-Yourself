@@ -6,6 +6,10 @@ public class Inventory : MonoBehaviour
 {
     Inventory()
     {
+        resourceAmount.Add("matter", 0);
+        resourceAmount.Add("smarts", 0);
+        resourceAmount.Add("motion", 0);
+        resourceAmount.Add("force", 0);
         reset();
     }
 
@@ -18,10 +22,10 @@ public class Inventory : MonoBehaviour
         {
             inventoryAmount[i] = 0;
         }
-        resourceAmount.Add("matter", 0);
-        resourceAmount.Add("smarts", 0);
-        resourceAmount.Add("motion", 0);
-        resourceAmount.Add("force", 0);
+        resourceAmount["matter"] = 0;
+        resourceAmount["smarts"] = 0;
+        resourceAmount["motion"] = 0;
+        resourceAmount["force"] = 0;
     }
 
     // Start is called before the first frame update

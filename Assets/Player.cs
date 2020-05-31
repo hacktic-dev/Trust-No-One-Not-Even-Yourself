@@ -56,6 +56,10 @@ using UnityEngine.AI;
     public GameObject flag;
 
     Vector3 fallSpeed;
+
+    bool flagHitStartCount;
+    float flagCount;
+
     float damage = 10f;
     // Start is called before the first frame update
     void Start()
@@ -76,8 +80,28 @@ using UnityEngine.AI;
         if (gameHandler.gameState == "active")
         {
 
+            if(flagCount<0f)
+
+            {
+                flagHitStartCount = false;
+                flagCount = 1f;
+                gameHandler.newRoundF();
+                gameHandler.roundType = "defend";
+                CharacterController cc = this.GetComponent<CharacterController>();
+                cc.enabled = false;
+                transform.position = flag.transform.position;
+                cc.enabled = true;
+            }
+
+            if(flagHitStartCount)
+            { flagCount -= Time.deltaTime; }
+
+
+
             if(health.health<=0)
-            { gameHandler.gameState = "lose"; }
+            { StartCoroutine(ExecuteAfterTime(0.3f)); }
+
+
 
             if (gameHandler.newRound)
             {
@@ -417,11 +441,8 @@ using UnityEngine.AI;
 
                 if(flagHit && closestDistance== Vector3.Distance(raycast[flagIndex].transform.position, transform.position))
                 {
-                    gameHandler.newRoundF();
-                    CharacterController cc = this.GetComponent<CharacterController>();
-                    cc.enabled = false;
-                    transform.position = flag.transform.position;
-                    cc.enabled = true;
+                    flagHitStartCount = true;
+                    flagCount = 0.3f;
                 }
 
             }
@@ -472,4 +493,12 @@ using UnityEngine.AI;
         cc.enabled = true;
         inventory.reset();
     }
+
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        gameHandler.gameState = "lose";
+    }
+
 }

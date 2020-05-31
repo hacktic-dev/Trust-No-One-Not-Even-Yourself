@@ -229,6 +229,11 @@ public class CanvasUpdate : MonoBehaviour
         gameHandler.gameState = "options";
     }
 
+    public void ResumeGame()
+    {
+        gameHandler.gameState = "active";
+    }
+
     public void StartGameOnClick()
     {
         
@@ -250,6 +255,7 @@ public class CanvasUpdate : MonoBehaviour
         stillTurretAmountText.text = player.inventory.inventoryAmount[1].ToString();
         movingTurretAmountText.text = player.inventory.inventoryAmount[2].ToString();
 
+        //Debug.Log("health is " + player.health.health.ToString());
         health.text = "Health: "+player.health.health.ToString();
 
         smartsText.text = player.inventory.resourceAmount["smarts"].ToString();

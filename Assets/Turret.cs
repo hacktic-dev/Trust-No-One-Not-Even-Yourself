@@ -6,6 +6,7 @@ public class Turret : MonoBehaviour
 {
     public Transform head;
     public Transform player;
+    public Transform hurtParticle;
     GameObject closest;
     const float timeBetweenShoot = 1f;
     float timeToNextShoot;
@@ -50,7 +51,7 @@ public class Turret : MonoBehaviour
         //Debug.Log(particleTimer.ToString());
         if (health.health != lastFrameHealth && !firstFrame)
         {
-            gameObject.GetComponent<ParticleSystem>().Play();
+           hurtParticle.GetComponent<ParticleSystem>().Play();
             particleTimer2 = 0.4f;
         }
         lastFrameHealth = health.health;
@@ -62,7 +63,7 @@ public class Turret : MonoBehaviour
 
         if (particleTimer2 < 0)
         {
-            gameObject.GetComponent<ParticleSystem>().Stop();
+            hurtParticle.GetComponent<ParticleSystem>().Stop();
             particleTimer2 = 0;
         }
 
@@ -136,44 +137,14 @@ public class Turret : MonoBehaviour
                 Look();
                 if (timeToNextShoot <= 0f)
                 {
-
-                    if (closest != null)
-                    {
-                        audioSource.PlayOneShot(shoot, 0.3f*gameHandler.MasterVolume);
-                        head.GetComponent<ParticleSystem>().Play();
-                        particleTimer = 0.4f;
-
-
-                        foreach (Transform child in head.transform)
-                        {
-                            gunOffset = 0.2f;
-                        }
-
-                        timeToNextShoot = timeBetweenShoot;
-
-                        Debug.DrawRay(head.position, head.forward * 10f, Color.white, 0.5f);
-                        RaycastHit[] raycast = Physics.RaycastAll(head.position, head.forward, 100f);
-                        if (raycast.Length > 0)
-                        {
-
-                            for (int i = 0; i < raycast.Length; i++)
-                            {
-                                if (raycast[i].transform.tag == "Enemy" || (gameHandler.roundType == "attack" && raycast[i].transform.tag == "Player"))
-                                {
-                                    raycast[i].transform.GetComponent<Health>().health -= damage;
-                                    break;
-                                }
-                            }
-
-                        }
-
-                    }
+                    Shoot();
+                    
                 }
             }
         }
         }
 
-        void Look()
+    void Look()
         {
             //DEBUG
             FindClosestEnemy();
@@ -186,7 +157,44 @@ public class Turret : MonoBehaviour
             }
         }
 
-        void FindClosestEnemy()
+    void Shoot()
+    {
+        if (closest != null)
+        {
+            audioSource.PlayOneShot(shoot, 0.3f * gameHandler.MasterVolume);
+            head.GetComponent<ParticleSystem>().Play();
+            particleTimer = 0.2f;
+
+
+            foreach (Transform child in head.transform)
+            {
+                gunOffset = 0.2f;
+            }
+
+            timeToNextShoot = timeBetweenShoot;
+
+            //Debug.DrawRay(head.position, head.forward * 10f, Color.white, 0.5f);
+            RaycastHit[] raycast = Physics.RaycastAll(head.position, head.forward, 100f);
+            if (raycast.Length > 0)
+            {
+
+                for (int i = 0; i < raycast.Length; i++)
+                {
+                    if (raycast[i].transform.tag == "Enemy" || (gameHandler.roundType == "attack" && raycast[i].transform.tag == "Player"))
+                    {
+                        raycast[i].transform.GetComponent<Health>().health -= damage;
+                        break;
+                    }
+                }
+
+            }
+
+        }
+    }
+
+    void FindClosestEnemy()
+    {
+        if (gameObject.tag != "Shadow")
         {
             GameObject[] enemies;
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -195,7 +203,7 @@ public class Turret : MonoBehaviour
             list.AddRange(enemies);
             list.AddRange(players);
             enemies = list.ToArray();
-             float closestDistance = 10000;
+            float closestDistance = 10000;
             Vector3 position = transform.position;
             closest = null;
             foreach (GameObject enemy in enemies)
@@ -206,8 +214,8 @@ public class Turret : MonoBehaviour
 
                 for (int i = 0; i < raycast.Length; i++)
                 {
-                    if (raycast[i].transform.tag == "Enemy" || (gameHandler.roundType=="attack" && raycast[i].transform.tag=="Player") )
-                    enemyIndex = i;
+                    if (raycast[i].transform.tag == "Enemy" || (gameHandler.roundType == "attack" && raycast[i].transform.tag == "Player"))
+                        enemyIndex = i;
                     break;
                 }
 
@@ -234,4 +242,5 @@ public class Turret : MonoBehaviour
 
             }
         }
+    }
     }

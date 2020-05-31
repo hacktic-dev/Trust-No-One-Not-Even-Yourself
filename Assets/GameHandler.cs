@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
+    public AudioSource audioSource;
+    public AudioClip music;
+
+    public GameObject flag;
     public float roundLength=60f; //test value, default 180
     public float fightTimeLength=55f;
     public string roundType="defend";
@@ -59,6 +63,11 @@ public class GameHandler : MonoBehaviour
     public void SetVolume(System.Single value)
     {
         MasterVolume = value;
+    }
+
+    public void SetMusicVolume(System.Single value)
+    {
+        audioSource.volume = value;
     }
 
     public void newRoundF()
