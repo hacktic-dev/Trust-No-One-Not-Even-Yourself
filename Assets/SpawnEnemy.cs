@@ -28,7 +28,10 @@ public class SpawnEnemy : MonoBehaviour
         if(timeToNextSpawn<=0f)
         {
             timeToNextSpawn = timeBetweenSpawns;
-            Spawn();
+            if (gameHandler.timeLeftThisRound < gameHandler.fightTimeLength && gameHandler.roundType == "defend")
+            {
+                Spawn();
+            }
         }
 
         if (currentRound!=gameHandler.roundNumber)
@@ -49,8 +52,9 @@ public class SpawnEnemy : MonoBehaviour
         Enemy EnemyObject = instantiatedObject.GetComponent<Enemy>();
 
         //TODO test values, update later
+        EnemyObject.GetComponent<Health>().maxHealth = 10 + currentRound * 10;
+        EnemyObject.gameHandler = gameHandler;
         EnemyObject.flag = flag.transform;
-        EnemyObject.speed = 1f+currentRound;
-        EnemyObject.attackPower = 1f + currentRound;
+
     }
 }

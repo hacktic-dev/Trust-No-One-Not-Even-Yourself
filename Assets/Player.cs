@@ -43,6 +43,8 @@ using UnityEngine;
 
     public GameObject level;
 
+    public GameHandler gameHandler;
+
     GameObject objectToPlace;
     int currentObjectAmount;
 
@@ -58,36 +60,40 @@ using UnityEngine;
     // Update is called once per frame
     void Update()
     {
-        //goes true for a frame when initiating a new selection
-        newSelection = false;
+        if (gameHandler.gameState == "active")
+        {
+            //goes true for a frame when initiating a new selection
+            newSelection = false;
 
-        //select inventory
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-        {
-            selectUpdate(1);
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") <0f)
-        {
-            selectUpdate(-1);
-        }
-        if(Input.GetKeyDown("e") && objectPlaceMode)
-        {
-            shadowPointer.position= new Vector3(0, -100, 0);
-            objectPlaceMode = false;
-        }
-        else if (Input.GetKeyDown("e"))
-        {
-            objectPlaceMode = true;
-        }
+            //select inventory
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+            {
+                selectUpdate(1);
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+            {
+                selectUpdate(-1);
+            }
+            if (Input.GetKeyDown("e") && objectPlaceMode)
+            {
+                shadowPointer.position = new Vector3(0, -100, 0);
+                objectPlaceMode = false;
+            }
+            else if (Input.GetKeyDown("e"))
+            {
+                objectPlaceMode = true;
+            }
 
-        Movement();
-        Camera();
-        if (objectPlaceMode)
-        {
-            ShadowPointer();
-        }
+            Movement();
+            Camera();
+            if (objectPlaceMode)
+            {
+                ShadowPointer();
+            }
 
-        Jump();
+            Jump();
+
+        }
     }
 
     void Movement()
@@ -165,7 +171,7 @@ using UnityEngine;
                 break;
         }
 
-        LayerMask mask = ~LayerMask.GetMask("Hidden Objects","RaycastCollider");
+        LayerMask mask = ~LayerMask.GetMask("Hidden Objects","RaycastCollider","Grayscale");
         if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance, mask) && inventory.inventoryAmount[selectedIndex]>0)
         {
             RaycastHit hit;
@@ -280,8 +286,8 @@ using UnityEngine;
             {
                 foreach (Transform child in currentshadowPointer.transform)
                 {
-                    
-                    child.gameObject.GetComponent<Renderer>().material.color = new Color(0.10f,0.01f,0.01f,0.01f);
+
+                    child.gameObject.layer = LayerMask.NameToLayer("Grayscale");
                 }
                 return false;
             }
@@ -290,7 +296,7 @@ using UnityEngine;
                 foreach (Transform child in currentshadowPointer.transform)
                 {
 
-                    child.gameObject.GetComponent<Renderer>().material.color = new Color(0.1f, 0.1f, 0.1f, 0.5f);
+                    child.gameObject.layer = LayerMask.NameToLayer("Hidden Objects");
                 }
                 return true;
             }
@@ -300,7 +306,7 @@ using UnityEngine;
             foreach (Transform child in currentshadowPointer.transform)
             {
 
-                child.gameObject.GetComponent<Renderer>().material.color = new Color(0.1f, 0.1f, 0.1f, 0.5f);
+                child.gameObject.layer = LayerMask.NameToLayer("Hidden Objects");
             }
             return true;
         }

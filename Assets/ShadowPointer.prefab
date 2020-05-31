@@ -97,7 +97,7 @@ PrefabInstance:
     - target: {fileID: 7698930115498940518, guid: 89b4424f1be34c64b8ff551513602783,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Shadow
       objectReference: {fileID: 0}
     - target: {fileID: 7698930115498940519, guid: 89b4424f1be34c64b8ff551513602783,
         type: 3}
@@ -287,7 +287,7 @@ PrefabInstance:
     - target: {fileID: 4896469589659572524, guid: aafe7a5a3f52e3345a25e28cf03a1aad,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Shadow
       objectReference: {fileID: 0}
     - target: {fileID: 4896469589659572524, guid: aafe7a5a3f52e3345a25e28cf03a1aad,
         type: 3}

@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 2965455412392207828}
   m_Layer: 8
   m_Name: Gray cam
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

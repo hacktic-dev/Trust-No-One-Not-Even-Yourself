@@ -14,7 +14,9 @@ public class CanvasUpdate : MonoBehaviour
     public Text motionText;
     public Text forceText;
 
+    public Text waveTime;
     public Text waveNumber;
+    public Text instructionText;
 
     private const float alpha = 0.8f;
 
@@ -33,6 +35,10 @@ public class CanvasUpdate : MonoBehaviour
 
     public Player player;
     public List<GameObject> inventoryBoxSprites;
+
+    public GameObject activeUI;
+    public GameObject menuUI;
+    public Button startGame;
 
     // Start is called before the first frame update
     void Start()
@@ -59,12 +65,34 @@ public class CanvasUpdate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(gameHandler.gameState=="active")
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            activeUI.SetActive(true);
+            menuUI.SetActive(false);
+        }
+        else if (gameHandler.gameState=="menu")
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            activeUI.SetActive(false);
+            menuUI.SetActive(true);
+        }
+
+        //startGame.onClick.AddListener(StartGameOnClick);
+
         updateTextValues();
 
         if (player.newSelection == true)
         {
             updateSelection();
         }
+    }
+
+    public void StartGameOnClick()
+    {
+        gameHandler.gameState = "active";
     }
 
     void updateSelection()
@@ -80,13 +108,41 @@ public class CanvasUpdate : MonoBehaviour
         stillTurretAmountText.text = player.inventory.inventoryAmount[1].ToString();
         movingTurretAmountText.text = player.inventory.inventoryAmount[2].ToString();
 
-        smartsText.text= player.inventory.resourceAmount["smarts"].ToString();
+        smartsText.text = player.inventory.resourceAmount["smarts"].ToString();
         motionText.text = player.inventory.resourceAmount["motion"].ToString();
         forceText.text = player.inventory.resourceAmount["force"].ToString();
         matterText.text = player.inventory.resourceAmount["matter"].ToString();
 
-        waveNumber.text = "Wave "+gameHandler.roundNumber.ToString();
+        waveNumber.text = "Wave " + gameHandler.roundNumber.ToString();
 
+        if (gameHandler.timeLeftThisRound < gameHandler.fightTimeLength)
+        {
+            waveTime.text = "Wave ends in " + Mathf.Ceil(gameHandler.timeLeftThisRound).ToString();
+        }
+        else
+        {
+            waveTime.text = "Wave begins in " + Mathf.Ceil(gameHandler.timeLeftThisRound - gameHandler.fightTimeLength).ToString();
+        }
+
+        if(gameHandler.gameState=="lose")
+        {
+            instructionText.text = "You Lose!";
+        }
+
+        else if (gameHandler.roundLength - gameHandler.timeLeftThisRound < 3)
+        {
+            if (gameHandler.roundType == "defend")
+            {
+                instructionText.text = "Defend The Flag!";
+            }
+            else
+            { instructionText.text = "Destroy The Flag!"; }
+        }
+   
+        else
+        {
+            instructionText.text = "";
+        }
     }
 
 }

@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - Resource
   - SolidObject
+  - Gun
+  - Shadow
+  - Gun2
   layers:
   - Default
   - TransparentFX

@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    public const float roundLength=10f; //test value, default 180
-    public const float setupTimeLength=2f;
+    public float roundLength=10f; //test value, default 180
+    public float fightTimeLength=2f;
     public string roundType;
     public float timeLeftThisRound;
     public int roundNumber;
- 
+    public string gameState;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        roundNumber = 0;
+        gameState = "active";
+        roundNumber = 1;
         timeLeftThisRound = roundLength;
         roundType = "defend";
     }
@@ -23,19 +24,23 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeLeftThisRound -= Time.deltaTime;
 
-        if (timeLeftThisRound<=0f)
+        if (gameState == "active")
         {
-            timeLeftThisRound = roundLength;
-            roundNumber++;
-            if(roundNumber%2==0)
+            timeLeftThisRound -= Time.deltaTime;
+
+            if (timeLeftThisRound <= 0f)
             {
-                roundType = "defend";
-            }
-            else
-            {
-                roundType = "attack";
+                timeLeftThisRound = roundLength;
+                roundNumber++;
+                if (roundNumber % 2 == 1)
+                {
+                    roundType = "defend";
+                }
+                else
+                {
+                    roundType = "attack";
+                }
             }
         }
     }

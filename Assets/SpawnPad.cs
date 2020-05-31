@@ -19,6 +19,8 @@ public class SpawnPad : MonoBehaviour
     public Player player;
     public GameObject Resource;
 
+    public GameHandler gameHandler;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,26 +34,29 @@ public class SpawnPad : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timerToSpawn -= Time.deltaTime;
-        
-
-        if (Vector3.Distance(player.transform.position, transform.position)<3f && currentSpawnedResources>0)
+        if (gameHandler.gameState == "active")
         {
-            audioSource.pitch = (Random.Range(0.9f, 1.1f));
-            audioSource.PlayOneShot(clip, 0.2f);
-            player.inventory.resourceAmount[resourceType] += currentSpawnedResources;
-            currentSpawnedResources = 0;
-            DestroyAllChildren();
+            timerToSpawn -= Time.deltaTime;
 
-            timerToSpawn = spawnTimeInterval;
-        }
 
-        if (timerToSpawn <= 0 && currentSpawnedResources < spawnedMaximum)
-        {
-            currentSpawnedResources++;
-            timerToSpawn = spawnTimeInterval;
-            SpawnObject(resourceType);
+            if (Vector3.Distance(player.transform.position, transform.position) < 3f && currentSpawnedResources > 0)
+            {
+                audioSource.pitch = (Random.Range(0.9f, 1.1f));
+                audioSource.PlayOneShot(clip, 0.2f);
+                player.inventory.resourceAmount[resourceType] += currentSpawnedResources;
+                currentSpawnedResources = 0;
+                DestroyAllChildren();
 
+                timerToSpawn = spawnTimeInterval;
+            }
+
+            if (timerToSpawn <= 0 && currentSpawnedResources < spawnedMaximum)
+            {
+                currentSpawnedResources++;
+                timerToSpawn = spawnTimeInterval;
+                SpawnObject(resourceType);
+
+            }
         }
     }
 
