@@ -38,6 +38,7 @@ public class CanvasUpdate : MonoBehaviour
 
     public GameObject activeUI;
     public GameObject menuUI;
+    public GameObject pauseUI;
     public Button startGame;
 
     // Start is called before the first frame update
@@ -71,6 +72,8 @@ public class CanvasUpdate : MonoBehaviour
             Cursor.visible = false;
             activeUI.SetActive(true);
             menuUI.SetActive(false);
+            pauseUI.SetActive(false);
+
         }
         else if (gameHandler.gameState=="menu")
         {
@@ -78,6 +81,16 @@ public class CanvasUpdate : MonoBehaviour
             Cursor.visible = true;
             activeUI.SetActive(false);
             menuUI.SetActive(true);
+            pauseUI.SetActive(false);
+        }
+        else if (gameHandler.gameState=="paused")
+
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            activeUI.SetActive(false);
+            menuUI.SetActive(false);
+            pauseUI.SetActive(true);
         }
 
         //startGame.onClick.AddListener(StartGameOnClick);
@@ -88,6 +101,11 @@ public class CanvasUpdate : MonoBehaviour
         {
             updateSelection();
         }
+    }
+
+    public void ReturnToMenu()
+    {
+        gameHandler.gameState = "menu";
     }
 
     public void StartGameOnClick()
