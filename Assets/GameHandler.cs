@@ -24,9 +24,18 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameState=="paused")
+        {
+
+        }
 
         if (gameState == "active")
         {
+            if (Input.GetKeyDown("escape"))
+            {
+                gameState = "paused";
+            }
+
             timeLeftThisRound -= Time.deltaTime;
 
             if (timeLeftThisRound <= 0f)
