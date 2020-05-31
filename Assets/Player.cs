@@ -384,6 +384,7 @@ using UnityEngine.AI;
     {
         float gravity = -19;
         float jumpHeight = 2;
+        LayerMask mask = ~LayerMask.GetMask("Hidden Objects");
 
         fallSpeed.y += gravity * Time.deltaTime;
 
@@ -392,7 +393,7 @@ using UnityEngine.AI;
             fallSpeed.y = 0f;
         }
 
-        if (Input.GetButton("Jump") && Physics.CheckSphere(transform.position, 0.4f))
+        if (Input.GetButton("Jump") && Physics.CheckSphere(transform.position, 0.4f, mask))
         {
             fallSpeed.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
