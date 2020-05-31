@@ -229,6 +229,11 @@ public class CanvasUpdate : MonoBehaviour
         gameHandler.gameState = "options";
     }
 
+    public void ResumeGame()
+    {
+        gameHandler.gameState = "active";
+    }
+
     public void StartGameOnClick()
     {
         

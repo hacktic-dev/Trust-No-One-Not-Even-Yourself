@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class SpawnEnemy : MonoBehaviour
 {
     float timeToNextSpawn;
@@ -16,13 +16,14 @@ public class SpawnEnemy : MonoBehaviour
     void Start()
     {
         currentRound = 0;
-        timeBetweenSpawns = 3f;
+        timeBetweenSpawns = 5f;
         timeToNextSpawn = timeBetweenSpawns;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (gameHandler.gameState == "active")
         {
             timeToNextSpawn -= Time.deltaTime;
@@ -39,8 +40,8 @@ public class SpawnEnemy : MonoBehaviour
             if (currentRound != gameHandler.roundNumber)
             {
                 currentRound = gameHandler.roundNumber;
-                //TODO change value
-                //timeBetweenSpawns -= 1f;
+                
+                timeBetweenSpawns -= 0.2f;
             }
         }
 
@@ -55,6 +56,7 @@ public class SpawnEnemy : MonoBehaviour
         Enemy EnemyObject = instantiatedObject.GetComponent<Enemy>();
 
         //TODO test values, update later
+        EnemyObject.GetComponent<NavMeshAgent>().speed = 1 + currentRound*0.34f;
         EnemyObject.GetComponent<Health>().maxHealth = 10 + currentRound * 10;
         EnemyObject.gameHandler = gameHandler;
         EnemyObject.flag = flag.transform;
