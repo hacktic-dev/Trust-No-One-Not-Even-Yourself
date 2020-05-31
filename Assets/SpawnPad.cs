@@ -34,7 +34,7 @@ public class SpawnPad : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameHandler.gameState == "active")
+        if (gameHandler.gameState == "active" && gameHandler.roundType=="defend")
         {
             timerToSpawn -= Time.deltaTime;
 
