@@ -14,6 +14,8 @@ public class CanvasUpdate : MonoBehaviour
     public Text motionText;
     public Text forceText;
 
+    public Text health;
+
     public Text waveTime;
     public Text waveNumber;
     public Text instructionText;
@@ -247,6 +249,8 @@ public class CanvasUpdate : MonoBehaviour
         barrierAmountText.text = player.inventory.inventoryAmount[0].ToString();
         stillTurretAmountText.text = player.inventory.inventoryAmount[1].ToString();
         movingTurretAmountText.text = player.inventory.inventoryAmount[2].ToString();
+
+        health.text = "Health: "+player.health.health.ToString();
 
         smartsText.text = player.inventory.resourceAmount["smarts"].ToString();
         motionText.text = player.inventory.resourceAmount["motion"].ToString();

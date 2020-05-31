@@ -54,7 +54,7 @@ MonoBehaviour:
   player: {fileID: 0}
   health: {fileID: 749300351818280439}
   audioSource: {fileID: 8791729130789984898}
-  shoot: {fileID: 8300000, guid: 9b2712cde8cbc80458e3cb6cea6eebec, type: 3}
+  shoot: {fileID: 8300000, guid: 34b1783ea5f506c47848661d514145b6, type: 3}
   gameHandler: {fileID: 0}
 --- !u!114 &749300351818280439
 MonoBehaviour:

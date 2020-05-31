@@ -9,6 +9,7 @@ using UnityEngine.AI;
     public AudioSource audioSource;
     public AudioClip craftSuccess;
     public AudioClip craftFail;
+    public AudioClip shoot;
 
     public Inventory inventory;
 
@@ -42,7 +43,7 @@ using UnityEngine.AI;
     GameObject currentshadowPointer;
 
     float particleTimer;
-
+    public Health health;
     public GameObject level;
 
     public NavMeshSurface Navmesh;
@@ -74,6 +75,9 @@ using UnityEngine.AI;
     {
         if (gameHandler.gameState == "active")
         {
+
+            if(health.health<=0)
+            { gameHandler.gameState = "lose"; }
 
             if (gameHandler.newRound)
             {
@@ -253,7 +257,7 @@ using UnityEngine.AI;
 
                 if (objectToPlace == turret)
                 {
-                    instantiatedObject.GetComponent<Health>().maxHealth = 50f;
+                    instantiatedObject.GetComponent<Health>().maxHealth = 80f;
                     instantiatedObject.GetComponent<Turret>().gameHandler = gameHandler;
                 }
 
@@ -376,7 +380,7 @@ using UnityEngine.AI;
     {
         if(Input.GetMouseButtonDown(0) && gameHandler.roundType == "attack")
         {
-            audioSource.PlayOneShot(craftFail, 0.8f * gameHandler.MasterVolume);
+            audioSource.PlayOneShot(shoot, 0.3f * gameHandler.MasterVolume);
             cameraMount.GetComponent<ParticleSystem>().Play();
             particleTimer = 0.2f;
             float closestDistance = 10000;
@@ -461,6 +465,7 @@ using UnityEngine.AI;
 
     public void reset()
     {
+        health.health = 50f;
         CharacterController cc = this.GetComponent<CharacterController>();
         cc.enabled = false;
         transform.position = flag.transform.position;

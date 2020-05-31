@@ -344,6 +344,7 @@ GameObject:
   - component: {fileID: 7110947734949821441}
   - component: {fileID: 7110947734949821440}
   - component: {fileID: 7110947734949821470}
+  - component: {fileID: 9082266045604083682}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -418,9 +419,25 @@ MonoBehaviour:
   shadowPointer: {fileID: 255521369}
   shadowPointerBarrier: {fileID: 2516361642616397927}
   shadowPointerTurret: {fileID: 1430474363479857107}
+  health: {fileID: 9082266045604083682}
   level: {fileID: 0}
   Navmesh: {fileID: 0}
   gameHandler: {fileID: 0}
+  flag: {fileID: 0}
+--- !u!114 &9082266045604083682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7110947734949821443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2dca929bcfffa46ae421d404132ac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 0
 --- !u!1 &7110947735381540031
 GameObject:
   m_ObjectHideFlags: 0

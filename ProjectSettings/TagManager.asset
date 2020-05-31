@@ -22,6 +22,7 @@ TagManager:
   - Lose
   - Barrier
   - Always
+  - ActiveAttack
   layers:
   - Default
   - TransparentFX

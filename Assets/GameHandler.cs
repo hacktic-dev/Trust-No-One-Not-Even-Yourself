@@ -72,6 +72,7 @@ public class GameHandler : MonoBehaviour
         }
         else
         {
+            player.health.health = 50f;
             roundType = "attack";
         }
     }
