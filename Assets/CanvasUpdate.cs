@@ -26,11 +26,6 @@ public class CanvasUpdate : MonoBehaviour
     public GameObject movingTurretInventory;
     public GameObject barrierInventory;
 
-    public GameObject matterBox;
-    public GameObject smartsBox;
-    public GameObject forceBox;
-    public GameObject motionBox;
-
     public GameHandler gameHandler;
 
     public Player player;
@@ -44,22 +39,8 @@ public class CanvasUpdate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        matterBox.GetComponent<Image>().color = new Color(0, 0, 0, alpha);
-        smartsBox.GetComponent<Image>().color = new Color(0, 0, 0, alpha);
-        forceBox.GetComponent<Image>().color = new Color(0, 0, 0, alpha);
-        motionBox.GetComponent<Image>().color = new Color(0, 0, 0, alpha);
 
         selectedIndex = 0;
-
-        inventoryBoxSprites.Add(barrierInventory);
-        inventoryBoxSprites.Add(stillTurretInventory);
-        inventoryBoxSprites.Add(movingTurretInventory);
-
-        for (int i = 0; i < inventoryBoxSprites.Count; i++)
-        {
-            inventoryBoxSprites[i].GetComponent<Image>().color = new Color(0,0,0, alpha);
-        }
-
         updateSelection();
     }
 
