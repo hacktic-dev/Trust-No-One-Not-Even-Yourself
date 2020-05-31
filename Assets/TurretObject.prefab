@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3838270391197718908}
   - component: {fileID: 7314005101251303819}
+  - component: {fileID: 749300351818280439}
   m_Layer: 9
   m_Name: TurretObject
   m_TagString: SolidObject
@@ -50,7 +51,20 @@ MonoBehaviour:
   player: {fileID: 0}
   audioSource: {fileID: 8791729130789984898}
   shoot: {fileID: 8300000, guid: 9b2712cde8cbc80458e3cb6cea6eebec, type: 3}
-  testMove: 0
+--- !u!114 &749300351818280439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4896469589659572524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac2dca929bcfffa46ae421d404132ac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 0
 --- !u!1 &5131305396004352866
 GameObject:
   m_ObjectHideFlags: 0
