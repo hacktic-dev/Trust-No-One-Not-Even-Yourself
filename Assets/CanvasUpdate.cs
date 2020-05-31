@@ -250,6 +250,7 @@ public class CanvasUpdate : MonoBehaviour
         stillTurretAmountText.text = player.inventory.inventoryAmount[1].ToString();
         movingTurretAmountText.text = player.inventory.inventoryAmount[2].ToString();
 
+        //Debug.Log("health is " + player.health.health.ToString());
         health.text = "Health: "+player.health.health.ToString();
 
         smartsText.text = player.inventory.resourceAmount["smarts"].ToString();

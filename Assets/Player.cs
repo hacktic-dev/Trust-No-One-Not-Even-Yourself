@@ -77,7 +77,7 @@ using UnityEngine.AI;
         {
 
             if(health.health<=0)
-            { gameHandler.gameState = "lose"; }
+            { StartCoroutine(ExecuteAfterTime(0.3f)); }
 
             if (gameHandler.newRound)
             {
@@ -471,5 +471,12 @@ using UnityEngine.AI;
         transform.position = flag.transform.position;
         cc.enabled = true;
         inventory.reset();
+    }
+
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        gameHandler.gameState = "lose";
     }
 }
