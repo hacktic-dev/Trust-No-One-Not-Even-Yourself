@@ -361,9 +361,10 @@ using UnityEngine.AI;
     bool checkIfPlaceable()
     {
         Collider[] checkSphere = Physics.OverlapSphere(shadowPointer.transform.position,
-                                 4f, LayerMask.GetMask("Barrier","Turret"));
+                                 4f, LayerMask.GetMask("Solid Object"));
         if (checkSphere.Length > 0)
         {
+            
             if (currentshadowPointer.transform.Find("BoundBox").GetComponent<Collider>().bounds.Intersects(checkSphere[0].bounds))
             {
                 foreach (Transform child in currentshadowPointer.transform)

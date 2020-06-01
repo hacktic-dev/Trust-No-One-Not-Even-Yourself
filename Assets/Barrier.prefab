@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 4585355696462146833}
   - component: {fileID: 8698153785090404349}
   - component: {fileID: 5630520769987384382}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: BoundBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,6 @@ GameObject:
   - component: {fileID: 7698930114829046126}
   - component: {fileID: 7698930114829046125}
   - component: {fileID: 7698930114829046124}
-  - component: {fileID: 5254906543733312528}
   - component: {fileID: 7016814850115508167}
   - component: {fileID: 6572835157242589066}
   m_Layer: 9
@@ -376,19 +375,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5254906543733312528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7698930114829046121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c4e13748f5c87948a717e4f25cfd4e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentGameObject: {fileID: 7698930114829046121}
 --- !u!198 &7016814850115508167
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5121,6 +5107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7698930115498940519}
   - component: {fileID: 4525429432374645652}
+  - component: {fileID: 3291032437132998613}
   m_Layer: 9
   m_Name: Barrier
   m_TagString: Barrier
@@ -5163,6 +5150,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &3291032437132998613
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7698930115498940518}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 6, z: 6}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &7698930115572238275
 GameObject:
   m_ObjectHideFlags: 0

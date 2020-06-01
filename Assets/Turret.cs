@@ -158,7 +158,7 @@ public class Turret : MonoBehaviour
             {
                 Vector3 test = head.position;
                 Quaternion target = Quaternion.LookRotation(closest.transform.position - test);
-                head.rotation = Quaternion.Lerp(head.rotation, target, Time.deltaTime * 10);
+                head.rotation = Quaternion.Lerp(head.rotation, target, Time.deltaTime * 8);
             }
         }
 
@@ -237,7 +237,7 @@ public class Turret : MonoBehaviour
 
                 for (int i = 0; i < raycast.Length; i++)
                 {
-                    if ((raycast[i].transform.tag == "SolidObject" && raycast[i].distance <= raycast[enemyIndex].distance) || raycast[enemyIndex].transform.position.y<transform.position.y)
+                    if (((raycast[i].transform.tag == "SolidObject" || raycast[i].transform.tag == "Barrier") && raycast[i].distance <= raycast[enemyIndex].distance) || raycast[enemyIndex].transform.position.y<transform.position.y)
                     {
                         nestedBreak = true;
                     }

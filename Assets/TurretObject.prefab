@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7888503482614676057}
   - component: {fileID: 866696588076546963}
   - component: {fileID: 2885890581204846446}
-  m_Layer: 9
+  m_Layer: 18
   m_Name: HurtParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4767,7 +4767,7 @@ GameObject:
   - component: {fileID: 749300351818280439}
   - component: {fileID: 3612936787662770580}
   - component: {fileID: 8136558259881509758}
-  m_Layer: 9
+  m_Layer: 18
   m_Name: TurretObject
   m_TagString: Turret
   m_Icon: {fileID: 0}
@@ -9681,7 +9681,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6626418538527899004}
   - component: {fileID: 8791729130789984898}
-  m_Layer: 9
+  m_Layer: 18
   m_Name: Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9823,7 +9823,7 @@ PrefabInstance:
     - target: {fileID: 1666340304050393665, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2405663557978638506, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
@@ -9833,12 +9833,12 @@ PrefabInstance:
     - target: {fileID: 2513501686593541979, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 3399464247024579467, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 3893911089623783648, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
@@ -9853,7 +9853,7 @@ PrefabInstance:
     - target: {fileID: 5438981786095236027, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5563128875656904617, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
@@ -9918,7 +9918,7 @@ PrefabInstance:
     - target: {fileID: 7923899630127425881, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7923899630127425881, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
@@ -9938,7 +9938,7 @@ PrefabInstance:
     - target: {fileID: 8928386924355158379, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8928386924355158379, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}

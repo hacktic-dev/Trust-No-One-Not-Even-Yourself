@@ -51,6 +51,11 @@ public class CanvasUpdate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(gameHandler.gameState=="menu" && Input.GetKeyDown("escape"))
+        {
+            QuitGame();
+        }
+
         if(gameHandler.gameState=="active")
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -215,6 +220,11 @@ public class CanvasUpdate : MonoBehaviour
         {
             updateSelection();
         }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     public void ReturnToMenu()
