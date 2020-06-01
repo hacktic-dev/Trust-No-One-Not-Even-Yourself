@@ -42,6 +42,8 @@ using UnityEngine.AI;
     public GameObject shadowPointerTurret;
     GameObject currentshadowPointer;
 
+    public AudioClip hurtSound;
+
     float particleTimer;
     public Health health;
 
@@ -286,7 +288,7 @@ using UnityEngine.AI;
                 if (objectToPlace == turret)
                 {
                     instantiatedObject.transform.position =new Vector3(instantiatedObject.transform.position.x, instantiatedObject.transform.position.y - 1, instantiatedObject.transform.position.z);
-                    instantiatedObject.GetComponent<Health>().maxHealth = 50f;
+                    instantiatedObject.GetComponent<Health>().maxHealth = 100f;
                     instantiatedObject.GetComponent<Turret>().gameHandler = gameHandler;
                 }
 
@@ -492,7 +494,7 @@ using UnityEngine.AI;
 
     public void reset()
     {
-        health.health = 50f;
+        health.health = 100f;
         CharacterController cc = this.GetComponent<CharacterController>();
         cc.enabled = false;
         transform.position = flag.transform.position;
@@ -505,6 +507,20 @@ using UnityEngine.AI;
         yield return new WaitForSeconds(time);
 
         gameHandler.gameState = "lose";
+    }
+
+    IEnumerator SoundAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        audioSource.PlayOneShot(hurtSound, 0.8f * gameHandler.MasterVolume);
+    }
+
+    public void PlayHurt()
+    {
+        StartCoroutine(SoundAfterTime(0.0f));
+
+
     }
 
 }

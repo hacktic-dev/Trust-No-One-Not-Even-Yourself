@@ -153,7 +153,7 @@ public class Turret : MonoBehaviour
             {
                 Vector3 test = head.position;
                 Quaternion target = Quaternion.LookRotation(closest.transform.position - test);
-                head.rotation = Quaternion.Lerp(head.rotation, target, Time.deltaTime * 5);
+                head.rotation = Quaternion.Lerp(head.rotation, target, Time.deltaTime * 10);
             }
         }
 
@@ -183,6 +183,10 @@ public class Turret : MonoBehaviour
                     if (raycast[i].transform.tag == "Enemy" || (gameHandler.roundType == "attack" && raycast[i].transform.tag == "Player"))
                     {
                         raycast[i].transform.GetComponent<Health>().health -= damage;
+                        if(raycast[i].transform.tag == "Player")
+                        {
+                            raycast[i].transform.GetComponent<Player>().PlayHurt();
+                        }
                         break;
                     }
                 }
