@@ -72,7 +72,7 @@ using UnityEngine.AI;
     public void SetMouseSens(System.Single value)
     {
         mouseSense = 50f + value * 800f;
-        Debug.Log(mouseSense);
+     //   Debug.Log(mouseSense);
     }
 
     // Update is called once per frame
@@ -108,7 +108,7 @@ using UnityEngine.AI;
             {
                 shadowPointerBarrier.SetActive(false);
                 shadowPointerTurret.SetActive(false);
-                Debug.Log("new loc");
+              //  Debug.Log("new loc");
                 newPlayerLocation();
             }
 
@@ -278,7 +278,7 @@ using UnityEngine.AI;
         }
 
         bool check = checkIfPlaceable();
-        Debug.Log("placeable" + check);
+      //  Debug.Log("placeable" + check);
         if (Input.GetMouseButtonDown(0))
         {
             bool success = false;
@@ -299,9 +299,9 @@ using UnityEngine.AI;
                     instantiatedObject.GetComponent<Turret>().gameHandler = gameHandler;
                 }
 
-                Debug.Log(inventory.inventoryAmount[selectedIndex]);
+               // Debug.Log(inventory.inventoryAmount[selectedIndex]);
                 inventory.inventoryAmount[selectedIndex]--;
-                Debug.Log(inventory.inventoryAmount[selectedIndex]);
+              //  Debug.Log(inventory.inventoryAmount[selectedIndex]);
             }
 
             if (success)
@@ -472,7 +472,7 @@ using UnityEngine.AI;
             List<GameObject> spawnLocs = new List<GameObject>();
             foreach (object o in obj)
             {
-                Debug.Log("test");
+                //Debug.Log("test");
                 GameObject g = (GameObject)o;
                 if (g.tag=="EnemySpawn")
                 {
@@ -484,10 +484,10 @@ using UnityEngine.AI;
             int locationIndex = Random.Range(0, spawnLocs.Count);
             CharacterController cc = this.GetComponent<CharacterController>();
             cc.enabled = false;
-            Debug.Log(locationIndex.ToString());
+           // Debug.Log(locationIndex.ToString());
             transform.position = spawnLocs[locationIndex].transform.position;
-            Debug.Log(transform.position);
-            Debug.Log(spawnLocs[locationIndex].transform.position);
+           // Debug.Log(transform.position);
+           // Debug.Log(spawnLocs[locationIndex].transform.position);
             cc.enabled = true;
         }
         else

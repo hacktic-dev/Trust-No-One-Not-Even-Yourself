@@ -25,7 +25,7 @@ public class Turret : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("FindClosestEnemy", 0.5f, 0.5f);
+        //InvokeRepeating("FindClosestEnemy", 0.5f, 0.5f);
         timeToNextShoot = timeBetweenShoot;
 
         /*
@@ -48,7 +48,10 @@ public class Turret : MonoBehaviour
         // Update is called once per frame
         void Update()
         {
-        FindClosestEnemy();
+        if (transform.tag != "Shadow")
+        {
+            FindClosestEnemy();
+        }
         //Debug.Log(head.GetComponent<ParticleSystem>().isPlaying.ToString());
         //Debug.Log(particleTimer.ToString());
         if (health.health != lastFrameHealth && !firstFrame)
@@ -83,7 +86,7 @@ public class Turret : MonoBehaviour
 
                 if (particleTimer < 0)
                 {
-                    Debug.Log("end");
+                   // Debug.Log("end");
                     head.GetComponent<ParticleSystem>().Stop();
                     particleTimer = 0;
                 }

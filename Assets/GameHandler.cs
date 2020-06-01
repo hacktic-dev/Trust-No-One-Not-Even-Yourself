@@ -93,11 +93,11 @@ public class GameHandler : MonoBehaviour
         List<GameObject> spawnLocs = new List<GameObject>();
         foreach (object o in obj)
         {
-            Debug.Log("test");
+           // Debug.Log("test");
             GameObject g = (GameObject)o;
             if (g.tag == "Enemy" || g.tag=="Turret"||g.tag=="Resource"||g.tag=="Barrier")
             {
-                Debug.Log("destroy" + g.tag.ToString());
+              //  Debug.Log("destroy" + g.tag.ToString());
                 Destroy(g);
             }
             if(g.tag=="SpawnPad")
