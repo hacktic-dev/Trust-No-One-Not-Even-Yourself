@@ -227,7 +227,8 @@ using UnityEngine.AI;
 
     void ShadowPointer()
     {
-       
+
+        //activate selected shadow pointer
         switch (selectedIndex)
         {
             case 0:
@@ -247,7 +248,8 @@ using UnityEngine.AI;
 
         Vector3 hitNormal=new Vector3(0f,0f,0f);
 
-        LayerMask mask = ~LayerMask.GetMask("Hidden Objects","RaycastCollider","Grayscale");
+        LayerMask mask = ~LayerMask.GetMask("Shadow","No Collision","RaycastCollider");
+
         if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance, mask) && inventory.inventoryAmount[selectedIndex]>0)
         {
             shadowPointer.SetActive(true);
@@ -256,17 +258,20 @@ using UnityEngine.AI;
             {
                 hitPosition = hit.point;
                 hitNormal = hit.normal;
+                Debug.Log(hit.normal);
             }
         }
 		else
 		{
             
 			hitPosition = new Vector3(1000, 0, 0);
-            shadowPointer.SetActive(false);
-        }
-        shadowPointer.transform.position = hitPosition;
-        shadowPointer.transform.SetPositionAndRotation(new Vector3(shadowPointer.transform.position.x, shadowPointer.transform.position.y, shadowPointer.transform.position.z),selfTransform.rotation);
 
+        }
+
+        shadowPointer.transform.position = hitPosition;
+        shadowPointer.transform.rotation = selfTransform.rotation;
+
+        //rotate according to which pointer is active
         switch (selectedIndex)
         {
             case 0:
@@ -277,13 +282,15 @@ using UnityEngine.AI;
                 break;
         }
 
-        bool check = checkIfPlaceable();
+
+        bool check = checkIfPlaceable(hitNormal);
+
       //  Debug.Log("placeable" + check);
         if (Input.GetMouseButtonDown(0))
         {
             bool success = false;
             
-            if (inventory.inventoryAmount[selectedIndex] > 0 && check && hitNormal==new Vector3(0f,1f,0f))
+            if (inventory.inventoryAmount[selectedIndex] > 0 && check)
             {
                 
 
@@ -295,7 +302,8 @@ using UnityEngine.AI;
                 if (objectToPlace == turret)
                 {
                     instantiatedObject.transform.position =new Vector3(instantiatedObject.transform.position.x, instantiatedObject.transform.position.y - 1, instantiatedObject.transform.position.z);
-                    instantiatedObject.GetComponent<Health>().maxHealth = 100f;
+                    instantiatedObject.GetComponent<Health>().maxHealth = 50f;
+                    instantiatedObject.GetComponent<Health>().health = 50f;
                     instantiatedObject.GetComponent<Turret>().gameHandler = gameHandler;
                 }
 
@@ -314,25 +322,68 @@ using UnityEngine.AI;
             }
         }
 
-        
-
     }
 	
+
+    bool checkIfPlaceable(Vector3 hitNormal)
+    {
+        if ( hitNormal != new Vector3(0f, 1f, 0f))
+        {
+            setTransparency(currentshadowPointer, 0.2f);
+            return false;
+        }
+
+        Collider[] checkSphere = Physics.OverlapSphere(shadowPointer.transform.position,
+                                 4f, LayerMask.GetMask("Solid Object"));
+        if (checkSphere.Length > 0)
+        {
+            
+            if (currentshadowPointer.transform.Find("BoundBox").GetComponent<Collider>().bounds.Intersects(checkSphere[0].bounds))
+            {
+                setTransparency(currentshadowPointer, 0.2f);
+                return false;
+            }
+            else
+            {
+                setTransparency(currentshadowPointer, 0.8f);
+                return true;
+            }
+        }
+        else
+        {
+            setTransparency(currentshadowPointer, 0.8f);
+            return true;
+        }
+    }
+
+    void setTransparency(GameObject gameObject,float transparency)
+    {
+        foreach (Transform child in currentshadowPointer.GetComponentsInChildren<Transform>())
+        {
+            if (child.transform.tag =="Shadow")
+            {
+                Color tempColor = child.gameObject.GetComponent<Renderer>().material.color;
+                tempColor.a = transparency;
+                child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", tempColor);
+            }
+        }
+    }
+
     public void craftItem(string itemName)
     {
         bool success = false;
-        if (itemName=="barrier")
+        if (itemName == "barrier")
         {
-            if(inventory.resourceAmount["matter"]>=2 && inventory.resourceAmount["force"] >= 1)
+            if (inventory.resourceAmount["matter"] >= 2 && inventory.resourceAmount["force"] >= 1)
             {
                 inventory.inventoryAmount[0]++;
                 inventory.resourceAmount["matter"] -= 2;
                 inventory.resourceAmount["force"] -= 1;
                 success = true;
             }
-            
+
         }
-        else if (itemName=="still turret")
+        else if (itemName == "still turret")
         {
             if (inventory.resourceAmount["smarts"] >= 2 && inventory.resourceAmount["force"] >= 1)
             {
@@ -358,48 +409,11 @@ using UnityEngine.AI;
         }
     }
 
-    bool checkIfPlaceable()
-    {
-        Collider[] checkSphere = Physics.OverlapSphere(shadowPointer.transform.position,
-                                 4f, LayerMask.GetMask("Solid Object"));
-        if (checkSphere.Length > 0)
-        {
-            
-            if (currentshadowPointer.transform.Find("BoundBox").GetComponent<Collider>().bounds.Intersects(checkSphere[0].bounds))
-            {
-                foreach (Transform child in currentshadowPointer.transform)
-                {
-
-                    child.gameObject.layer = LayerMask.NameToLayer("Grayscale");
-                }
-                return false;
-            }
-            else
-            {
-                foreach (Transform child in currentshadowPointer.transform)
-                {
-
-                    child.gameObject.layer = LayerMask.NameToLayer("Hidden Objects");
-                }
-                return true;
-            }
-        }
-        else
-        {
-            foreach (Transform child in currentshadowPointer.transform)
-            {
-
-                child.gameObject.layer = LayerMask.NameToLayer("Hidden Objects");
-            }
-            return true;
-        }
-    }
-
     void Jump()
     {
         float gravity = -19;
         float jumpHeight = 2;
-        LayerMask mask = ~LayerMask.GetMask("Hidden Objects","No Collision");
+        LayerMask mask = ~LayerMask.GetMask("Hidden Objects","No Collision","Shadow");
 
         fallSpeed.y += gravity * Time.deltaTime;
 
