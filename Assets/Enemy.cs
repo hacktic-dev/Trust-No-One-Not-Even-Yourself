@@ -27,10 +27,13 @@ public class Enemy : MonoBehaviour
     void Update()
     {
 
-        enemy.SetDestination(flag.position);
+        if (gameHandler.gameState=="lose")
+        { Destroy(gameObject); }
+       
         if (gameHandler.gameState == "active")
         {
-           // gameObject.GetComponent<AIPath>().enabled = true;
+            enemy.SetDestination(flag.position);
+            // gameObject.GetComponent<AIPath>().enabled = true;
             if (particleTimer <= 0)
             {
                 particleTimer = 0;

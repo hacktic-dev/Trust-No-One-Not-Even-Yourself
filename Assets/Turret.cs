@@ -46,7 +46,7 @@ public class Turret : MonoBehaviour
         // Update is called once per frame
         void Update()
         {
-
+        FindClosestEnemy();
         //Debug.Log(head.GetComponent<ParticleSystem>().isPlaying.ToString());
         //Debug.Log(particleTimer.ToString());
         if (health.health != lastFrameHealth && !firstFrame)
@@ -197,15 +197,19 @@ public class Turret : MonoBehaviour
         if (gameObject.tag != "Shadow")
         {
             GameObject[] enemies;
+
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
             List<GameObject> list = new List<GameObject>();
             list.AddRange(enemies);
             list.AddRange(players);
             enemies = list.ToArray();
+
             float closestDistance = 10000;
             Vector3 position = transform.position;
             closest = null;
+
             foreach (GameObject enemy in enemies)
             {
                 RaycastHit[] raycast = Physics.RaycastAll(transform.position, -transform.position + enemy.transform.position, 100f);
@@ -219,16 +223,23 @@ public class Turret : MonoBehaviour
                     break;
                 }
 
+                bool nestedBreak = false;
+
                 for (int i = 0; i < raycast.Length; i++)
                 {
-                    if (raycast[i].transform.tag == "SolidObject" && raycast[i].distance <= raycast[enemyIndex].distance)
+                    if ((raycast[i].transform.tag == "SolidObject" && raycast[i].distance <= raycast[enemyIndex].distance) || raycast[enemyIndex].transform.position.y<transform.position.y)
                     {
-                        goto nested_break;
+                        nestedBreak = true;
                     }
 
                 }
+                if (nestedBreak == true)
+                {
+                    continue;
+                }
 
-                if (raycast.Length > 0 && raycast[0].transform.tag == "Enemy" || (gameHandler.roundType == "attack" && raycast[0].transform.tag == "Player"))
+                if ((raycast.Length > 0 && raycast[enemyIndex].transform.tag == "Enemy" )||
+                    ( raycast.Length > 0  && gameHandler.roundType == "attack" && raycast[enemyIndex].transform.tag == "Player"))
                 {
                     float distance = Vector3.Distance(enemy.transform.position, transform.position);
                     if (distance < closestDistance)
@@ -238,7 +249,7 @@ public class Turret : MonoBehaviour
                     }
                 }
 
-            nested_break: continue;
+   
 
             }
         }

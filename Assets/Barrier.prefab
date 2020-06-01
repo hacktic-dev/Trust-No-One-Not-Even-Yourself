@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3756951657352926156}
   m_Layer: 13
   m_Name: RaycastBox
-  m_TagString: Untagged
+  m_TagString: SolidObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3161641882137265185}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.008, y: 2.748, z: -0.064}
-  m_LocalScale: {x: 0.88859975, y: 6.601744, z: 6.8481917}
+  m_LocalScale: {x: 0.88859975, y: 7.3404794, z: 7.7740674}
   m_Children: []
   m_Father: {fileID: 7698930115498940519}
   m_RootOrder: 4
@@ -386,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c4e13748f5c87948a717e4f25cfd4e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGameObject: {fileID: 0}
+  currentGameObject: {fileID: 7698930114829046121}
 --- !u!1 &7698930115498940518
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,7 +430,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7698930115498940518}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 3.5}

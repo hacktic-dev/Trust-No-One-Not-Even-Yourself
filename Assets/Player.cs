@@ -37,7 +37,7 @@ using UnityEngine.AI;
     public float maxPlaceDistance = 20f;
     Vector3 hitPosition;
 
-    public Transform shadowPointer;
+    public GameObject shadowPointer;
     public GameObject shadowPointerBarrier;
     public GameObject shadowPointerTurret;
     GameObject currentshadowPointer;
@@ -139,7 +139,7 @@ using UnityEngine.AI;
                 }
                 if (Input.GetKeyDown("e") && objectPlaceMode)
                 {
-                    shadowPointer.position = new Vector3(0, -100, 0);
+                    shadowPointer.transform.position = new Vector3(0, -100, 0);
                     objectPlaceMode = false;
                 }
                 else if (Input.GetKeyDown("e"))
@@ -242,6 +242,7 @@ using UnityEngine.AI;
         LayerMask mask = ~LayerMask.GetMask("Hidden Objects","RaycastCollider","Grayscale");
         if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance, mask) && inventory.inventoryAmount[selectedIndex]>0)
         {
+            shadowPointer.SetActive(true);
             RaycastHit hit;
             if (Physics.Raycast(cameraMount.position, cameraMount.forward, out hit, maxPlaceDistance + 1, mask))
             {
@@ -251,22 +252,24 @@ using UnityEngine.AI;
         }
 		else
 		{
+            shadowPointer.SetActive(false) ;
 			hitPosition = new Vector3(1000, 0, 0);
         }
-        shadowPointer.position = hitPosition;
-        shadowPointer.SetPositionAndRotation(new Vector3(shadowPointer.position.x, shadowPointer.position.y, shadowPointer.position.z),selfTransform.rotation);
+        shadowPointer.transform.position = hitPosition;
+        shadowPointer.transform.SetPositionAndRotation(new Vector3(shadowPointer.transform.position.x, shadowPointer.transform.position.y, shadowPointer.transform.position.z),selfTransform.rotation);
 
         switch (selectedIndex)
         {
             case 0:
-                shadowPointer.Rotate(0.0f, 90.0f, 0.0f);
+                shadowPointer.transform.Rotate(0.0f, 90.0f, 0.0f);
                 break;
             case 1:
-                shadowPointer.Rotate(0.0f, 180.0f, 0.0f);
+                shadowPointer.transform.Rotate(0.0f, 180.0f, 0.0f);
                 break;
         }
 
         bool check = checkIfPlaceable();
+        Debug.Log("placeable" + check);
         if (Input.GetMouseButtonDown(0))
         {
             bool success = false;
@@ -276,12 +279,14 @@ using UnityEngine.AI;
                 
 
                 success = true;
-                GameObject instantiatedObject = Instantiate(objectToPlace, shadowPointer.position, shadowPointer.rotation);
-                Navmesh.BuildNavMesh();
+                GameObject instantiatedObject = Instantiate(objectToPlace, shadowPointer.transform.position, shadowPointer.transform.rotation);
+
+                //Navmesh.BuildNavMesh();
 
                 if (objectToPlace == turret)
                 {
-                    instantiatedObject.GetComponent<Health>().maxHealth = 80f;
+                    instantiatedObject.transform.position =new Vector3(instantiatedObject.transform.position.x, instantiatedObject.transform.position.y - 1, instantiatedObject.transform.position.z);
+                    instantiatedObject.GetComponent<Health>().maxHealth = 50f;
                     instantiatedObject.GetComponent<Turret>().gameHandler = gameHandler;
                 }
 
@@ -346,8 +351,8 @@ using UnityEngine.AI;
 
     bool checkIfPlaceable()
     {
-        Collider[] checkSphere = Physics.OverlapSphere(shadowPointer.position,
-                                 4f, LayerMask.GetMask("Solid Object","Turret"));
+        Collider[] checkSphere = Physics.OverlapSphere(shadowPointer.transform.position,
+                                 4f, LayerMask.GetMask("Barrier","Turret"));
         if (checkSphere.Length > 0)
         {
             if (currentshadowPointer.transform.Find("BoundBox").GetComponent<Collider>().bounds.Intersects(checkSphere[0].bounds))

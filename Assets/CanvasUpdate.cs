@@ -104,6 +104,7 @@ public class CanvasUpdate : MonoBehaviour
         }
         else if (gameHandler.gameState=="menu")
         {
+            Debug.Log("menu");
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
@@ -218,7 +219,9 @@ public class CanvasUpdate : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        Debug.Log("return to menu");
         gameHandler.gameState = "menu";
+        Debug.Log(gameHandler.gameState);
     }
 
     public void OpenOptions()
@@ -235,6 +238,7 @@ public class CanvasUpdate : MonoBehaviour
     {
         
         gameHandler.gameState = "active";
+        Debug.Log(gameHandler.gameState);
         gameHandler.newGame();
     }
 
