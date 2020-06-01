@@ -12710,5 +12710,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   head: {fileID: 2513501686593541978}
   player: {fileID: 0}
+  hurtParticle: {fileID: 0}
+  health: {fileID: 0}
   audioSource: {fileID: 0}
   shoot: {fileID: 0}
+  gameHandler: {fileID: 0}

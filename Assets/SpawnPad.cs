@@ -11,7 +11,7 @@ public class SpawnPad : MonoBehaviour
     float timerToSpawn;
 
     public float spawnTimeInterval = 1.5f; //DEBUG default 1.5
-    const int spawnedMaximum = 10;
+    const int spawnedMaximum = 5;
 
     public string resourceType;
     public int currentSpawnedResources;
@@ -36,8 +36,18 @@ public class SpawnPad : MonoBehaviour
     {
         if (gameHandler.gameState == "active" && gameHandler.roundType=="defend")
         {
-            timerToSpawn -= Time.deltaTime;
 
+            if (gameHandler.timeLeftThisRound > gameHandler.fightTimeLength)
+            {
+                timerToSpawn -= Time.deltaTime;
+                if (timerToSpawn <= 0 && currentSpawnedResources < spawnedMaximum)
+                {
+                    currentSpawnedResources++;
+                    timerToSpawn = spawnTimeInterval;
+                    SpawnObject(resourceType);
+
+                }
+            }
 
             if (Vector3.Distance(player.transform.position, transform.position) < 3f && currentSpawnedResources > 0)
             {
@@ -50,13 +60,7 @@ public class SpawnPad : MonoBehaviour
                 timerToSpawn = spawnTimeInterval;
             }
 
-            if (timerToSpawn <= 0 && currentSpawnedResources < spawnedMaximum)
-            {
-                currentSpawnedResources++;
-                timerToSpawn = spawnTimeInterval;
-                SpawnObject(resourceType);
-
-            }
+          
         }
     }
 

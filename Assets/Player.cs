@@ -90,7 +90,7 @@ using UnityEngine.AI;
                 gameHandler.roundType = "defend";
                 CharacterController cc = this.GetComponent<CharacterController>();
                 cc.enabled = false;
-                transform.position = flag.transform.position;
+                transform.position = flag.transform.position- new Vector3(0, 6, 0); ;
                 cc.enabled = true;
             }
 
@@ -100,7 +100,7 @@ using UnityEngine.AI;
 
 
             if(health.health<=0)
-            { StartCoroutine(ExecuteAfterTime(0.3f)); }
+            { StartCoroutine(ExecuteAfterTime(0.15f)); }
 
 
 
@@ -151,7 +151,13 @@ using UnityEngine.AI;
 
                 if (objectPlaceMode)
                 {
+                    shadowPointer.SetActive(true);
                     ShadowPointer();
+                }
+                else
+                {
+                    hitPosition = new Vector3(1000, 0, 0);
+                    shadowPointer.SetActive(false);
                 }
             }
 
@@ -254,8 +260,9 @@ using UnityEngine.AI;
         }
 		else
 		{
-            shadowPointer.SetActive(false) ;
+            
 			hitPosition = new Vector3(1000, 0, 0);
+            shadowPointer.SetActive(false);
         }
         shadowPointer.transform.position = hitPosition;
         shadowPointer.transform.SetPositionAndRotation(new Vector3(shadowPointer.transform.position.x, shadowPointer.transform.position.y, shadowPointer.transform.position.z),selfTransform.rotation);
@@ -391,7 +398,7 @@ using UnityEngine.AI;
     {
         float gravity = -19;
         float jumpHeight = 2;
-        LayerMask mask = ~LayerMask.GetMask("Hidden Objects");
+        LayerMask mask = ~LayerMask.GetMask("Hidden Objects","No Collision");
 
         fallSpeed.y += gravity * Time.deltaTime;
 
@@ -487,7 +494,7 @@ using UnityEngine.AI;
         {
             CharacterController cc = this.GetComponent<CharacterController>();
             cc.enabled = false;
-            transform.position = flag.transform.position;
+            transform.position = flag.transform.position-new Vector3(0,6,0);
             cc.enabled = true;
         }
     }
@@ -497,7 +504,7 @@ using UnityEngine.AI;
         health.health = 100f;
         CharacterController cc = this.GetComponent<CharacterController>();
         cc.enabled = false;
-        transform.position = flag.transform.position;
+        transform.position = flag.transform.position- new Vector3(0, 6, 0); ;
         cc.enabled = true;
         inventory.reset();
     }

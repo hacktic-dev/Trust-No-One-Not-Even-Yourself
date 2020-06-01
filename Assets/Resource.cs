@@ -9,6 +9,7 @@ public class Resource : MonoBehaviour
     public float bobYOffset;
     float absoluteY;
     public bool rotateActive=true;
+    public float bobSpeed = 3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +46,7 @@ public class Resource : MonoBehaviour
 
     void Bob()
     {
-        bobYOffset += Time.deltaTime*3f;
+        bobYOffset += Time.deltaTime*bobSpeed;
         bobYOffset = bobYOffset % (Mathf.PI * 2);
         transform.position = new Vector3(transform.position.x,absoluteY+Mathf.Sin(bobYOffset)/7f,transform.position.z);
         if (rotateActive)

@@ -68,7 +68,7 @@ public class GameHandler : MonoBehaviour
 
     public void SetMusicVolume(System.Single value)
     {
-        audioSource.volume = value;
+        audioSource.volume = value*0.5f;
     }
 
     public void newRoundF()
@@ -82,7 +82,7 @@ public class GameHandler : MonoBehaviour
         }
         else
         {
-            player.health.health = 50f;
+            player.health.health = 100f;
             roundType = "attack";
         }
     }

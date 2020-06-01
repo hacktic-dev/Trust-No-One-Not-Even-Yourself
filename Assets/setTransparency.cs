@@ -5,7 +5,7 @@ using UnityEngine;
 public class setTransparency : MonoBehaviour
 {
     public GameObject currentGameObject;
-    float alpha = 0.2f;
+    float alpha = 0.85f;
 
     // Start is called before the first frame update
     void Start()

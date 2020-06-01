@@ -11,7 +11,7 @@ public class Turret : MonoBehaviour
     const float timeBetweenShoot = 1f;
     float timeToNextShoot;
     float damage = 10f;
-    float gunOffset = 0.2f;
+    //float gunOffset = 0.2f;
     Vector3 gun1Position;
     Vector3 gun2Position;
     public Health health;
@@ -28,6 +28,7 @@ public class Turret : MonoBehaviour
         InvokeRepeating("FindClosestEnemy", 0.5f, 0.5f);
         timeToNextShoot = timeBetweenShoot;
 
+        /*
         foreach (Transform child in head.transform)
         {
             //Debug.Log(gunOffset);
@@ -41,6 +42,7 @@ public class Turret : MonoBehaviour
                 gun2Position = child.position;
             }
         }
+        */
     }
 
         // Update is called once per frame
@@ -165,11 +167,12 @@ public class Turret : MonoBehaviour
             head.GetComponent<ParticleSystem>().Play();
             particleTimer = 0.2f;
 
-
+            /*
             foreach (Transform child in head.transform)
             {
                 gunOffset = 0.2f;
             }
+            */
 
             timeToNextShoot = timeBetweenShoot;
 

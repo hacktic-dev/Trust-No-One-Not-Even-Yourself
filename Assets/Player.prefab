@@ -403,6 +403,7 @@ MonoBehaviour:
   audioSource: {fileID: 544003993}
   craftSuccess: {fileID: 8300000, guid: a23b5d82f16035a4d95ecf9da3b148dd, type: 3}
   craftFail: {fileID: 8300000, guid: 9b2712cde8cbc80458e3cb6cea6eebec, type: 3}
+  shoot: {fileID: 0}
   inventory: {fileID: 6498804531098940055}
   objectPlaceMode: 0
   selectedIndex: 0
@@ -419,8 +420,8 @@ MonoBehaviour:
   shadowPointer: {fileID: 255521369}
   shadowPointerBarrier: {fileID: 2516361642616397927}
   shadowPointerTurret: {fileID: 1430474363479857107}
+  hurtSound: {fileID: 0}
   health: {fileID: 9082266045604083682}
-  level: {fileID: 0}
   Navmesh: {fileID: 0}
   gameHandler: {fileID: 0}
   flag: {fileID: 0}
@@ -660,7 +661,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 90
+      scalar: 180
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5383,6 +5384,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2597775516720691509, guid: 18bdb42c66dc1c54288f54b5e6c343d8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d954b75ac0c8b334794b9aee4291e1f6, type: 2}
     - target: {fileID: 2597775516720691512, guid: 18bdb42c66dc1c54288f54b5e6c343d8,
         type: 3}
       propertyPath: m_TagString
@@ -5393,6 +5399,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Shadow
       objectReference: {fileID: 0}
+    - target: {fileID: 2597775518103292729, guid: 18bdb42c66dc1c54288f54b5e6c343d8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d954b75ac0c8b334794b9aee4291e1f6, type: 2}
     - target: {fileID: 2597775518103292732, guid: 18bdb42c66dc1c54288f54b5e6c343d8,
         type: 3}
       propertyPath: m_TagString

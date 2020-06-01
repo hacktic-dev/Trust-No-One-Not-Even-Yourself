@@ -31,7 +31,7 @@ public class SpawnEnemy : MonoBehaviour
                 timeToNextSpawn -= Time.deltaTime;
             }
 
-            if (timeToNextSpawn <= 0f)
+            if (timeToNextSpawn <= 0f && gameHandler.timeLeftThisRound < gameHandler.fightTimeLength && gameHandler.roundType == "defend")
             {
                 timeToNextSpawn = timeBetweenSpawns;
                 if (gameHandler.timeLeftThisRound < gameHandler.fightTimeLength && gameHandler.roundType == "defend")

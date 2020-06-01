@@ -286,7 +286,7 @@ public class CanvasUpdate : MonoBehaviour
         {
             if (gameHandler.roundType == "defend")
             {
-                instructionText.text = "Defend The Flag!";
+                instructionText.text = "Protect The Orb!";
             }
             else
             { instructionText.text = "Destroy The Flag!"; }
