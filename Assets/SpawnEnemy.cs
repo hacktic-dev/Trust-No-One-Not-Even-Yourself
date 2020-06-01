@@ -17,7 +17,7 @@ public class SpawnEnemy : MonoBehaviour
     {
         currentRound = 0;
         timeBetweenSpawns = 10f;
-        timeToNextSpawn = timeBetweenSpawns;
+        timeToNextSpawn = 0f;
     }
 
     // Update is called once per frame
@@ -26,7 +26,10 @@ public class SpawnEnemy : MonoBehaviour
         
         if (gameHandler.gameState == "active")
         {
-            timeToNextSpawn -= Time.deltaTime;
+            if (gameHandler.timeLeftThisRound < gameHandler.fightTimeLength && gameHandler.roundType == "defend")
+            {
+                timeToNextSpawn -= Time.deltaTime;
+            }
 
             if (timeToNextSpawn <= 0f)
             {
@@ -42,6 +45,7 @@ public class SpawnEnemy : MonoBehaviour
                 currentRound = gameHandler.roundNumber;
                 
                 timeBetweenSpawns -= 0.5f;
+                timeToNextSpawn = 0f;
             }
         }
 
@@ -56,7 +60,7 @@ public class SpawnEnemy : MonoBehaviour
         Enemy EnemyObject = instantiatedObject.GetComponent<Enemy>();
 
         //TODO test values, update later
-        EnemyObject.GetComponent<NavMeshAgent>().speed = 10.5f + currentRound*0.5f; //default 1.5
+        EnemyObject.GetComponent<NavMeshAgent>().speed = 1.5f + currentRound*0.5f; //default 1.5
         EnemyObject.GetComponent<Health>().maxHealth = 30 + currentRound * 10;
         EnemyObject.gameHandler = gameHandler;
         EnemyObject.flag = flag.transform;

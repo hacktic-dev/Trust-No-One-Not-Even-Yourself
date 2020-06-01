@@ -30,7 +30,7 @@ public class GameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(gameState);
+       
         newRound = false;
 
         if (gameState=="paused")
