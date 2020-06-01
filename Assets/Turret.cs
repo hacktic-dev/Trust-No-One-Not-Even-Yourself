@@ -229,8 +229,10 @@ public class Turret : MonoBehaviour
                 for (int i = 0; i < raycast.Length; i++)
                 {
                     if (raycast[i].transform.tag == "Enemy" || (gameHandler.roundType == "attack" && raycast[i].transform.tag == "Player"))
+                    {
                         enemyIndex = i;
-                    break;
+                        break;
+                    }
                 }
 
                 bool nestedBreak = false;

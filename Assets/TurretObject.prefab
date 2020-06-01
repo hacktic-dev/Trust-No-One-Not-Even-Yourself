@@ -9825,6 +9825,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 18
       objectReference: {fileID: 0}
+    - target: {fileID: 1666340304050393665, guid: a9016b66f10ff26429a84a461464b02d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 2405663557978638506, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Mesh
@@ -9846,6 +9851,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3928311104328428154, guid: a9016b66f10ff26429a84a461464b02d,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921657622366645693, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Mesh
       value: 
@@ -9910,6 +9920,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6394280776679579392, guid: a9016b66f10ff26429a84a461464b02d,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6836048801967758078, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Mesh
@@ -9923,7 +9938,7 @@ PrefabInstance:
     - target: {fileID: 7923899630127425881, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_TagString
-      value: Gun2
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8786691969528570577, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}

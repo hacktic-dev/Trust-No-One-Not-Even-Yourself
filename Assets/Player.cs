@@ -32,7 +32,7 @@ using UnityEngine.AI;
     public CharacterController controller;
     float xRotation;
     public int test;
-    public float mouseSense = 100f;
+    public float mouseSense = 50f;
     public Transform cameraMount;
     public float maxPlaceDistance = 20f;
     Vector3 hitPosition;
@@ -71,7 +71,7 @@ using UnityEngine.AI;
 
     public void SetMouseSens(System.Single value)
     {
-        mouseSense = 50f + value * 800f;
+        mouseSense = 20f + value * 400f;
      //   Debug.Log(mouseSense);
     }
 
@@ -248,7 +248,7 @@ using UnityEngine.AI;
 
         Vector3 hitNormal=new Vector3(0f,0f,0f);
 
-        LayerMask mask = ~LayerMask.GetMask("Shadow","No Collision","RaycastCollider");
+        LayerMask mask = ~LayerMask.GetMask("Shadow","No Collision","RaycastCollider","Player","Turret");
 
         if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance, mask) && inventory.inventoryAmount[selectedIndex]>0)
         {
@@ -327,7 +327,7 @@ using UnityEngine.AI;
 
     bool checkIfPlaceable(Vector3 hitNormal)
     {
-        if ( hitNormal != new Vector3(0f, 1f, 0f))
+        if ( hitNormal != new Vector3(0f, 1f, 0f) || Vector3.Distance(currentshadowPointer.transform.position,transform.position)<1.5)
         {
             setTransparency(currentshadowPointer, 0.2f);
             return false;

@@ -23,6 +23,7 @@ TagManager:
   - Barrier
   - Always
   - ActiveAttack
+  - ShadowNoRender
   layers:
   - Default
   - TransparentFX
@@ -38,9 +39,9 @@ TagManager:
   - Level
   - Wall
   - RaycastCollider
-  - Grayscale
+  - Player
   - Enemy
-  - UpperLevel
+  - 
   - Barrier
   - Turret
   - 
