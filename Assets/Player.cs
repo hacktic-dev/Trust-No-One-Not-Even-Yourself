@@ -158,6 +158,8 @@ public class Player : MonoBehaviour
         if (objectPlaceMode && objectPlaceFrameChange)
         {
             objectPlaceFrameChange = false;
+            shadowPointerBarrier.SetActive(false);
+            shadowPointerTurret.SetActive(false);
             shadowPointer.SetActive(true);
         }
         else if (objectPlaceFrameChange)
@@ -524,6 +526,9 @@ public class Player : MonoBehaviour
 
     public void reset()
     {
+        shadowPointerBarrier.SetActive(false);
+        shadowPointerTurret.SetActive(false);
+
         cameraMount.transform.GetComponent<PostProcessVolume>().enabled = false;
         health.health = 100f;
         CharacterController cc = this.GetComponent<CharacterController>();
