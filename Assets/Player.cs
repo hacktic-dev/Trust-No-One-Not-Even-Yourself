@@ -547,7 +547,7 @@ public class Player : MonoBehaviour
         gameHandler.gameState = "lose";
     }
 
-    public void Hurt(float )
+    public void Hurt()
     {
         audioSource.PlayOneShot(hurtSound, 0.8f * gameHandler.MasterVolume);
         Color oldColor = canvas.transform.Find("Overlay").GetComponent<Image>().color;
