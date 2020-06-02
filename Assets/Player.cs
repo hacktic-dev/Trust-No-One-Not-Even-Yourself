@@ -84,17 +84,16 @@ using UnityEngine.AI;
             if(flagCount<0f)
 
             {
-                flagHitStartCount = false;
-                flagCount = 1f;
                 gameHandler.newRoundF();
-                gameHandler.roundType = "defend";
-                CharacterController cc = this.GetComponent<CharacterController>();
-                cc.enabled = false;
-                transform.position = flag.transform.position- new Vector3(0, 6, 0); ;
-                cc.enabled = true;
             }
 
-            if(flagHitStartCount)
+            if (gameHandler.newRound)
+            {
+                //  Debug.Log("new loc");
+                newRound();
+            }
+
+            if (flagHitStartCount)
             { flagCount -= Time.deltaTime; }
 
 
@@ -104,13 +103,7 @@ using UnityEngine.AI;
 
 
 
-            if (gameHandler.newRound)
-            {
-                shadowPointerBarrier.SetActive(false);
-                shadowPointerTurret.SetActive(false);
-              //  Debug.Log("new loc");
-                newPlayerLocation();
-            }
+            
 
 
 
@@ -441,11 +434,11 @@ using UnityEngine.AI;
             bool flagHit = false;
             int flagIndex=0;
             Debug.DrawRay(cameraMount.position, cameraMount.forward * 100f, Color.white, 1f);
+
+            //Check for hits
             RaycastHit[] raycast = Physics.RaycastAll(cameraMount.position, cameraMount.forward, 100f);
             if (raycast.Length > 0)
             {
-
-
 
                 for (int i = 0; i < raycast.Length; i++)
                 {
@@ -479,15 +472,22 @@ using UnityEngine.AI;
         }
     }
 
-    void newPlayerLocation()
+    //set player variables for a new round
+
+    void newRound()
     {
         if (gameHandler.roundType=="attack")
         {
+
+            //disable shadow pointer
+            shadowPointerBarrier.SetActive(false);
+            shadowPointerTurret.SetActive(false);
+
+            //enumerate all spawn pads
             object[] obj = GameObject.FindObjectsOfType(typeof(GameObject));
             List<GameObject> spawnLocs = new List<GameObject>();
             foreach (object o in obj)
             {
-                //Debug.Log("test");
                 GameObject g = (GameObject)o;
                 if (g.tag=="EnemySpawn")
                 {
@@ -496,23 +496,29 @@ using UnityEngine.AI;
 
             }
 
+            //pick random enemy spawn pad
             int locationIndex = Random.Range(0, spawnLocs.Count);
+
+            //move player
             CharacterController cc = this.GetComponent<CharacterController>();
             cc.enabled = false;
-           // Debug.Log(locationIndex.ToString());
             transform.position = spawnLocs[locationIndex].transform.position;
-           // Debug.Log(transform.position);
-           // Debug.Log(spawnLocs[locationIndex].transform.position);
             cc.enabled = true;
         }
         else
         {
+            //reset flag hit countdown
+            flagHitStartCount = false;
+            flagCount = 1f;
+
             CharacterController cc = this.GetComponent<CharacterController>();
             cc.enabled = false;
-            transform.position = flag.transform.position-new Vector3(0,6,0);
+            transform.position = flag.transform.position- new Vector3(0, 6, 0); ;
             cc.enabled = true;
         }
     }
+
+    
 
     public void reset()
     {

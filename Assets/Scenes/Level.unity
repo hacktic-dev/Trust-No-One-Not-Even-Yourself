@@ -5481,7 +5481,7 @@ MonoBehaviour:
   audioSource: {fileID: 2105613465}
   music: {fileID: 0}
   flag: {fileID: 153149488}
-  roundLength: 10
+  roundLength: 20
   fightTimeLength: 0
   roundType: defend
   timeLeftThisRound: 0
@@ -7046,7 +7046,7 @@ GameObject:
   - component: {fileID: 581474367}
   - component: {fileID: 581474366}
   - component: {fileID: 581474365}
-  m_Layer: 13
+  m_Layer: 10
   m_Name: CentralBox
   m_TagString: RaycastCollider
   m_Icon: {fileID: 0}
