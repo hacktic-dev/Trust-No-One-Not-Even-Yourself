@@ -271,7 +271,6 @@ public class Player : MonoBehaviour
 
         shadowPointer.transform.position = shadowPointerHitPosition;
         shadowPointer.transform.rotation = transform.rotation;
-        Debug.Log(shadowPointer.transform.position);
 
         //rotate according to which pointer is active
         switch (selectedIndex)
@@ -414,7 +413,7 @@ public class Player : MonoBehaviour
     {
         float gravity = -19;
         float jumpHeight = 2;
-        LayerMask mask = ~LayerMask.GetMask("Hidden Objects","No Collision","Shadow","Player");
+        LayerMask mask = ~LayerMask.GetMask("Hidden Objects","No Collision","Shadow","Player","RaycastCollider");
 
         fallSpeed.y += gravity * Time.deltaTime;
 
