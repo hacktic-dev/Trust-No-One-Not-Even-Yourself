@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     Vector3 move;
     public float speed = 12f;
     public CharacterController controller;
-    public float mouseSense = 20f;
+    public float mouseSense = 450f;
     public Transform cameraMount;
     float xRotation;
     Vector3 fallSpeed;
@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
 
     public void SetMouseSens(System.Single value)
     {
-        mouseSense = 20f + value * 400f;
+        mouseSense = 50f + value * 800f;
         //   Debug.Log(mouseSense);
     }
 

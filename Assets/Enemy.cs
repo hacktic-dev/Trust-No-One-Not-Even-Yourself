@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
 
-        if(Vector3.Distance(transform.position,flag.transform.position)<6)
+        if(Vector3.Distance(transform.position,flag.transform.position)<6.25)
             {
             flag.GetComponent<Flag>().PlayLose();
             gameHandler.gameState = "lose";
