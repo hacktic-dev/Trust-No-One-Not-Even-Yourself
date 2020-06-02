@@ -8,9 +8,10 @@ public class GameHandler : MonoBehaviour
     public AudioClip music;
 
     public GameObject flag;
-    public float roundLengthDefend=60f;
-    public float roundLengthAttack = 60f;
-    public float fightTimeLength=55f;
+    public float roundLengthDefend=120f;
+    public float roundLengthDefendRound1 = 140f;
+    public float roundLengthAttack = 120f;
+    public float fightTimeLength=60f;
     public string roundType="defend";
     public float timeLeftThisRound;
     public int roundNumber;
@@ -24,7 +25,7 @@ public class GameHandler : MonoBehaviour
     {
         gameState = "menu";
         roundNumber = 1;
-        timeLeftThisRound = roundLengthDefend;
+        timeLeftThisRound = roundLengthDefendRound1;
         
     }
 
@@ -79,7 +80,14 @@ public class GameHandler : MonoBehaviour
         roundNumber++;
         if (roundNumber % 2 == 1)
         {
-            timeLeftThisRound = roundLengthDefend;
+            if (roundNumber == 1)
+            {
+                timeLeftThisRound = roundLengthDefendRound1;
+            }
+            else
+            {
+                timeLeftThisRound = roundLengthDefend;
+            }
             roundType = "defend";
         }
         else
@@ -111,7 +119,7 @@ public class GameHandler : MonoBehaviour
 
         }
         roundNumber = 1;
-        timeLeftThisRound = roundLengthDefend;
+        timeLeftThisRound = roundLengthDefendRound1;
         roundType = "defend";
         player.reset();
     }

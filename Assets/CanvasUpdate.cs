@@ -63,7 +63,7 @@ public class CanvasUpdate : MonoBehaviour
             {
                 Debug.Log(transform.Find("Overlay").GetComponent<Image>().color.a);
                 Color tempColor = transform.Find("Overlay").GetComponent<Image>().color;
-                tempColor.a -= 6f * Time.deltaTime;
+                tempColor.a -= 4f * Time.deltaTime;
                 transform.Find("Overlay").GetComponent<Image>().color = tempColor;
             }
             
