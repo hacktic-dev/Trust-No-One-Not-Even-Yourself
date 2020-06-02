@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering.PostProcessing;
 
-public class Player : MonoBehaviour
+    public class Player : MonoBehaviour
 {
     //audio
     public AudioSource audioSource;
@@ -78,6 +77,7 @@ public class Player : MonoBehaviour
         {
 
             if(flagCount<0f)
+
             {
                 gameHandler.newRoundF();
             }
@@ -85,11 +85,6 @@ public class Player : MonoBehaviour
             if (gameHandler.newRound)
             {
                 newRound();
-            }
-
-            if (gameHandler.newRound)
-            {
-                CameraEffectsUpdate();
             }
 
             if (flagHitStartCount)
@@ -107,6 +102,8 @@ public class Player : MonoBehaviour
 
             particleTimer -= Time.deltaTime;
 
+
+
             //goes true for a frame when initiating a new selection
             newSelectionFrameChange = false;
 
@@ -120,11 +117,10 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if (gameHandler.roundType == "attack" && Input.GetMouseButtonDown(0))
+            if (gameHandler.roundType == "attack")
             {
                 Shooting();
             }
-
             Movement();
             Camera();
             Jump();
@@ -433,49 +429,52 @@ public class Player : MonoBehaviour
 
     void Shooting()
     {
-        audioSource.PlayOneShot(shoot, 0.3f * gameHandler.MasterVolume);
-        cameraMount.GetComponent<ParticleSystem>().Play();
-        particleTimer = 0.2f;
-        float closestDistance = 10000;
-        int closestIndex = 0;
-        bool flagHit = false;
-        Debug.DrawRay(cameraMount.position, cameraMount.forward * 100f, Color.white, 1f);
-
-        //Check for hits
-        RaycastHit[] raycast = Physics.RaycastAll(cameraMount.position, cameraMount.forward, 100f);
-        if (raycast.Length > 0)
+        if(Input.GetMouseButtonDown(0))
         {
+            audioSource.PlayOneShot(shoot, 0.3f * gameHandler.MasterVolume);
+            cameraMount.GetComponent<ParticleSystem>().Play();
+            particleTimer = 0.2f;
+            float closestDistance = 10000;
+            int closestIndex = 0;
+            bool flagHit = false;
+            int flagIndex=0;
+            Debug.DrawRay(cameraMount.position, cameraMount.forward * 100f, Color.white, 1f);
 
-            for (int i = 0; i < raycast.Length; i++)
+            //Check for hits
+            RaycastHit[] raycast = Physics.RaycastAll(cameraMount.position, cameraMount.forward, 100f);
+            if (raycast.Length > 0)
             {
-                float distance = Vector3.Distance(raycast[i].transform.position, transform.position);
-                if (distance < closestDistance)
+
+                for (int i = 0; i < raycast.Length; i++)
                 {
-                    closestIndex = i;
-                    closestDistance = distance;
+                    float distance = Vector3.Distance(raycast[i].transform.position, transform.position);
+                    if (distance < closestDistance)
+                    {
+                        closestIndex = i;
+                        closestDistance = distance;
                         
+                    }
                 }
+
+                if (raycast[closestIndex].transform.tag == "Turret")
+                {
+
+                    raycast[closestIndex].transform.GetComponent<Health>().health -= damage;
+
+                }
+                else if (raycast[closestIndex].transform.tag == "Flag")
+                {
+                    flagHit = true;
+                }
+
+                if (flagHit)
+                {
+                    flagHitStartCount = true;
+                    flagCount = 0.3f;
+                }
+
             }
-
-            if (raycast[closestIndex].transform.tag == "Turret")
-            {
-
-                raycast[closestIndex].transform.GetComponent<Health>().health -= damage;
-
-            }
-            else if (raycast[closestIndex].transform.tag == "Flag")
-            {
-                flagHit = true;
-            }
-
-            if (flagHit)
-            {
-                flagHitStartCount = true;
-                flagCount = 0.3f;
-            }
-
         }
-        
     }
 
     //set player variables for a new round
@@ -544,18 +543,5 @@ public class Player : MonoBehaviour
     {
         audioSource.PlayOneShot(hurtSound, 0.8f * gameHandler.MasterVolume);
     }
-
-    void CameraEffectsUpdate()
-    {
-        if (gameHandler.roundType=="attack")
-        {
-            cameraMount.transform.GetComponent<PostProcessVolume>().enabled = true;
-        }
-        else
-        {
-            cameraMount.transform.GetComponent<PostProcessVolume>().enabled = false;
-        }
-    }
-    
 
 }
