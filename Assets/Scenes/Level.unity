@@ -339,6 +339,11 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7506587840729740563, guid: 1c5a99bf671995b43b0c876e1669400e,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8000602254866986207, guid: 1c5a99bf671995b43b0c876e1669400e,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -5491,10 +5496,10 @@ MonoBehaviour:
   audioSource: {fileID: 2105613465}
   music: {fileID: 0}
   flag: {fileID: 153149488}
-  roundLengthDefend: 5
+  roundLengthDefend: 120
   roundLengthDefendRound1: 140
-  roundLengthAttack: 1000
-  fightTimeLength: 0
+  roundLengthAttack: 120
+  fightTimeLength: 60
   roundType: defend
   timeLeftThisRound: 0
   roundNumber: 0
@@ -27300,7 +27305,7 @@ PrefabInstance:
     - target: {fileID: 6498804531098940055, guid: 5e566204aafaf2845990ca9fbdf14821,
         type: 3}
       propertyPath: debug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6498804531098940055, guid: 5e566204aafaf2845990ca9fbdf14821,
         type: 3}
