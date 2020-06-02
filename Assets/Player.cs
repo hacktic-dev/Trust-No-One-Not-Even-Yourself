@@ -32,7 +32,7 @@ using UnityEngine.AI;
     public CharacterController controller;
     float xRotation;
     public int test;
-    public float mouseSense = 50f;
+    public float mouseSense = 450f;
     public Transform cameraMount;
     public float maxPlaceDistance = 20f;
     Vector3 hitPosition;
@@ -71,7 +71,7 @@ using UnityEngine.AI;
 
     public void SetMouseSens(System.Single value)
     {
-        mouseSense = 20f + value * 400f;
+        mouseSense = 50f + value * 850f;
      //   Debug.Log(mouseSense);
     }
 
@@ -413,7 +413,7 @@ using UnityEngine.AI;
     {
         float gravity = -19;
         float jumpHeight = 2;
-        LayerMask mask = ~LayerMask.GetMask("Hidden Objects","No Collision","Shadow");
+        LayerMask mask = ~LayerMask.GetMask("Hidden Objects","No Collision","Shadow","Player");
 
         fallSpeed.y += gravity * Time.deltaTime;
 
