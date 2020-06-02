@@ -179,6 +179,11 @@ PrefabInstance:
       propertyPath: m_Value
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2631405008396966679, guid: 1c5a99bf671995b43b0c876e1669400e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Always
+      objectReference: {fileID: 0}
     - target: {fileID: 4732857726538388608, guid: 1c5a99bf671995b43b0c876e1669400e,
         type: 3}
       propertyPath: m_Name
@@ -27420,6 +27425,11 @@ PrefabInstance:
       propertyPath: hurtSound
       value: 
       objectReference: {fileID: 8300000, guid: 733822048225cb64a8d26ec48e1dfeb7, type: 3}
+    - target: {fileID: 7110947734949821470, guid: 5e566204aafaf2845990ca9fbdf14821,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1307346113}
     - target: {fileID: 7110947735381540029, guid: 5e566204aafaf2845990ca9fbdf14821,
         type: 3}
       propertyPath: m_BackGroundColor.r
@@ -27987,6 +27997,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5fa03b8dee673049ab1e55009df3a39, type: 3}
+--- !u!1 &1307346113 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4732857726538388608, guid: 1c5a99bf671995b43b0c876e1669400e,
+    type: 3}
+  m_PrefabInstance: {fileID: 38399708}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1348051693
 Mesh:
   m_ObjectHideFlags: 0
