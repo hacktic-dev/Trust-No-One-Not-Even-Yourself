@@ -24,6 +24,7 @@ TagManager:
   - Always
   - ActiveAttack
   - ShadowNoRender
+  - RaycastCollider
   layers:
   - Default
   - TransparentFX

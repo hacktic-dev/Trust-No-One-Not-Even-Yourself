@@ -239,7 +239,7 @@ public class Turret : MonoBehaviour
 
                 for (int i = 0; i < raycast.Length; i++)
                 {
-                    if (((raycast[i].transform.tag == "SolidObject" || raycast[i].transform.tag == "Barrier") && raycast[i].distance <= raycast[enemyIndex].distance) || raycast[enemyIndex].transform.position.y<transform.position.y)
+                    if (((raycast[i].transform.tag == "SolidObject" || raycast[i].transform.tag == "Barrier" || raycast[i].transform.tag == "RaycastCollider")  && raycast[i].distance <= raycast[enemyIndex].distance) || raycast[enemyIndex].transform.position.y<transform.position.y)
                     {
                         nestedBreak = true;
                     }
