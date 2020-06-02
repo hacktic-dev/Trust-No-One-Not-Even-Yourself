@@ -413,7 +413,7 @@ using UnityEngine.AI;
     {
         float gravity = -19;
         float jumpHeight = 2;
-        LayerMask mask = ~LayerMask.GetMask("Hidden Objects","No Collision","Shadow");
+        LayerMask mask = ~LayerMask.GetMask("Hidden Objects","No Collision","Shadow","Player");
 
         fallSpeed.y += gravity * Time.deltaTime;
 
