@@ -6,15 +6,17 @@ public class Inventory : MonoBehaviour
 {
     Inventory()
     {
-        resourceAmount.Add("matter", 10);
-        resourceAmount.Add("smarts", 10);
-        resourceAmount.Add("motion", 10);
-        resourceAmount.Add("force", 10);
+        resourceAmount.Add("matter", 0);
+        resourceAmount.Add("smarts", 0);
+        resourceAmount.Add("motion", 0);
+        resourceAmount.Add("force", 0);
         reset();
     }
 
     public int[] inventoryAmount=new int[2];
     public SortedDictionary<string, int> resourceAmount=new SortedDictionary<string, int>();
+    int resourceStartAmount;
+    public bool debug;
 
     public void reset()
     {
@@ -22,16 +24,23 @@ public class Inventory : MonoBehaviour
         {
             inventoryAmount[i] = 0;
         }
-        resourceAmount["matter"] = 10;
-        resourceAmount["smarts"] = 10;
-        resourceAmount["motion"] = 10;
-        resourceAmount["force"] = 10;
+        resourceAmount["matter"] = resourceStartAmount;
+        resourceAmount["smarts"] = resourceStartAmount;
+        resourceAmount["motion"] = resourceStartAmount;
+        resourceAmount["force"] = resourceStartAmount;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-       
+       if (debug)
+        {
+            resourceStartAmount = 100;
+        }
+       else
+        {
+            resourceStartAmount = 0;
+        }
     }
 
     // Update is called once per frame

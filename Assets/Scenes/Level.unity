@@ -5538,7 +5538,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2198
+  m_Name: pb_Mesh-141850
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -26912,7 +26912,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2192
+  m_Name: pb_Mesh-141866
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27274,6 +27274,26 @@ PrefabInstance:
     - target: {fileID: 6492398806521626218, guid: 5e566204aafaf2845990ca9fbdf14821,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6498804531098940055, guid: 5e566204aafaf2845990ca9fbdf14821,
+        type: 3}
+      propertyPath: debug
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6498804531098940055, guid: 5e566204aafaf2845990ca9fbdf14821,
+        type: 3}
+      propertyPath: inventoryAmount.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6498804531098940055, guid: 5e566204aafaf2845990ca9fbdf14821,
+        type: 3}
+      propertyPath: inventoryAmount.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6498804531098940055, guid: 5e566204aafaf2845990ca9fbdf14821,
+        type: 3}
+      propertyPath: inventoryAmount.Array.data[2]
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6716935066802565769, guid: 5e566204aafaf2845990ca9fbdf14821,
@@ -38311,7 +38331,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-5436
+  m_Name: pb_Mesh-141978
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -40191,7 +40211,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2196
+  m_Name: pb_Mesh-141870
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
