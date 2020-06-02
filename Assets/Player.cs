@@ -415,7 +415,7 @@ public class Player : MonoBehaviour
     {
         float gravity = -19;
         float jumpHeight = 2;
-        LayerMask mask = ~LayerMask.GetMask("Hidden Objects","No Collision","Shadow","Player","RaycastCollider");
+        LayerMask mask = ~LayerMask.GetMask("No Collision","Shadow","Player","RaycastCollider");
 
         fallSpeed.y += gravity * Time.deltaTime;
 
@@ -454,10 +454,9 @@ public class Player : MonoBehaviour
                 {
                     closestIndex = i;
                     closestDistance = distance;
-                        
+                    
                 }
             }
-
             if (raycast[closestIndex].transform.tag == "Turret")
             {
 
@@ -466,6 +465,7 @@ public class Player : MonoBehaviour
             }
             else if (raycast[closestIndex].transform.tag == "Flag")
             {
+                Debug.Log("flaghit");
                 flagHit = true;
             }
 

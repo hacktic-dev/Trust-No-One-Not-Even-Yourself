@@ -18255,6 +18255,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4873562269836911605, guid: 88d3e4c3f92ae3241bfbfa1b772bef25,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4873562269836911607, guid: 88d3e4c3f92ae3241bfbfa1b772bef25,
         type: 3}
       propertyPath: m_Layer
@@ -27076,6 +27081,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 255521368, guid: 5e566204aafaf2845990ca9fbdf14821, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 156928312026413905, guid: 5e566204aafaf2845990ca9fbdf14821,
         type: 3}
       propertyPath: m_Layer
