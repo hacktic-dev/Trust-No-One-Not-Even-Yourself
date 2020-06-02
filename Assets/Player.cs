@@ -321,7 +321,6 @@ using UnityEngine.AI;
         }
 
     }
-	
 
     bool checkIfPlaceable(Vector3 hitNormal)
     {
@@ -436,6 +435,7 @@ using UnityEngine.AI;
             cameraMount.GetComponent<ParticleSystem>().Play();
             particleTimer = 0.2f;
             float closestDistance = 10000;
+            int closestIndex = 0;
             bool flagHit = false;
             int flagIndex=0;
             Debug.DrawRay(cameraMount.position, cameraMount.forward * 100f, Color.white, 1f);
@@ -450,24 +450,24 @@ using UnityEngine.AI;
                     float distance = Vector3.Distance(raycast[i].transform.position, transform.position);
                     if (distance < closestDistance)
                     {
+                        closestIndex = i;
                         closestDistance = distance;
                         
                     }
-
-                    if (raycast[i].transform.tag == "Turret")
-                    {
-
-                        raycast[i].transform.GetComponent<Health>().health -= damage;
-                        break;
-                    }
-                    else if (raycast[i].transform.tag == "Flag")
-                    {
-                        flagHit = true;
-                        flagIndex = i;
-                    }
                 }
 
-                if(flagHit && closestDistance== Vector3.Distance(raycast[flagIndex].transform.position, transform.position))
+                if (raycast[closestIndex].transform.tag == "Turret")
+                {
+
+                    raycast[closestIndex].transform.GetComponent<Health>().health -= damage;
+
+                }
+                else if (raycast[closestIndex].transform.tag == "Flag")
+                {
+                    flagHit = true;
+                }
+
+                if (flagHit)
                 {
                     flagHitStartCount = true;
                     flagCount = 0.3f;
@@ -521,8 +521,6 @@ using UnityEngine.AI;
             cc.enabled = true;
         }
     }
-
-    
 
     public void reset()
     {
