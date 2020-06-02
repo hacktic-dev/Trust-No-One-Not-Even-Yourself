@@ -301,14 +301,14 @@ public class CanvasUpdate : MonoBehaviour
             instructionText.text = "You Lose!";
         }
 
-        else if (gameHandler.roundLength - gameHandler.timeLeftThisRound < 3)
+        else if (gameHandler.roundLengthDefend - gameHandler.timeLeftThisRound < 3)
         {
             if (gameHandler.roundType == "defend")
             {
                 instructionText.text = "Protect The Orb!";
             }
             else
-            { instructionText.text = "Destroy The Flag!"; }
+            { instructionText.text = "Destroy The Orb!"; }
         }
    
         else
