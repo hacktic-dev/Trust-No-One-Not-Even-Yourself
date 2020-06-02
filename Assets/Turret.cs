@@ -202,68 +202,69 @@ public class Turret : MonoBehaviour
         }
     }
 
-    void FindClosestEnemy()
+void FindClosestEnemy()
+{
+    if (gameObject.tag != "Shadow")
     {
-        if (gameObject.tag != "Shadow")
+        GameObject[] enemies;
+
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        List<GameObject> list = new List<GameObject>();
+        list.AddRange(enemies);
+        list.AddRange(players);
+        enemies = list.ToArray();
+
+        float closestDistance = 10000;
+        Vector3 position = transform.position;
+        closest = null;
+
+        foreach (GameObject enemy in enemies)
         {
-            GameObject[] enemies;
+            RaycastHit[] raycast = Physics.RaycastAll(transform.position, -transform.position + enemy.transform.position, 100f);
 
-            enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-
-            List<GameObject> list = new List<GameObject>();
-            list.AddRange(enemies);
-            list.AddRange(players);
-            enemies = list.ToArray();
-
-            float closestDistance = 10000;
-            Vector3 position = transform.position;
-            closest = null;
-
-            foreach (GameObject enemy in enemies)
+            int enemyIndex = 0;
+            
+            //get index of the player/enemy in the raycast array
+            for (int i = 0; i < raycast.Length; i++)
             {
-                RaycastHit[] raycast = Physics.RaycastAll(transform.position, -transform.position + enemy.transform.position, 100f);
-
-                int enemyIndex = 0;
-
-                for (int i = 0; i < raycast.Length; i++)
+                if (raycast[i].transform.tag == "Enemy" || (gameHandler.roundType == "attack" && raycast[i].transform.tag == "Player"))
                 {
-                    if (raycast[i].transform.tag == "Enemy" || (gameHandler.roundType == "attack" && raycast[i].transform.tag == "Player"))
-                    {
-                        enemyIndex = i;
-                        break;
-                    }
+                    enemyIndex = i;
+                    break;
                 }
+            }
 
-                bool nestedBreak = false;
-
-                for (int i = 0; i < raycast.Length; i++)
+            //check to make sure there isn't any walls in the way
+            bool nestedBreak = false;
+            for (int i = 0; i < raycast.Length; i++)
+            {
+                if (((raycast[i].transform.tag == "SolidObject" || raycast[i].transform.tag == "Barrier" || raycast[i].transform.tag == "RaycastCollider")
+                        && raycast[i].distance <= raycast[enemyIndex].distance))
                 {
-                    if (((raycast[i].transform.tag == "SolidObject" || raycast[i].transform.tag == "Barrier" || raycast[i].transform.tag == "RaycastCollider")  && raycast[i].distance <= raycast[enemyIndex].distance) || raycast[enemyIndex].transform.position.y<transform.position.y)
-                    {
-                        nestedBreak = true;
-                    }
-
+                    nestedBreak = true;
                 }
-                if (nestedBreak == true)
-                {
-                    continue;
-                }
-
-                if ((raycast.Length > 0 && raycast[enemyIndex].transform.tag == "Enemy" )||
-                    ( raycast.Length > 0  && gameHandler.roundType == "attack" && raycast[enemyIndex].transform.tag == "Player"))
-                {
-                    float distance = Vector3.Distance(enemy.transform.position, transform.position);
-                    if (distance < closestDistance)
-                    {
-                        closestDistance = distance;
-                        closest = enemy;
-                    }
-                }
-
-   
 
             }
+            if (nestedBreak == true)
+            {
+                continue;
+            }
+
+            //check to see if its closer than all enemies checked before
+            if ((raycast.Length > 0 && raycast[enemyIndex].transform.tag == "Enemy" )||
+                ( raycast.Length > 0  && gameHandler.roundType == "attack" && raycast[enemyIndex].transform.tag == "Player"))
+            {
+                float distance = Vector3.Distance(enemy.transform.position, transform.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closest = enemy;
+                }
+            }
+
         }
     }
+}
     }
