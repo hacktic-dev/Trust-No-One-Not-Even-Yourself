@@ -301,7 +301,8 @@ public class CanvasUpdate : MonoBehaviour
             instructionText.text = "You Lose!";
         }
 
-        else if (gameHandler.roundLengthDefend - gameHandler.timeLeftThisRound < 3)
+        else if ((gameHandler.roundNumber==1 && gameHandler.roundLengthDefendRound1 - gameHandler.timeLeftThisRound <3)
+                    || (gameHandler.roundNumber != 1 && gameHandler.roundLengthDefend - gameHandler.timeLeftThisRound <3))
         {
             if (gameHandler.roundType == "defend")
             {
