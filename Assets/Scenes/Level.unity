@@ -5481,7 +5481,7 @@ MonoBehaviour:
   audioSource: {fileID: 2105613465}
   music: {fileID: 0}
   flag: {fileID: 153149488}
-  roundLength: 20
+  roundLength: 10
   fightTimeLength: 0
   roundType: defend
   timeLeftThisRound: 0

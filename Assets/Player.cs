@@ -525,6 +525,7 @@ public class Player : MonoBehaviour
 
     public void reset()
     {
+        cameraMount.transform.GetComponent<PostProcessVolume>().enabled = false;
         health.health = 100f;
         CharacterController cc = this.GetComponent<CharacterController>();
         cc.enabled = false;
