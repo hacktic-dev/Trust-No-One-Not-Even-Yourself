@@ -58,6 +58,15 @@ public class CanvasUpdate : MonoBehaviour
 
         if(gameHandler.gameState=="active")
         {
+
+            if (transform.Find("Overlay").GetComponent<Image>().color.a > 0)
+            {
+                Debug.Log(transform.Find("Overlay").GetComponent<Image>().color.a);
+                Color tempColor = transform.Find("Overlay").GetComponent<Image>().color;
+                tempColor.a -= 6f * Time.deltaTime;
+                transform.Find("Overlay").GetComponent<Image>().color = tempColor;
+            }
+            
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class Player : MonoBehaviour
     GameObject objectToPlace;
     public GameHandler gameHandler;
     public GameObject flag;
+    public GameObject canvas;
 
     //misc
     float particleTimer;
@@ -545,9 +547,11 @@ public class Player : MonoBehaviour
         gameHandler.gameState = "lose";
     }
 
-    public void PlayHurt()
+    public void Hurt(float )
     {
         audioSource.PlayOneShot(hurtSound, 0.8f * gameHandler.MasterVolume);
+        Color oldColor = canvas.transform.Find("Overlay").GetComponent<Image>().color;
+        canvas.transform.Find("Overlay").GetComponent<Image>().color =new Color(oldColor.r, oldColor.g, oldColor.b, 0.5f);
     }
 
     void CameraEffectsUpdate()

@@ -190,8 +190,8 @@ public class Turret : MonoBehaviour
                     {
                         raycast[i].transform.GetComponent<Health>().health -= damage;
                         if(raycast[i].transform.tag == "Player")
-                        {
-                            raycast[i].transform.GetComponent<Player>().PlayHurt();
+                        {   
+                             raycast[i].transform.GetComponent<Player>().Hurt();
                         }
                         break;
                     }
