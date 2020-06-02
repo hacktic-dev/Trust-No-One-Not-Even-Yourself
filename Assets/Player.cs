@@ -5,63 +5,58 @@ using UnityEngine.AI;
 
     public class Player : MonoBehaviour
 {
-
+    //audio
     public AudioSource audioSource;
     public AudioClip craftSuccess;
     public AudioClip craftFail;
     public AudioClip shoot;
+    public AudioClip hurtSound;
 
+    //inventory and shadowpointer related
     public Inventory inventory;
-
     //execute objectPlace code when new
-    public bool objectPlaceMode;
+    public bool objectPlaceMode=false;
+    //used to only activacte object place mode code changes on the frame the mode changes, not every frame
+    bool objectPlaceFrameChange = false;
     //index for selected item
     public int selectedIndex;
-
-    public bool newSelection;
-
+    //only execute new selection code on the frame it changes
+    public bool newSelectionFrameChange;
     //the number of items in the game, update this as we add more
     const int totalItemNumber = 2;
 
-    public GameObject barrier;
-    public GameObject turret;
+    public float maxPlaceDistance = 20f;
+    Vector3 shadowPointerHitPosition;
 
-    public Transform selfTransform;
+    //movement
     Vector3 move;
     public float speed = 12f;
     public CharacterController controller;
-    float xRotation;
-    public int test;
     public float mouseSense = 50f;
     public Transform cameraMount;
-    public float maxPlaceDistance = 20f;
-    Vector3 hitPosition;
+    float xRotation;
+    Vector3 fallSpeed;
 
+    //GameObjects
+    public GameObject barrier;
+    public GameObject turret;
     public GameObject shadowPointer;
     public GameObject shadowPointerBarrier;
     public GameObject shadowPointerTurret;
     GameObject currentshadowPointer;
-
-    public AudioClip hurtSound;
-
-    float particleTimer;
-    public Health health;
-
-    public NavMeshSurface Navmesh;
-
-    public GameHandler gameHandler;
-
     GameObject objectToPlace;
-    int currentObjectAmount;
-
+    public GameHandler gameHandler;
     public GameObject flag;
 
-    Vector3 fallSpeed;
-
+    //misc
+    float particleTimer;
+    public Health health;
+    public NavMeshSurface Navmesh;
     bool flagHitStartCount;
     float flagCount;
-
     float damage = 10f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -89,23 +84,14 @@ using UnityEngine.AI;
 
             if (gameHandler.newRound)
             {
-                //  Debug.Log("new loc");
                 newRound();
             }
 
             if (flagHitStartCount)
             { flagCount -= Time.deltaTime; }
 
-
-
             if(health.health<=0)
-            { StartCoroutine(ExecuteAfterTime(0.15f)); }
-
-
-
-            
-
-
+            { StartCoroutine(LoseAfterTime(0.15f)); }
 
             if (particleTimer <= 0)
             {
@@ -119,46 +105,62 @@ using UnityEngine.AI;
 
 
             //goes true for a frame when initiating a new selection
-            newSelection = false;
+            newSelectionFrameChange = false;
 
             //select inventory
             if (gameHandler.roundType == "defend")
             {
-                if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-                {
-                    selectUpdate(1);
-                }
-                else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-                {
-                    selectUpdate(-1);
-                }
-                if (Input.GetKeyDown("e") && objectPlaceMode)
-                {
-                    shadowPointer.transform.position = new Vector3(0, -100, 0);
-                    objectPlaceMode = false;
-                }
-                else if (Input.GetKeyDown("e"))
-                {
-                    objectPlaceMode = true;
-                }
-
+                InventoryUpdate();
                 if (objectPlaceMode)
                 {
-                    shadowPointer.SetActive(true);
                     ShadowPointer();
-                }
-                else
-                {
-                    hitPosition = new Vector3(1000, 0, 0);
-                    shadowPointer.SetActive(false);
                 }
             }
 
-            shooting();
+            if (gameHandler.roundType == "attack")
+            {
+                Shooting();
+            }
             Movement();
             Camera();
             Jump();
 
+        }
+    }
+
+    void InventoryUpdate()
+    {
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            selectUpdate(1);
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            selectUpdate(-1);
+        }
+
+        if (Input.GetKeyDown("e") && objectPlaceMode)
+        {
+            objectPlaceMode = false;
+            objectPlaceFrameChange = true;
+        }
+        else if (Input.GetKeyDown("e"))
+        {
+            objectPlaceMode = true;
+            objectPlaceFrameChange = true;
+        }
+
+        if (objectPlaceMode && objectPlaceFrameChange)
+        {
+            objectPlaceFrameChange = false;
+            shadowPointer.SetActive(true);
+        }
+        else if (objectPlaceFrameChange)
+        {
+            objectPlaceFrameChange = false;
+            shadowPointerHitPosition = new Vector3(1000, 0, 0);
+            shadowPointer.SetActive(false);
         }
     }
 
@@ -190,10 +192,11 @@ using UnityEngine.AI;
         Cursor.visible = false;
     }
 
-    //execute this when the player selects a new object
+    //execute this when the player selects a new placeable object
+    //@param selectDirection the scroll direction
     void selectUpdate(int selectDirection)
     {
-        newSelection = true;
+        newSelectionFrameChange = true;
         if (selectDirection == 1)
         {
             if (selectedIndex == 0)
@@ -249,7 +252,8 @@ using UnityEngine.AI;
             RaycastHit hit;
             if (Physics.Raycast(cameraMount.position, cameraMount.forward, out hit, maxPlaceDistance + 1, mask))
             {
-                hitPosition = hit.point;
+                Debug.Log(shadowPointerHitPosition);
+                shadowPointerHitPosition = hit.point;
                 hitNormal = hit.normal;
                 Debug.Log(hit.normal);
             }
@@ -257,12 +261,13 @@ using UnityEngine.AI;
 		else
 		{
             
-			hitPosition = new Vector3(1000, 0, 0);
+			shadowPointerHitPosition = new Vector3(1000, 0, 0);
 
         }
 
-        shadowPointer.transform.position = hitPosition;
-        shadowPointer.transform.rotation = selfTransform.rotation;
+        shadowPointer.transform.position = shadowPointerHitPosition;
+        shadowPointer.transform.rotation = transform.rotation;
+        Debug.Log(shadowPointer.transform.position);
 
         //rotate according to which pointer is active
         switch (selectedIndex)
@@ -423,9 +428,9 @@ using UnityEngine.AI;
         controller.Move(fallSpeed * Time.deltaTime);
     }
 
-    void shooting()
+    void Shooting()
     {
-        if(Input.GetMouseButtonDown(0) && gameHandler.roundType == "attack")
+        if(Input.GetMouseButtonDown(0))
         {
             audioSource.PlayOneShot(shoot, 0.3f * gameHandler.MasterVolume);
             cameraMount.GetComponent<ParticleSystem>().Play();
@@ -473,7 +478,6 @@ using UnityEngine.AI;
     }
 
     //set player variables for a new round
-
     void newRound()
     {
         if (gameHandler.roundType=="attack")
@@ -530,25 +534,16 @@ using UnityEngine.AI;
         inventory.reset();
     }
 
-    IEnumerator ExecuteAfterTime(float time)
+    IEnumerator LoseAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
 
         gameHandler.gameState = "lose";
     }
 
-    IEnumerator SoundAfterTime(float time)
-    {
-        yield return new WaitForSeconds(time);
-
-        audioSource.PlayOneShot(hurtSound, 0.8f * gameHandler.MasterVolume);
-    }
-
     public void PlayHurt()
     {
-        StartCoroutine(SoundAfterTime(0.0f));
-
-
+        audioSource.PlayOneShot(hurtSound, 0.8f * gameHandler.MasterVolume);
     }
 
 }

@@ -216,7 +216,7 @@ public class CanvasUpdate : MonoBehaviour
 
         updateTextValues();
 
-        if (player.newSelection == true)
+        if (player.newSelectionFrameChange == true)
         {
             updateSelection();
         }
