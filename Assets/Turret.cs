@@ -158,7 +158,7 @@ public class Turret : MonoBehaviour
             {
                 Vector3 test = head.position;
                 Quaternion target = Quaternion.LookRotation(closest.transform.position - test);
-                head.rotation = Quaternion.Lerp(head.rotation, target, Time.deltaTime * 8);
+                head.rotation = Quaternion.Lerp(head.rotation, target, Time.deltaTime * 10); //ACCURACY
             }
         }
 
@@ -188,11 +188,16 @@ public class Turret : MonoBehaviour
                 {
                     if (raycast[i].transform.tag == "Enemy" || (gameHandler.roundType == "attack" && raycast[i].transform.tag == "Player"))
                     {
-                        raycast[i].transform.GetComponent<Health>().health -= damage;
-                        if(raycast[i].transform.tag == "Player")
-                        {   
-                             raycast[i].transform.GetComponent<Player>().Hurt();
+                        if (raycast[i].transform.tag == "Player")
+                        {
+                            raycast[i].transform.GetComponent<Player>().StageHurt(damage,Vector3.Distance(raycast[i].transform.position,transform.position));
                         }
+                        else
+                        {
+                            //todo put this inside turret and make taking damage a part of the health component
+                            raycast[i].transform.GetComponent<Health>().health -= damage; }
+                        
+                        
                         break;
                     }
                 }

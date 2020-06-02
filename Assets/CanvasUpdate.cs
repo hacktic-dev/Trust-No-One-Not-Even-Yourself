@@ -210,7 +210,7 @@ public class CanvasUpdate : MonoBehaviour
 
             foreach (GameObject child in allChildren)
             {
-                if (child.tag == "Lose" || child.tag == "Always")
+                if (child.tag == "Lose")
                 {
                     child.SetActive(true);
                 }

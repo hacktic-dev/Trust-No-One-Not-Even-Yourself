@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     //inventory and shadowpointer related
     public Inventory inventory;
     //execute objectPlace code when new
-    public bool objectPlaceMode=false;
+    public bool objectPlaceMode = false;
     //used to only activacte object place mode code changes on the frame the mode changes, not every frame
     bool objectPlaceFrameChange = false;
     //index for selected item
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     Vector3 move;
     public float speed = 12f;
     public CharacterController controller;
-    public float mouseSense = 50f;
+    public float mouseSense = 20f;
     public Transform cameraMount;
     float xRotation;
     Vector3 fallSpeed;
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
     public void SetMouseSens(System.Single value)
     {
         mouseSense = 20f + value * 400f;
-     //   Debug.Log(mouseSense);
+        //   Debug.Log(mouseSense);
     }
 
     // Update is called once per frame
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
         if (gameHandler.gameState == "active")
         {
 
-            if(flagCount<0f)
+            if (flagCount < 0f)
             {
                 gameHandler.newRoundF();
             }
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
             if (flagHitStartCount)
             { flagCount -= Time.deltaTime; }
 
-            if(health.health<=0)
+            if (health.health <= 0)
             { StartCoroutine(LoseAfterTime(0.15f)); }
 
             if (particleTimer <= 0)
@@ -250,11 +250,11 @@ public class Player : MonoBehaviour
         }
 
 
-        Vector3 hitNormal=new Vector3(0f,0f,0f);
+        Vector3 hitNormal = new Vector3(0f, 0f, 0f);
 
-        LayerMask mask = ~LayerMask.GetMask("Shadow","No Collision","RaycastCollider","Player","Turret");
+        LayerMask mask = ~LayerMask.GetMask("Shadow", "No Collision", "RaycastCollider", "Player", "Turret");
 
-        if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance, mask) && inventory.inventoryAmount[selectedIndex]>0)
+        if (Physics.Raycast(cameraMount.position, cameraMount.forward, maxPlaceDistance, mask) && inventory.inventoryAmount[selectedIndex] > 0)
         {
             shadowPointer.SetActive(true);
             RaycastHit hit;
@@ -266,10 +266,10 @@ public class Player : MonoBehaviour
                 Debug.Log(hit.normal);
             }
         }
-		else
-		{
-            
-			shadowPointerHitPosition = new Vector3(1000, 0, 0);
+        else
+        {
+
+            shadowPointerHitPosition = new Vector3(1000, 0, 0);
 
         }
 
@@ -290,14 +290,14 @@ public class Player : MonoBehaviour
 
         bool check = checkIfPlaceable(hitNormal);
 
-      //  Debug.Log("placeable" + check);
+        //  Debug.Log("placeable" + check);
         if (Input.GetMouseButtonDown(0))
         {
             bool success = false;
-            
+
             if (inventory.inventoryAmount[selectedIndex] > 0 && check)
             {
-                
+
 
                 success = true;
                 GameObject instantiatedObject = Instantiate(objectToPlace, shadowPointer.transform.position, shadowPointer.transform.rotation);
@@ -306,24 +306,24 @@ public class Player : MonoBehaviour
 
                 if (objectToPlace == turret)
                 {
-                    instantiatedObject.transform.position =new Vector3(instantiatedObject.transform.position.x, instantiatedObject.transform.position.y - 1, instantiatedObject.transform.position.z);
+                    instantiatedObject.transform.position = new Vector3(instantiatedObject.transform.position.x, instantiatedObject.transform.position.y - 1, instantiatedObject.transform.position.z);
                     instantiatedObject.GetComponent<Health>().maxHealth = 50f;
                     instantiatedObject.GetComponent<Health>().health = 50f;
                     instantiatedObject.GetComponent<Turret>().gameHandler = gameHandler;
                 }
 
-               // Debug.Log(inventory.inventoryAmount[selectedIndex]);
+                // Debug.Log(inventory.inventoryAmount[selectedIndex]);
                 inventory.inventoryAmount[selectedIndex]--;
-              //  Debug.Log(inventory.inventoryAmount[selectedIndex]);
+                //  Debug.Log(inventory.inventoryAmount[selectedIndex]);
             }
 
             if (success)
             {
-                audioSource.PlayOneShot(craftSuccess, 0.8f*gameHandler.MasterVolume);
+                audioSource.PlayOneShot(craftSuccess, 0.8f * gameHandler.MasterVolume);
             }
             else
             {
-                audioSource.PlayOneShot(craftFail, 0.8f* gameHandler.MasterVolume);
+                audioSource.PlayOneShot(craftFail, 0.8f * gameHandler.MasterVolume);
             }
         }
 
@@ -331,7 +331,7 @@ public class Player : MonoBehaviour
 
     bool checkIfPlaceable(Vector3 hitNormal)
     {
-        if ( hitNormal != new Vector3(0f, 1f, 0f) || Vector3.Distance(currentshadowPointer.transform.position,transform.position)<1.5)
+        if (hitNormal != new Vector3(0f, 1f, 0f) || Vector3.Distance(currentshadowPointer.transform.position, transform.position) < 1.5)
         {
             setTransparency(currentshadowPointer, 0.2f);
             return false;
@@ -341,7 +341,7 @@ public class Player : MonoBehaviour
                                  4f, LayerMask.GetMask("Solid Object"));
         if (checkSphere.Length > 0)
         {
-            
+
             if (currentshadowPointer.transform.Find("BoundBox").GetComponent<Collider>().bounds.Intersects(checkSphere[0].bounds))
             {
                 setTransparency(currentshadowPointer, 0.2f);
@@ -360,11 +360,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    void setTransparency(GameObject gameObject,float transparency)
+    void setTransparency(GameObject gameObject, float transparency)
     {
         foreach (Transform child in currentshadowPointer.GetComponentsInChildren<Transform>())
         {
-            if (child.transform.tag =="Shadow")
+            if (child.transform.tag == "Shadow")
             {
                 Color tempColor = child.gameObject.GetComponent<Renderer>().material.color;
                 tempColor.a = transparency;
@@ -417,7 +417,7 @@ public class Player : MonoBehaviour
     {
         float gravity = -19;
         float jumpHeight = 2;
-        LayerMask mask = ~LayerMask.GetMask("No Collision","Shadow","Player","RaycastCollider");
+        LayerMask mask = ~LayerMask.GetMask("No Collision", "Shadow", "Player", "RaycastCollider");
 
         fallSpeed.y += gravity * Time.deltaTime;
 
@@ -456,7 +456,7 @@ public class Player : MonoBehaviour
                 {
                     closestIndex = i;
                     closestDistance = distance;
-                    
+
                 }
             }
             if (raycast[closestIndex].transform.tag == "Turret")
@@ -478,13 +478,13 @@ public class Player : MonoBehaviour
             }
 
         }
-        
+
     }
 
     //set player variables for a new round
     void newRound()
     {
-        if (gameHandler.roundType=="attack")
+        if (gameHandler.roundType == "attack")
         {
 
             //disable shadow pointer
@@ -497,7 +497,7 @@ public class Player : MonoBehaviour
             foreach (object o in obj)
             {
                 GameObject g = (GameObject)o;
-                if (g.tag=="EnemySpawn")
+                if (g.tag == "EnemySpawn")
                 {
                     spawnLocs.Add(g);
                 }
@@ -521,7 +521,7 @@ public class Player : MonoBehaviour
 
             CharacterController cc = this.GetComponent<CharacterController>();
             cc.enabled = false;
-            transform.position = flag.transform.position- new Vector3(0, 6, 0); ;
+            transform.position = flag.transform.position - new Vector3(0, 6, 0); ;
             cc.enabled = true;
         }
     }
@@ -535,7 +535,7 @@ public class Player : MonoBehaviour
         health.health = 100f;
         CharacterController cc = this.GetComponent<CharacterController>();
         cc.enabled = false;
-        transform.position = flag.transform.position- new Vector3(0, 6, 0); ;
+        transform.position = flag.transform.position - new Vector3(0, 6, 0); ;
         cc.enabled = true;
         inventory.reset();
     }
@@ -543,16 +543,22 @@ public class Player : MonoBehaviour
     IEnumerator LoseAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
-
         gameHandler.gameState = "lose";
     }
 
-    public void Hurt()
+    public void StageHurt(float damage,float distance)
     {
-        audioSource.PlayOneShot(hurtSound, 0.8f * gameHandler.MasterVolume);
-        Color oldColor = canvas.transform.Find("Overlay").GetComponent<Image>().color;
-        canvas.transform.Find("Overlay").GetComponent<Image>().color =new Color(oldColor.r, oldColor.g, oldColor.b, 0.5f);
+        StartCoroutine(Hurt(damage,distance * 0.01f));
     }
+
+    IEnumerator Hurt(float damage,float time)
+    {
+    yield return new WaitForSeconds(time);
+    audioSource.PlayOneShot(hurtSound, 0.8f * gameHandler.MasterVolume);
+    Color oldColor = canvas.transform.Find("Overlay").GetComponent<Image>().color;
+    canvas.transform.Find("Overlay").GetComponent<Image>().color =new Color(oldColor.r, oldColor.g, oldColor.b, 0.5f);
+    health.health -= damage;
+}
 
     void CameraEffectsUpdate()
     {
