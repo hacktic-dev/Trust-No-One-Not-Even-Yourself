@@ -445,7 +445,7 @@ public class Player : MonoBehaviour
         Debug.DrawRay(cameraMount.position, cameraMount.forward * 100f, Color.white, 1f);
 
         //Check for hits
-        RaycastHit[] raycast = Physics.RaycastAll(cameraMount.position, cameraMount.forward, 100f);
+        RaycastHit[] raycast = Physics.RaycastAll(cameraMount.position, cameraMount.forward, 100f,~LayerMask.GetMask("No Collision"));
         if (raycast.Length > 0)
         {
 

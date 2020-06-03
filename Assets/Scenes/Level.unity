@@ -5497,9 +5497,9 @@ MonoBehaviour:
   music: {fileID: 0}
   flag: {fileID: 153149488}
   roundLengthDefend: 120
-  roundLengthDefendRound1: 140
+  roundLengthDefendRound1: 10
   roundLengthAttack: 120
-  fightTimeLength: 140
+  fightTimeLength: 60
   roundType: defend
   timeLeftThisRound: 0
   roundNumber: 0
@@ -5555,7 +5555,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-31480
+  m_Name: pb_Mesh-3654
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -26994,7 +26994,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-31508
+  m_Name: pb_Mesh-3684
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27365,7 +27365,7 @@ PrefabInstance:
     - target: {fileID: 6498804531098940055, guid: 5e566204aafaf2845990ca9fbdf14821,
         type: 3}
       propertyPath: debug
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6498804531098940055, guid: 5e566204aafaf2845990ca9fbdf14821,
         type: 3}
@@ -27595,7 +27595,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232711310}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
@@ -38527,7 +38527,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-31478
+  m_Name: pb_Mesh-16838
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -40435,7 +40435,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-31502
+  m_Name: pb_Mesh-3678
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

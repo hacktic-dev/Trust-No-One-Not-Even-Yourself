@@ -4765,8 +4765,9 @@ GameObject:
   - component: {fileID: 3838270391197718908}
   - component: {fileID: 7314005101251303819}
   - component: {fileID: 749300351818280439}
-  - component: {fileID: 3612936787662770580}
   - component: {fileID: 8136558259881509758}
+  - component: {fileID: 3280442021880447353}
+  - component: {fileID: 5511670553370669328}
   m_Layer: 18
   m_Name: TurretObject
   m_TagString: Turret
@@ -4825,7 +4826,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 0
---- !u!136 &3612936787662770580
+--- !u!208 &8136558259881509758
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4896469589659572524}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 1.5, y: 2, z: 1.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!136 &3280442021880447353
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4835,26 +4852,23 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1
-  m_Height: 3
+  m_Radius: 0.3
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 2, z: 0}
---- !u!208 &8136558259881509758
-NavMeshObstacle:
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!135 &5511670553370669328
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4896469589659572524}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1.5, y: 2, z: 1.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 1.5, z: 0}
-  m_TimeToStationary: 0.5
+  serializedVersion: 2
+  m_Radius: 0.8
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1 &5131305396004352866
 GameObject:
   m_ObjectHideFlags: 0
@@ -9823,7 +9837,7 @@ PrefabInstance:
     - target: {fileID: 1666340304050393665, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 18
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1666340304050393665, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
@@ -9835,15 +9849,25 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2513501686593541978, guid: a9016b66f10ff26429a84a461464b02d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2513501686593541979, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 18
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2542783773892577059, guid: a9016b66f10ff26429a84a461464b02d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3399464247024579467, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 18
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3893911089623783648, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
@@ -9855,6 +9879,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4739557662355295179, guid: a9016b66f10ff26429a84a461464b02d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.264
+      objectReference: {fileID: 0}
     - target: {fileID: 4921657622366645693, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Mesh
@@ -9863,7 +9892,7 @@ PrefabInstance:
     - target: {fileID: 5438981786095236027, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 18
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5563128875656904617, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
@@ -9933,7 +9962,7 @@ PrefabInstance:
     - target: {fileID: 7923899630127425881, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 18
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7923899630127425881, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
