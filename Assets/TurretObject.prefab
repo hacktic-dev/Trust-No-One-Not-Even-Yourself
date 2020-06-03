@@ -4810,7 +4810,9 @@ MonoBehaviour:
   hurtParticle: {fileID: 7888503482614676057}
   health: {fileID: 749300351818280439}
   audioSource: {fileID: 8791729130789984898}
+  TakeDamage: {fileID: 8300000, guid: 9fbc61f0cb9042e4c977faf8f958cc64, type: 3}
   shoot: {fileID: 8300000, guid: 34b1783ea5f506c47848661d514145b6, type: 3}
+  deathSound: {fileID: 8300000, guid: 2a96630e78cced746b9649e78554bc3c, type: 3}
   gameHandler: {fileID: 0}
 --- !u!114 &749300351818280439
 MonoBehaviour:
@@ -9756,7 +9758,7 @@ AudioSource:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.090270996
+      time: 0.14365005
       value: 0
       inSlope: 0
       outSlope: 0

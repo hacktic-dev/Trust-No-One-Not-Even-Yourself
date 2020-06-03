@@ -5497,9 +5497,9 @@ MonoBehaviour:
   music: {fileID: 0}
   flag: {fileID: 153149488}
   roundLengthDefend: 120
-  roundLengthDefendRound1: 20
+  roundLengthDefendRound1: 10
   roundLengthAttack: 120
-  fightTimeLength: 60
+  fightTimeLength: 5
   roundType: defend
   timeLeftThisRound: 0
   roundNumber: 0
@@ -5507,6 +5507,7 @@ MonoBehaviour:
   MasterVolume: 1
   newRound: 0
   player: {fileID: 1395299395}
+  debugMode: 1
 --- !u!4 &147332044
 Transform:
   m_ObjectHideFlags: 0
@@ -5555,7 +5556,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3654
+  m_Name: pb_Mesh-1936
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -26994,7 +26995,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3684
+  m_Name: pb_Mesh-1964
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27496,7 +27497,7 @@ PrefabInstance:
         type: 3}
       propertyPath: hurtSound
       value: 
-      objectReference: {fileID: 8300000, guid: 733822048225cb64a8d26ec48e1dfeb7, type: 3}
+      objectReference: {fileID: 8300000, guid: 020e7d5cf296d9344bdde2ce17b8a8e0, type: 3}
     - target: {fileID: 7110947734949821470, guid: 5e566204aafaf2845990ca9fbdf14821,
         type: 3}
       propertyPath: canvas
@@ -27595,7 +27596,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232711310}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
@@ -38527,7 +38528,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-16838
+  m_Name: pb_Mesh-1934
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -40435,7 +40436,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3678
+  m_Name: pb_Mesh-1958
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -40621,7 +40622,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 27a7d51e008d3e548b8d0aff90c390c2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0

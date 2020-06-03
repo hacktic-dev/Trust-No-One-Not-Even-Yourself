@@ -12,11 +12,16 @@ public class Turret : MonoBehaviour
     float timeToNextShoot;
     float damage = 10f;
     //float gunOffset = 0.2f;
-    Vector3 gun1Position;
-    Vector3 gun2Position;
+   // Vector3 gun1Position;
+    //Vector3 gun2Position;
+
     public Health health;
+
     public AudioSource audioSource;
+    public AudioClip TakeDamage;
     public AudioClip shoot;
+    public AudioClip deathSound;
+
     float particleTimer, particleTimer2;
     float lastFrameHealth;
     public GameHandler gameHandler;
@@ -81,6 +86,8 @@ public class Turret : MonoBehaviour
 
                 if (health.health <= 0)
                 {
+                    audioSource.pitch = (Random.Range(0.9f, 1.1f));
+                    //AudioSource.PlayClipAtPoint(deathSound,transform.position ,0.8f * gameHandler.MasterVolume);
                     Destroy(gameObject, 0.4f);
                 }
 
@@ -166,6 +173,7 @@ public class Turret : MonoBehaviour
     {
         if (closest != null)
         {
+            audioSource.pitch = (Random.Range(0.9f, 1.1f));
             audioSource.PlayOneShot(shoot, 0.3f * gameHandler.MasterVolume);
             head.GetComponent<ParticleSystem>().Play();
             particleTimer = 0.2f;
@@ -207,7 +215,7 @@ public class Turret : MonoBehaviour
         }
     }
 
-void FindClosestEnemy()
+    void FindClosestEnemy()
 {
     if (gameObject.tag != "Shadow")
     {
@@ -239,7 +247,7 @@ void FindClosestEnemy()
                 if (raycast[i].transform.tag == "Enemy" ||  raycast[i].transform.tag == "Player")
                 {
                     enemyIndex = i;
-                    Debug.Log(enemyIndex);
+                    //Debug.Log(enemyIndex);
                     break;
                 }
             }
@@ -274,4 +282,19 @@ void FindClosestEnemy()
         }
     }
 }
+
+    public void StageHurt(float damage, float distance)
+    {
+        StartCoroutine(Hurt(damage, distance * 0.01f));
     }
+
+    IEnumerator Hurt(float damage, float time)
+    {
+        yield return new WaitForSeconds(time);
+        audioSource.pitch = (Random.Range(0.9f, 1.1f));
+        audioSource.PlayOneShot(TakeDamage, 0.8f * gameHandler.MasterVolume);
+        health.health -= damage;
+        Debug.Log(damage);
+    }
+
+}

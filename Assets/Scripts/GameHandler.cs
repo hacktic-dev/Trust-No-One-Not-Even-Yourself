@@ -19,7 +19,7 @@ public class GameHandler : MonoBehaviour
     public float MasterVolume;
     public bool newRound;
     public Player player;
-
+    public bool debugMode=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -93,7 +93,7 @@ public class GameHandler : MonoBehaviour
         else
         {
             timeLeftThisRound = roundLengthAttack;
-            player.health.health = 100f;
+            player.health.health = player.maxHealth;
             roundType = "attack";
         }
     }

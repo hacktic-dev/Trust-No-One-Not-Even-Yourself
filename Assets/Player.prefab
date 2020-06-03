@@ -171,7 +171,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryAmount: 0a0000000a0000000a000000
-  debug: 0
+  resourceStartAmount: 0
+  gameHandler: {fileID: 0}
 --- !u!1 &7110947734949821443
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,8 +243,8 @@ MonoBehaviour:
   audioSource: {fileID: 544003993}
   craftSuccess: {fileID: 8300000, guid: a23b5d82f16035a4d95ecf9da3b148dd, type: 3}
   craftFail: {fileID: 8300000, guid: 9b2712cde8cbc80458e3cb6cea6eebec, type: 3}
-  shoot: {fileID: 0}
-  hurtSound: {fileID: 0}
+  shoot: {fileID: 8300000, guid: 34b1783ea5f506c47848661d514145b6, type: 3}
+  hurtSound: {fileID: 8300000, guid: 020e7d5cf296d9344bdde2ce17b8a8e0, type: 3}
   inventory: {fileID: 6498804531098940055}
   objectPlaceMode: 0
   selectedIndex: 0
@@ -260,7 +261,9 @@ MonoBehaviour:
   shadowPointerTurret: {fileID: 1430474363479857107}
   gameHandler: {fileID: 0}
   flag: {fileID: 0}
+  canvas: {fileID: 0}
   health: {fileID: 9082266045604083682}
+  maxHealth: 100
   Navmesh: {fileID: 0}
 --- !u!114 &9082266045604083682
 MonoBehaviour:

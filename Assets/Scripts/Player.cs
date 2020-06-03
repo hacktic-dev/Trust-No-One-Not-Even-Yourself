@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+
     //audio
     public AudioSource audioSource;
     public AudioClip craftSuccess;
@@ -54,6 +55,7 @@ public class Player : MonoBehaviour
     //misc
     float particleTimer;
     public Health health;
+    public float maxHealth = 100;
     public NavMeshSurface Navmesh;
     bool flagHitStartCount;
     float flagCount;
@@ -63,6 +65,12 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(gameHandler.debugMode)
+        {
+            maxHealth = 1000;
+            inventory.resourceStartAmount = 100;
+        }
+        
         LockMouse();
         fallSpeed = new Vector3(0, 0, 0);
     }
@@ -260,10 +268,10 @@ public class Player : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(cameraMount.position, cameraMount.forward, out hit, maxPlaceDistance + 1, mask))
             {
-                Debug.Log(shadowPointerHitPosition);
+                //Debug.Log(shadowPointerHitPosition);
                 shadowPointerHitPosition = hit.point;
                 hitNormal = hit.normal;
-                Debug.Log(hit.normal);
+                //Debug.Log(hit.normal);
             }
         }
         else
@@ -436,6 +444,7 @@ public class Player : MonoBehaviour
 
     void Shooting()
     {
+        audioSource.pitch = (Random.Range(0.9f, 1.1f));
         audioSource.PlayOneShot(shoot, 0.3f * gameHandler.MasterVolume);
         cameraMount.GetComponent<ParticleSystem>().Play();
         particleTimer = 0.2f;
@@ -462,7 +471,7 @@ public class Player : MonoBehaviour
             if (raycast[closestIndex].transform.tag == "Turret")
             {
 
-                raycast[closestIndex].transform.GetComponent<Health>().health -= damage;
+                raycast[closestIndex].transform.GetComponent<Turret>().StageHurt(damage, Vector3.Distance(transform.position, raycast[closestIndex].transform.position));
 
             }
             else if (raycast[closestIndex].transform.tag == "Flag")
@@ -532,7 +541,7 @@ public class Player : MonoBehaviour
         shadowPointerTurret.SetActive(false);
 
         cameraMount.transform.GetComponent<PostProcessVolume>().enabled = false;
-        health.health = 100f;
+        health.health = maxHealth;
         CharacterController cc = this.GetComponent<CharacterController>();
         cc.enabled = false;
         transform.position = flag.transform.position - new Vector3(0, 6, 0); ;
@@ -554,11 +563,11 @@ public class Player : MonoBehaviour
     IEnumerator Hurt(float damage,float time)
     {
     yield return new WaitForSeconds(time);
-    audioSource.PlayOneShot(hurtSound, 0.8f * gameHandler.MasterVolume);
+    audioSource.PlayOneShot(hurtSound, 0.6f * gameHandler.MasterVolume);
     Color oldColor = canvas.transform.Find("Overlay").GetComponent<Image>().color;
     canvas.transform.Find("Overlay").GetComponent<Image>().color =new Color(oldColor.r, oldColor.g, oldColor.b, 0.5f);
     health.health -= damage;
-}
+    }
 
     void CameraEffectsUpdate()
     {
