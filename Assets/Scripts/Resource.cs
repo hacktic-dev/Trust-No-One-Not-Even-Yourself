@@ -16,7 +16,7 @@ public class Resource : MonoBehaviour
         absoluteY = transform.position.y;
         bobYOffset = 0;
 
-        if(transform.tag!="Flag")
+        if (transform.tag != "Flag")
         {
             {
                 if (resourceType == "matter")
@@ -40,6 +40,7 @@ public class Resource : MonoBehaviour
                     throw new System.Exception("Invalid Resource Type! The object " + transform.name + " tried to access the colour of " + resourceType + ".");
                 }
             }
+        }
     }
 
     // Update is called once per frame
