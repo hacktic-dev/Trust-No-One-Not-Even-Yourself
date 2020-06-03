@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public class Turret : MonoBehaviour
 {
@@ -50,18 +51,19 @@ public class Turret : MonoBehaviour
         */
     }
 
-        // Update is called once per frame
-        void Update()
-        {
-        if (transform.tag != "Shadow")
-        {
-            FindClosestEnemy();
-        }
+    // Update is called once per frame
+    void Update()
+    {
+
+    if (transform.tag != "Shadow")
+    {
+
+
         //Debug.Log(head.GetComponent<ParticleSystem>().isPlaying.ToString());
         //Debug.Log(particleTimer.ToString());
         if (health.health != lastFrameHealth && !firstFrame)
         {
-           hurtParticle.GetComponent<ParticleSystem>().Play();
+            hurtParticle.GetComponent<ParticleSystem>().Play();
             particleTimer2 = 0.4f;
         }
         lastFrameHealth = health.health;
@@ -93,68 +95,73 @@ public class Turret : MonoBehaviour
 
                 if (particleTimer < 0)
                 {
-                   // Debug.Log("end");
+                    // Debug.Log("end");
                     head.GetComponent<ParticleSystem>().Stop();
                     particleTimer = 0;
                 }
-            particleTimer -= Time.deltaTime;
-            
+                particleTimer -= Time.deltaTime;
 
-                //please do not judge this code  
-
-                //TODO fix if there is time
-                /*
-                foreach (Transform child in head.transform)
+                //Unused code
                 {
-                    Debug.Log(gunOffset);
-                    if (child.tag == "Gun" && gunOffset > 0)
-                    {
-                        if (gunOffset - Time.deltaTime/5 > 0)
-                        {
-                            float time = Time.deltaTime/5;
+                    //please do not judge this code  
 
-                            child.position = head.position - child.up * gunOffset;
-                            gunOffset -= time;
+                    //TODO fix if there is time
+                    /*
+                    foreach (Transform child in head.transform)
+                    {
+                        Debug.Log(gunOffset);
+                        if (child.tag == "Gun" && gunOffset > 0)
+                        {
+                            if (gunOffset - Time.deltaTime/5 > 0)
+                            {
+                                float time = Time.deltaTime/5;
+
+                                child.position = head.position - child.up * gunOffset;
+                                gunOffset -= time;
+
+                            }
+                            else
+                            {
+
+                                child.position = gun1Position - child.up * gunOffset;
+                                gunOffset = 0;
 
                         }
-                        else
+                        }
+                        if (child.tag == "Gun2" && gunOffset > 0)
                         {
-                            
-                            child.position = gun1Position - child.up * gunOffset;
-                            gunOffset = 0;
+                            if (gunOffset - Time.deltaTime/5 > 0)
+                            {
+                                float time = Time.deltaTime/5;
+
+                                child.position = gun2Position - child.up * gunOffset;
+                                gunOffset -= time;
+                                Debug.DrawRay(child.position, child.up * 10f, Color.white, 0.5f);
+                        }
+                            else
+                            {
+
+                                child.position = gun2Position - child.up * gunOffset;
+                                gunOffset = 0;
+                        }
+                        }
 
                     }
-                    }
-                    if (child.tag == "Gun2" && gunOffset > 0)
-                    {
-                        if (gunOffset - Time.deltaTime/5 > 0)
-                        {
-                            float time = Time.deltaTime/5;
-
-                            child.position = gun2Position - child.up * gunOffset;
-                            gunOffset -= time;
-                            Debug.DrawRay(child.position, child.up * 10f, Color.white, 0.5f);
-                    }
-                        else
-                        {
-                           
-                            child.position = gun2Position - child.up * gunOffset;
-                            gunOffset = 0;
-                    }
-                    }
-
+                    */
                 }
-                */
+
                 timeToNextShoot -= Time.deltaTime;
                 Look();
                 if (timeToNextShoot <= 0f)
                 {
                     Shoot();
-                    
+
                 }
             }
         }
-        }
+    }
+
+    }
 
     void Look()
         {
@@ -188,7 +195,9 @@ public class Turret : MonoBehaviour
             timeToNextShoot = timeBetweenShoot;
 
             //Debug.DrawRay(head.position, head.forward * 10f, Color.white, 0.5f);
+            Profiler.BeginSample("Shoot raycast Sample");
             RaycastHit[] raycast = Physics.RaycastAll(head.position, head.forward, 100f);
+            Profiler.EndSample();
             if (raycast.Length > 0)
             {
 
@@ -238,7 +247,7 @@ public class Turret : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             RaycastHit[] raycast = Physics.RaycastAll(transform.position, -transform.position + enemy.transform.position, 100f);
-            Debug.Log(raycast);
+            
             int enemyIndex = 0;
             
             //get index of the player/enemy in the raycast array
