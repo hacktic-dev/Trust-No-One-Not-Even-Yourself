@@ -451,7 +451,7 @@ public class Player : MonoBehaviour
         float closestDistance = 10000;
         int closestIndex = 0;
         bool flagHit = false;
-        Debug.DrawRay(cameraMount.position, cameraMount.forward * 100f, Color.white, 1f);
+        Debug.DrawRay(cameraMount.position, cameraMount.forward * 100f, Color.white, 5f);
 
         //Check for hits
         RaycastHit[] raycast = Physics.RaycastAll(cameraMount.position, cameraMount.forward, 100f,~LayerMask.GetMask("No Collision"));
