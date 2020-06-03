@@ -53,7 +53,7 @@ public class SpawnEnemy : MonoBehaviour
 
     void Spawn()
     {
-        Vector3 newPosition = new Vector3(transform.position.x, transform.position.y -0.1f, transform.position.z);
+        Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
         GameObject instantiatedObject = Instantiate(enemy, newPosition, transform.rotation);
 
