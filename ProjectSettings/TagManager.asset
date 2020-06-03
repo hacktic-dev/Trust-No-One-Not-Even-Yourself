@@ -24,6 +24,7 @@ TagManager:
   - Always
   - ActiveAttack
   - ShadowNoRender
+  - RaycastCollider
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - UI
   - 
   - 
-  - Hidden Objects
+  - 
   - Solid Object
   - No Collision
   - Level

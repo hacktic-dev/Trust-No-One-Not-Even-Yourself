@@ -115,7 +115,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -284,7 +284,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -606,7 +606,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -660,12 +660,12 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 0
-    angle: 25
+    angle: 10
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 0.1
+    radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 2, z: 0}
+    m_Position: {x: 0, y: 2.5, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
@@ -746,7 +746,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.1
+      value: 1
       mode: 0
       spread: 0
       speed:
@@ -1303,8 +1303,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0, b: 0, a: 1}
-        key1: {r: 0.9245283, g: 0.33579564, b: 0.33579564, a: 1}
+        key0: {r: 0.4245283, g: 0.09812211, b: 0.09812211, a: 1}
+        key1: {r: 0.4528302, g: 0.1260235, b: 0.1260235, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1320,8 +1320,8 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 65535
-        atime2: 0
+        atime1: 56283
+        atime2: 65342
         atime3: 0
         atime4: 0
         atime5: 0
@@ -1329,7 +1329,7 @@ ParticleSystem:
         atime7: 0
         m_Mode: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 2
+        m_NumAlphaKeys: 3
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1484,7 +1484,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -1541,7 +1541,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -2183,7 +2183,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: -50
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3554,9 +3554,9 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 3
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -3732,7 +3732,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 2048
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -4765,8 +4765,9 @@ GameObject:
   - component: {fileID: 3838270391197718908}
   - component: {fileID: 7314005101251303819}
   - component: {fileID: 749300351818280439}
-  - component: {fileID: 3612936787662770580}
   - component: {fileID: 8136558259881509758}
+  - component: {fileID: 3280442021880447353}
+  - component: {fileID: 5511670553370669328}
   m_Layer: 18
   m_Name: TurretObject
   m_TagString: Turret
@@ -4809,7 +4810,9 @@ MonoBehaviour:
   hurtParticle: {fileID: 7888503482614676057}
   health: {fileID: 749300351818280439}
   audioSource: {fileID: 8791729130789984898}
+  TakeDamage: {fileID: 8300000, guid: 9fbc61f0cb9042e4c977faf8f958cc64, type: 3}
   shoot: {fileID: 8300000, guid: 34b1783ea5f506c47848661d514145b6, type: 3}
+  deathSound: {fileID: 8300000, guid: 2a96630e78cced746b9649e78554bc3c, type: 3}
   gameHandler: {fileID: 0}
 --- !u!114 &749300351818280439
 MonoBehaviour:
@@ -4825,7 +4828,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 0
---- !u!136 &3612936787662770580
+--- !u!208 &8136558259881509758
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4896469589659572524}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 1.5, y: 2, z: 1.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!136 &3280442021880447353
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4835,26 +4854,23 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1
-  m_Height: 3
+  m_Radius: 0.3
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 2, z: 0}
---- !u!208 &8136558259881509758
-NavMeshObstacle:
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!135 &5511670553370669328
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4896469589659572524}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 1.5, y: 2, z: 1.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 1.5, z: 0}
-  m_TimeToStationary: 0.5
+  serializedVersion: 2
+  m_Radius: 0.8
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1 &5131305396004352866
 GameObject:
   m_ObjectHideFlags: 0
@@ -9742,7 +9758,7 @@ AudioSource:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.090270996
+      time: 0.14365005
       value: 0
       inSlope: 0
       outSlope: 0
@@ -9823,7 +9839,7 @@ PrefabInstance:
     - target: {fileID: 1666340304050393665, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 18
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1666340304050393665, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
@@ -9835,15 +9851,25 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2513501686593541978, guid: a9016b66f10ff26429a84a461464b02d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2513501686593541979, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 18
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2542783773892577059, guid: a9016b66f10ff26429a84a461464b02d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3399464247024579467, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 18
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3893911089623783648, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
@@ -9855,6 +9881,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4739557662355295179, guid: a9016b66f10ff26429a84a461464b02d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.264
+      objectReference: {fileID: 0}
     - target: {fileID: 4921657622366645693, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Mesh
@@ -9863,7 +9894,7 @@ PrefabInstance:
     - target: {fileID: 5438981786095236027, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 18
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5563128875656904617, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
@@ -9933,7 +9964,7 @@ PrefabInstance:
     - target: {fileID: 7923899630127425881, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
       propertyPath: m_Layer
-      value: 18
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7923899630127425881, guid: a9016b66f10ff26429a84a461464b02d,
         type: 3}
