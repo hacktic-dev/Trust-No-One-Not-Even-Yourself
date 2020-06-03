@@ -177,7 +177,7 @@ PrefabInstance:
     - target: {fileID: 1513671859029072648, guid: 1c5a99bf671995b43b0c876e1669400e,
         type: 3}
       propertyPath: m_Value
-      value: 0.8
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2631405008396966679, guid: 1c5a99bf671995b43b0c876e1669400e,
         type: 3}
@@ -378,6 +378,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015250666032659278, guid: 1c5a99bf671995b43b0c876e1669400e,
+        type: 3}
+      propertyPath: m_Value
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8873170194019341065, guid: 1c5a99bf671995b43b0c876e1669400e,
         type: 3}
@@ -5497,9 +5502,9 @@ MonoBehaviour:
   music: {fileID: 0}
   flag: {fileID: 153149488}
   roundLengthDefend: 120
-  roundLengthDefendRound1: 10
+  roundLengthDefendRound1: 140
   roundLengthAttack: 120
-  fightTimeLength: 5
+  fightTimeLength: 130
   roundType: defend
   timeLeftThisRound: 0
   roundNumber: 0
@@ -27511,7 +27516,7 @@ PrefabInstance:
     - target: {fileID: 7110947734949821470, guid: 5e566204aafaf2845990ca9fbdf14821,
         type: 3}
       propertyPath: mouseSense
-      value: 450
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7110947735381540029, guid: 5e566204aafaf2845990ca9fbdf14821,
         type: 3}

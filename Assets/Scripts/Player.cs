@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     Vector3 move;
     public float speed = 12f;
     public CharacterController controller;
-    public float mouseSense = 450f;
+    public float mouseSense = 4f;
     public Transform cameraMount;
     float xRotation;
     Vector3 fallSpeed;
@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
 
     public void SetMouseSens(System.Single value)
     {
-        mouseSense = 50f + value * 800f;
+        mouseSense = 0.5f + value * 9.5f;
         //   Debug.Log(mouseSense);
     }
 
@@ -191,8 +191,8 @@ public class Player : MonoBehaviour
 
     void Camera()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSense * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSense * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X")*mouseSense ;
+        float mouseY = Input.GetAxis("Mouse Y") *mouseSense;
 
 
         xRotation -= mouseY;
