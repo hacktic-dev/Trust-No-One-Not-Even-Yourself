@@ -16,7 +16,7 @@ public class SpawnEnemy : MonoBehaviour
     void Start()
     {
         currentRound = 0;
-        timeBetweenSpawns = 10f;
+        timeBetweenSpawns = 7f;
         timeToNextSpawn = 0f;
     }
 
@@ -44,7 +44,7 @@ public class SpawnEnemy : MonoBehaviour
             {
                 currentRound = gameHandler.roundNumber;
                 
-                timeBetweenSpawns -= 0.5f;
+                timeBetweenSpawns -= timeBetweenSpawns/14;
                 timeToNextSpawn = 0f;
             }
         }
