@@ -5502,9 +5502,9 @@ MonoBehaviour:
   music: {fileID: 0}
   flag: {fileID: 153149488}
   roundLengthDefend: 120
-  roundLengthDefendRound1: 0.1
+  roundLengthDefendRound1: 140
   roundLengthAttack: 120
-  fightTimeLength: 5
+  fightTimeLength: 60
   roundType: defend
   timeLeftThisRound: 0
   roundNumber: 0
@@ -5512,7 +5512,7 @@ MonoBehaviour:
   MasterVolume: 1
   newRound: 0
   player: {fileID: 1395299395}
-  debugMode: 1
+  debugMode: 0
 --- !u!4 &147332044
 Transform:
   m_ObjectHideFlags: 0
