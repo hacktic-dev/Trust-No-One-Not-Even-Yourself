@@ -279,7 +279,6 @@ public class CanvasUpdate : MonoBehaviour
         health.text = "Health: "+player.health.health.ToString();
 
         smartsText.text = player.inventory.resourceAmount["smarts"].ToString();
-       // motionText.text = player.inventory.resourceAmount["motion"].ToString();
         forceText.text = player.inventory.resourceAmount["force"].ToString();
         matterText.text = player.inventory.resourceAmount["matter"].ToString();
 

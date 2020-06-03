@@ -12,8 +12,9 @@ public class Turret : MonoBehaviour
     const float timeBetweenShoot = 1f;
     float timeToNextShoot;
     float damage = 10f;
+    const float maxDistance = 50f;
     //float gunOffset = 0.2f;
-   // Vector3 gun1Position;
+    // Vector3 gun1Position;
     //Vector3 gun2Position;
 
     public Health health;
@@ -231,13 +232,21 @@ public class Turret : MonoBehaviour
         GameObject[] enemies;
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if (gameHandler.roundType == "attack")
+        List<GameObject> list = new List<GameObject>();
+            for (int i= 0; i < enemies.Length;i++)
+            {
+                if(Vector3.Distance(enemies[i].transform.position,transform.position)<=maxDistance)
+                {list.Add(enemies[i]); }
+            }
+            enemies = list.ToArray();
+
+            if (gameHandler.roundType == "attack")
         {
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            List<GameObject> list = new List<GameObject>();
-            list.AddRange(enemies);
-            list.AddRange(players);
-            enemies = list.ToArray();
+            List<GameObject> list2 = new List<GameObject>();
+            list2.AddRange(enemies);
+            list2.AddRange(players);
+            enemies = list2.ToArray();
         }
 
         float closestDistance = 10000;
@@ -246,7 +255,7 @@ public class Turret : MonoBehaviour
 
         foreach (GameObject enemy in enemies)
         {
-            RaycastHit[] raycast = Physics.RaycastAll(transform.position, -transform.position + enemy.transform.position, 100f);
+            RaycastHit[] raycast = Physics.RaycastAll(transform.position, -transform.position + enemy.transform.position, maxDistance);
             
             int enemyIndex = 0;
             
